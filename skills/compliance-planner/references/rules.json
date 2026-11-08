@@ -1,0 +1,1550 @@
+{
+ "version": 1,
+ "checked": "2026-11-08",
+ "disclaimer": "Planning aid, not legal advice. Rules, fees and dates change. Every row must be confirmed with an accredited lab, certification body or regulator before you rely on it.",
+ "fx_note": "Costs are in USD. EUR ranges were converted at about 1.1 USD/EUR and BRL at about 5.5 BRL/USD [assumption].",
+ "conditions_help": "Each rule applies when the product sells in one of `markets` ('*' = every market) and its `if` block matches. Ops: truthy, falsy, eq, ne, in, intersects, contains, gte, lte.",
+ "rules": [
+  {
+   "id": "bt-sig",
+   "markets": [
+    "*"
+   ],
+   "area": "radio",
+   "name": "Bluetooth SIG qualification and listing",
+   "if": {
+    "any": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    11500,
+    12000
+   ],
+   "lead_weeks": [
+    1,
+    4
+   ],
+   "evidence": "verified",
+   "source": "bluetooth.com qualification-listing-fees (fees in effect since 2026-03-01), read 2026-11-08",
+   "notes": "Required for any product that uses Bluetooth or the Bluetooth name, even when it reuses a qualified chip and stack. Adopter: free membership, USD 12,000 per product. Contributing Adopter (small): USD 3,500 per year plus USD 8,000 for the first qualification of the membership year. A 128-bit custom UUID is free; a 16-bit UUID (USD 3,750) or a Company ID (USD 1,250) is optional.",
+   "levers": "Reuse the chip vendor's qualified controller and host stack without modification, so the qualification is a declaration and needs no lab tests."
+  },
+  {
+   "id": "fcc-15c",
+   "markets": [
+    "US"
+   ],
+   "area": "radio",
+   "name": "FCC Part 15 Subpart C certification (intentional radiator, e.g. 15.247) via a TCB",
+   "if": {
+    "all": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb",
+       "nfc"
+      ]
+     }
+    ],
+    "none": [
+     {
+      "trait": "radio_module_precertified",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    5000,
+    12500
+   ],
+   "lead_weeks": [
+    3,
+    6
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Chip-down radio. Covers lab tests (US labs cost more than accredited labs in Asia), the TCB grant fee and a one-time FCC grantee code. The product carries an FCC ID; small devices can put it in the manual or on an e-label if they have a screen.",
+   "levers": "A pre-certified module with modular approval removes this row if you follow the module grant's antenna and layout conditions."
+  },
+  {
+   "id": "fcc-modular",
+   "markets": [
+    "US"
+   ],
+   "area": "radio",
+   "name": "FCC host integration of a modular-approved radio (Part 15B SDoC + 'Contains FCC ID')",
+   "if": {
+    "all": [
+     {
+      "trait": "radio_module_precertified",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    1000,
+    3000
+   ],
+   "lead_weeks": [
+    2,
+    4
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Valid only within the module grant's conditions: same antenna type and gain, same power, required trace layout. A small body-worn host can still need its own RF-exposure evaluation.",
+   "levers": ""
+  },
+  {
+   "id": "fcc-15b",
+   "markets": [
+    "US"
+   ],
+   "area": "emc",
+   "name": "FCC Part 15 Subpart B (unintentional radiator), SDoC",
+   "if": {
+    "any": [
+     {
+      "trait": "has_digital_electronics",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    1000,
+    3000
+   ],
+   "lead_weeks": [
+    1,
+    3
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Every product with a clock or digital logic. Usually tested in the same lab session as 15C.",
+   "levers": ""
+  },
+  {
+   "id": "fcc-rf-exposure",
+   "markets": [
+    "US"
+   ],
+   "area": "rf-exposure",
+   "name": "FCC RF exposure (47 CFR 1.1307/1.1310, KDB 447498): exemption or SAR test",
+   "if": {
+    "all": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "lte",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb"
+      ]
+     },
+     {
+      "trait": "body_worn",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    8000
+   ],
+   "lead_weeks": [
+    0,
+    3
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Very low power transmitters (1 mW blanket exemption, or below the distance- and frequency-dependent threshold) need only a calculation. Above the threshold, a SAR test costs several thousand USD. At 2.4 GHz and a few mm from the body the threshold is a few mW.",
+   "levers": "Cap TX power (for example at 0 to 4 dBm for BLE) and document it. The same cap usually works for ISED, the EU and Brazil."
+  },
+  {
+   "id": "ised",
+   "markets": [
+    "CA"
+   ],
+   "area": "radio",
+   "name": "ISED Canada: RSS-Gen, RSS-247 (or other RSS), ICES-003, RSS-102 RF exposure",
+   "if": {
+    "any": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb",
+       "nfc",
+       "lte"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    1000,
+    2500
+   ],
+   "lead_weeks": [
+    2,
+    5
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Normally tested in the same lab as the FCC. Needs an ISED company number and, for foreign applicants, a Canadian representative. Products without radio still need ICES-003 (SDoC).",
+   "levers": "Same module and TX cap strategy as the FCC."
+  },
+  {
+   "id": "eu-red-radio",
+   "markets": [
+    "EU"
+   ],
+   "area": "radio",
+   "name": "CE under RED 2014/53/EU, art. 3.2 radio: EN 300 328 (2.4 GHz), EN 301 893 (5 GHz), EN 300 330 (NFC), EN 303 413 (GNSS) as applicable",
+   "if": {
+    "any": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "nfc",
+       "gnss",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb",
+       "lte"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    4500,
+    11000
+   ],
+   "lead_weeks": [
+    4,
+    8
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Self-declaration (Module A) is allowed when harmonised standards are applied in full; otherwise a notified body is needed. Includes EMC (EN 301 489-1 and -17) and safety (EN 62368-1) in a typical package. A GNSS receiver counts as radio equipment under RED.",
+   "levers": "A pre-certified module cuts the radio test scope but not the declaration."
+  },
+  {
+   "id": "eu-red-rf-exposure",
+   "markets": [
+    "EU",
+    "UK"
+   ],
+   "area": "rf-exposure",
+   "name": "RED art. 3.1(a) RF exposure: EN 62479 (low power) or EN 50663 / EN 50566 (SAR for body-worn)",
+   "if": {
+    "all": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb",
+       "lte"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    9000
+   ],
+   "lead_weeks": [
+    0,
+    3
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "EN 62479 low-power assessment (on the order of 20 mW and below) is usually a report, not a test. A body-worn product above that needs SAR.",
+   "levers": "TX power cap."
+  },
+  {
+   "id": "eu-red-cyber",
+   "markets": [
+    "EU"
+   ],
+   "area": "cybersecurity",
+   "name": "RED delegated regulation (EU) 2022/30, art. 3.3(d)(e)(f): EN 18031-1/-2/-3, mandatory since 2025-08-01",
+   "if": {
+    "any": [
+     {
+      "trait": "connected",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    3300,
+    11000
+   ],
+   "lead_weeks": [
+    3,
+    8
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Applies to radio equipment that can communicate over the internet, directly or through another device such as a phone (-1). Parts -2 and -3 apply when the product processes personal data or money. EN 18031 was harmonised with restrictions; if a restriction applies (for example, passwords the user may skip), you need a notified body.",
+   "levers": "No default passwords, signed firmware updates, encrypted storage of personal data, a documented update policy."
+  },
+  {
+   "id": "eu-cra",
+   "markets": [
+    "EU"
+   ],
+   "area": "cybersecurity",
+   "name": "Cyber Resilience Act (EU) 2024/2847: vulnerability reporting from 2026-09-11, full obligations from 2027-12-11",
+   "if": {
+    "any": [
+     {
+      "trait": "has_firmware",
+      "op": "truthy"
+     },
+     {
+      "trait": "connected",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    20000
+   ],
+   "lead_weeks": [
+    0,
+    0
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Covers products with digital elements. Requires secure-by-design practices, an SBOM, vulnerability handling and a declared support period. The cost is mostly process and documentation. Check how it overlaps with RED art. 3.3 for radio products.",
+   "levers": "Set up a vulnerability disclosure policy and an SBOM in the firmware build from the start."
+  },
+  {
+   "id": "eu-emc-lvd",
+   "markets": [
+    "EU"
+   ],
+   "area": "emc",
+   "name": "CE under EMC 2014/30/EU (and LVD 2014/35/EU if 50–1000 V AC) for products without radio",
+   "if": {
+    "all": [
+     {
+      "trait": "has_digital_electronics",
+      "op": "truthy"
+     },
+     {
+      "trait": "radios",
+      "op": "eq",
+      "value": []
+     }
+    ]
+   },
+   "cost_usd": [
+    2000,
+    6000
+   ],
+   "lead_weeks": [
+    2,
+    5
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Radio products cover EMC and safety inside RED instead.",
+   "levers": ""
+  },
+  {
+   "id": "eu-battery-reg",
+   "markets": [
+    "EU"
+   ],
+   "area": "battery",
+   "name": "EU Battery Regulation (EU) 2023/1542: CE for batteries, labelling, QR code, EPR registration per country",
+   "if": {
+    "any": [
+     {
+      "trait": "battery.chemistry",
+      "op": "ne",
+      "value": "none"
+     }
+    ]
+   },
+   "cost_usd": [
+    500,
+    5000
+   ],
+   "lead_weeks": [
+    2,
+    8
+   ],
+   "evidence": "estimate",
+   "source": "eur-lex.europa.eu CELEX:32023R1542 (cited in earlier research); dates and costs not re-verified",
+   "notes": "Labelling and QR-code dates are phased in during 2026–2027. Producer registration and take-back fees apply in every member state where you sell. Verify the current phase-in dates.",
+   "levers": "Use a compliance scheme or an authorised representative that covers several countries."
+  },
+  {
+   "id": "eu-battery-removable",
+   "markets": [
+    "EU"
+   ],
+   "area": "battery",
+   "name": "EU 2023/1542 art. 11: portable batteries readily removable and replaceable by the end user, from 2027-02-18",
+   "if": {
+    "all": [
+     {
+      "trait": "battery.chemistry",
+      "op": "ne",
+      "value": "none"
+     },
+     {
+      "trait": "battery.user_removable",
+      "op": "falsy"
+     }
+    ]
+   },
+   "cost_usd": [
+    2000,
+    10000
+   ],
+   "lead_weeks": [
+    0,
+    0
+   ],
+   "evidence": "estimate",
+   "source": "eur-lex.europa.eu CELEX:32023R1542 art. 11 (cited in earlier research)",
+   "notes": "DESIGN RISK. Exceptions exist, for example appliances designed to work mainly in an environment regularly exposed to splashing water or immersion and meant to be washable, and some medical or data-integrity cases. A glued or ultrasonic-welded enclosure needs a legal opinion before the mold is frozen. The cost range is for the legal opinion; a redesign costs far more.",
+   "levers": "Decide early: screws or a battery door with a gasket, or a documented exception."
+  },
+  {
+   "id": "eu-weee",
+   "markets": [
+    "EU"
+   ],
+   "area": "environment",
+   "name": "WEEE 2012/19/EU: producer registration per member state, crossed-out bin symbol",
+   "if": {
+    "any": [
+     {
+      "trait": "has_digital_electronics",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    300,
+    3000
+   ],
+   "lead_weeks": [
+    2,
+    6
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Annual fee per country and per volume. Marketplaces can delist products without a registration number.",
+   "levers": ""
+  },
+  {
+   "id": "rohs-reach",
+   "markets": [
+    "EU",
+    "UK",
+    "CN",
+    "KR",
+    "IN",
+    "US"
+   ],
+   "area": "materials",
+   "name": "RoHS (EU 2011/65 + 2015/863, China RoHS marking) and REACH SVHC declarations",
+   "if": {
+    "any": [
+     {
+      "trait": "has_digital_electronics",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    2000
+   ],
+   "lead_weeks": [
+    1,
+    4
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Mostly supplier declarations plus an optional XRF screen. China RoHS needs a hazardous-substance table and a marking. In the US this row is a retailer requirement, not federal law (California has its own RoHS-like rules).",
+   "levers": "Ask every supplier for RoHS/REACH declarations when you order samples."
+  },
+  {
+   "id": "nickel-skin",
+   "markets": [
+    "EU",
+    "UK"
+   ],
+   "area": "materials",
+   "name": "REACH Annex XVII entry 27: nickel release for parts in prolonged skin contact (EN 1811)",
+   "if": {
+    "all": [
+     {
+      "trait": "skin_contact",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    300,
+    1500
+   ],
+   "lead_weeks": [
+    1,
+    3
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Nickel-plated magnets, screws, charging contacts or clasps that touch skin. Test or choose non-nickel finishes.",
+   "levers": "Keep nickel-plated parts inside the sealed body, or use gold over a nickel-free barrier, PVD or stainless steel with low nickel release."
+  },
+  {
+   "id": "pfas",
+   "markets": [
+    "EU",
+    "US"
+   ],
+   "area": "materials",
+   "name": "PFAS restrictions (EU REACH restriction proposal; US state laws, e.g. Minnesota, Maine)",
+   "if": {
+    "any": [
+     {
+      "trait": "uses_ptfe_membranes",
+      "op": "truthy"
+     },
+     {
+      "trait": "uses_fluoropolymers",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    0
+   ],
+   "lead_weeks": [
+    0,
+    0
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "TREND RISK, not a certification. ePTFE acoustic or vent membranes, PTFE coatings and some lubricants are fluoropolymers. Bans and reporting duties are phasing in by state and region; check them before volume production.",
+   "levers": "Qualify a PFAS-free membrane (for example polyester or other non-fluorinated mesh) as an alternative early."
+  },
+  {
+   "id": "eu-gpsr",
+   "markets": [
+    "EU"
+   ],
+   "area": "market-access",
+   "name": "General Product Safety Regulation (EU) 2023/988 (since 2024-12-13): EU responsible economic operator, traceability, safety information",
+   "if": {
+    "any": [
+     {
+      "trait": "consumer_product",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    550,
+    2200
+   ],
+   "lead_weeks": [
+    1,
+    4
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "A non-EU seller needs an EU-based responsible person or authorised representative (annual fee). Name and address go on the product or packaging.",
+   "levers": ""
+  },
+  {
+   "id": "eu-common-charger",
+   "markets": [
+    "EU"
+   ],
+   "area": "market-access",
+   "name": "Common charger directive (EU) 2022/2380: USB-C receptacle for listed categories (from 2024-12-28)",
+   "if": {
+    "all": [
+     {
+      "trait": "wired_charging",
+      "op": "truthy"
+     },
+     {
+      "trait": "product_category",
+      "op": "in",
+      "value": [
+       "headphones",
+       "earbuds",
+       "headset",
+       "portable_speaker",
+       "camera",
+       "keyboard",
+       "mouse",
+       "handheld_console",
+       "e_reader",
+       "phone",
+       "tablet",
+       "navigation"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    0
+   ],
+   "lead_weeks": [
+    0,
+    0
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Listed categories must charge through USB-C. Small wearables outside the list may use proprietary contacts; verify the category list.",
+   "levers": ""
+  },
+  {
+   "id": "eu-ppwr",
+   "markets": [
+    "EU"
+   ],
+   "area": "environment",
+   "name": "Packaging and Packaging Waste Regulation (EU) 2025/40 and packaging EPR per country",
+   "if": {
+    "any": [
+     {
+      "trait": "consumer_product",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    200,
+    2000
+   ],
+   "lead_weeks": [
+    1,
+    4
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Packaging registration fees per country; recyclability and empty-space rules phase in. Verify dates.",
+   "levers": "Paper-based packaging without plastic windows or mixed materials."
+  },
+  {
+   "id": "uk-radio",
+   "markets": [
+    "UK"
+   ],
+   "area": "radio",
+   "name": "Great Britain: Radio Equipment Regulations 2017 (UKCA, CE currently accepted)",
+   "if": {
+    "any": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "nfc",
+       "gnss",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb",
+       "lte"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    2000
+   ],
+   "lead_weeks": [
+    0,
+    3
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "The EU RED reports normally carry over; the cost is a UK declaration and importer details.",
+   "levers": ""
+  },
+  {
+   "id": "uk-psti",
+   "markets": [
+    "UK"
+   ],
+   "area": "cybersecurity",
+   "name": "UK PSTI Act 2022 (since 2024-04-29): no universal default passwords, vulnerability policy, declared support period",
+   "if": {
+    "any": [
+     {
+      "trait": "connected",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    2000
+   ],
+   "lead_weeks": [
+    0,
+    2
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Mainly documentation plus a statement of compliance shipped with the product.",
+   "levers": ""
+  },
+  {
+   "id": "uk-weee-battery",
+   "markets": [
+    "UK"
+   ],
+   "area": "environment",
+   "name": "UK WEEE Regulations 2013 and Waste Batteries Regulations 2009: producer registration or compliance scheme",
+   "if": {
+    "any": [
+     {
+      "trait": "has_digital_electronics",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    200,
+    2000
+   ],
+   "lead_weeks": [
+    1,
+    4
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Small producers can use a distributor take-back scheme or a compliance scheme. Separate from the EU registrations.",
+   "levers": ""
+  },
+  {
+   "id": "br-anatel",
+   "markets": [
+    "BR"
+   ],
+   "area": "radio",
+   "name": "Brazil: Anatel homologation through an OCD (restricted-radiation equipment), Resolution 715/2019",
+   "if": {
+    "any": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb",
+       "nfc",
+       "lte"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    2700,
+    7300
+   ],
+   "lead_weeks": [
+    4,
+    10
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge; Anatel portals were not readable in the research session",
+   "notes": "BLOCKING: no radio product may be sold or imported for sale before homologation, including a small launch batch. The applicant must be a Brazilian legal entity (CNPJ). Tests run in accredited Brazilian labs. A homologated module reduces RF tests but the end product still needs its own certificate. The label carries the Anatel number and the restricted-radiation sentence; tiny products may move it to the packaging and manual. The cost range was BRL 15–40k (lower with a module).",
+   "levers": "Pre-sell with delivery after homologation. Use a homologated module. Cap TX power to stay under the SAR exclusion."
+  },
+  {
+   "id": "br-sar",
+   "markets": [
+    "BR"
+   ],
+   "area": "rf-exposure",
+   "name": "Brazil: SAR for body-worn transmitters (Resolution 700/2018), unless under the low-power exclusion",
+   "if": {
+    "all": [
+     {
+      "trait": "body_worn",
+      "op": "truthy"
+     },
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "lte",
+       "subghz",
+       "lora",
+       "uwb"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    4500
+   ],
+   "lead_weeks": [
+    0,
+    4
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Cost range was BRL 10–25k if a test is needed.",
+   "levers": "TX power cap."
+  },
+  {
+   "id": "br-reverse-logistics",
+   "markets": [
+    "BR"
+   ],
+   "area": "environment",
+   "name": "Brazil: reverse logistics for electronics and batteries (Decree 10.240/2020, CONAMA rules)",
+   "if": {
+    "any": [
+     {
+      "trait": "has_digital_electronics",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    200,
+    2000
+   ],
+   "lead_weeks": [
+    2,
+    6
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "The manufacturer or importer joins a take-back scheme (managing entity). Annual fee by volume.",
+   "levers": ""
+  },
+  {
+   "id": "br-charger",
+   "markets": [
+    "BR"
+   ],
+   "area": "safety",
+   "name": "Brazil: certification of mains chargers and power supplies (INMETRO/Anatel) if one ships in the box",
+   "if": {
+    "any": [
+     {
+      "trait": "ships_mains_adapter",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    2000,
+    8000
+   ],
+   "lead_weeks": [
+    4,
+    12
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Shipping only a USB cable usually avoids this row.",
+   "levers": "Do not ship a mains adapter."
+  },
+  {
+   "id": "jp-mic",
+   "markets": [
+    "JP"
+   ],
+   "area": "radio",
+   "name": "Japan: Radio Law technical conformity (MIC 'giteki') via a registered certification body",
+   "if": {
+    "any": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb",
+       "nfc",
+       "lte"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    3000,
+    8000
+   ],
+   "lead_weeks": [
+    3,
+    8
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "The product shows the giteki mark and certification number (an e-label is allowed on products with a screen). Using a module certified for Japan reduces the scope.",
+   "levers": "Module with Japanese certification."
+  },
+  {
+   "id": "jp-pse",
+   "markets": [
+    "JP"
+   ],
+   "area": "battery",
+   "name": "Japan: PSE (DENAN) for lithium-ion cells/packs and mains adapters",
+   "if": {
+    "any": [
+     {
+      "trait": "ships_mains_adapter",
+      "op": "truthy"
+     },
+     {
+      "trait": "battery.sold_separately",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    2000,
+    8000
+   ],
+   "lead_weeks": [
+    4,
+    10
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Batteries built into equipment are generally outside PSE, but spare batteries and AC adapters are in scope. Verify the volumetric energy-density threshold and the exemption.",
+   "levers": ""
+  },
+  {
+   "id": "kr-kc",
+   "markets": [
+    "KR"
+   ],
+   "area": "radio",
+   "name": "South Korea: KC (RRA) radio and EMC conformity; KC safety for lithium batteries",
+   "if": {
+    "any": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb",
+       "nfc",
+       "lte"
+      ]
+     },
+     {
+      "trait": "battery.chemistry",
+      "op": "in",
+      "value": [
+       "li-ion",
+       "li-polymer",
+       "lifepo4"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    3000,
+    10000
+   ],
+   "lead_weeks": [
+    4,
+    10
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Usually needs a local applicant or representative. Some tests must run in Korea.",
+   "levers": ""
+  },
+  {
+   "id": "cn-srrc",
+   "markets": [
+    "CN"
+   ],
+   "area": "radio",
+   "name": "China: SRRC radio type approval (MIIT); micro-power short-range exemptions may apply",
+   "if": {
+    "any": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb",
+       "lte"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    2000,
+    8000
+   ],
+   "lead_weeks": [
+    4,
+    12
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "The 2.4/5 GHz rules were revised in 2021–2023. Whether low-power BLE needs a type approval depends on EIRP and category; verify with a Chinese lab. CCC applies only to listed categories (for example mains adapters).",
+   "levers": ""
+  },
+  {
+   "id": "au-rcm",
+   "markets": [
+    "AU"
+   ],
+   "area": "radio",
+   "name": "Australia/New Zealand: RCM under ACMA rules (radiocommunications, EMC, EME); supplier registration",
+   "if": {
+    "any": [
+     {
+      "trait": "has_digital_electronics",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    500,
+    3000
+   ],
+   "lead_weeks": [
+    1,
+    4
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Self-declaration using test reports (EU reports are often reusable). Needs a local responsible supplier. Mains products also need EESS registration.",
+   "levers": ""
+  },
+  {
+   "id": "in-wpc-bis",
+   "markets": [
+    "IN"
+   ],
+   "area": "radio",
+   "name": "India: WPC ETA for license-exempt radios; BIS CRS registration for listed products and lithium cells (IS 16046)",
+   "if": {
+    "any": [
+     {
+      "trait": "radios",
+      "op": "intersects",
+      "value": [
+       "ble",
+       "bt_classic",
+       "wifi",
+       "subghz",
+       "lora",
+       "zigbee",
+       "thread",
+       "uwb"
+      ]
+     },
+     {
+      "trait": "battery.chemistry",
+      "op": "in",
+      "value": [
+       "li-ion",
+       "li-polymer",
+       "lifepo4"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    1500,
+    8000
+   ],
+   "lead_weeks": [
+    3,
+    12
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Wearables such as smartwatches are on the BIS CRS list; tests run in BIS-recognised Indian labs. Verify the current list.",
+   "levers": ""
+  },
+  {
+   "id": "un38-3",
+   "markets": [
+    "*"
+   ],
+   "area": "battery",
+   "name": "UN 38.3 transport tests and UN 38.3 test summary for every lithium cell/battery shipped",
+   "if": {
+    "any": [
+     {
+      "trait": "battery.chemistry",
+      "op": "in",
+      "value": [
+       "li-ion",
+       "li-polymer",
+       "lifepo4",
+       "li-primary",
+       "coin-cell",
+       "button-cell"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    6000
+   ],
+   "lead_weeks": [
+    0,
+    8
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "CRITICAL PATH. A custom cell does not inherit the vendor's existing reports: each new model needs its own tests before it can fly. Ask the cell vendor to include UN 38.3, the test summary and the MSDS in the cell NRE. Air shipping follows IATA PI 965–970 (UN3480/3481/3090/3091); couriers charge dangerous-goods surcharges. Lithium-metal coin and button cells (CR2032, CR2450…) are lithium cells too: a catalogue cell's UN 38.3 test summary comes from the cell maker at no cost; equipment that ships with the cell installed follows PI 970 (UN3091).",
+   "levers": "Choose a catalogue cell that already has UN 38.3 for prototypes."
+  },
+  {
+   "id": "iec62133",
+   "markets": [
+    "*"
+   ],
+   "area": "battery",
+   "name": "IEC 62133-2 (secondary lithium cells/batteries safety), usually through a CB scheme report",
+   "if": {
+    "any": [
+     {
+      "trait": "battery.chemistry",
+      "op": "in",
+      "value": [
+       "li-ion",
+       "li-polymer",
+       "lifepo4"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    6000
+   ],
+   "lead_weeks": [
+    0,
+    8
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "EN/IEC 62368-1 for the end product references it. Retailers and marketplaces ask for it even where the law does not.",
+   "levers": "Get it from the cell vendor as part of the custom-cell contract."
+  },
+  {
+   "id": "us-reeses-law",
+   "markets": [
+    "US"
+   ],
+   "area": "safety",
+   "name": "US Reese's Law (16 CFR 1263): child-resistant compartments and warnings for button/coin cells",
+   "if": {
+    "any": [
+     {
+      "trait": "battery.chemistry",
+      "op": "in",
+      "value": [
+       "coin-cell",
+       "button-cell"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    1000,
+    5000
+   ],
+   "lead_weeks": [
+    2,
+    6
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Covers consumer products that contain or ship with button or coin cells, including rechargeable ones. Australia has similar mandatory standards.",
+   "levers": "A secured battery door (tool or two simultaneous actions) designed in from the start."
+  },
+  {
+   "id": "us-cpsia",
+   "markets": [
+    "US"
+   ],
+   "area": "safety",
+   "name": "US CPSIA children's product certificate (CPC), third-party testing, tracking labels",
+   "if": {
+    "any": [
+     {
+      "trait": "for_children",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    1000,
+    6000
+   ],
+   "lead_weeks": [
+    2,
+    6
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Children's products also face small-parts, lead and phthalate limits, and other markets have their own toy rules (EN 71 in the EU).",
+   "levers": ""
+  },
+  {
+   "id": "us-prop65",
+   "markets": [
+    "US"
+   ],
+   "area": "materials",
+   "name": "California Proposition 65 warnings for listed substances (for example some plasticisers, lead in brass)",
+   "if": {
+    "any": [
+     {
+      "trait": "consumer_product",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    2000
+   ],
+   "lead_weeks": [
+    0,
+    3
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Mostly a materials-declaration exercise. Cables and soft-touch plastics are the usual sources.",
+   "levers": ""
+  },
+  {
+   "id": "ip-rating",
+   "markets": [
+    "*"
+   ],
+   "area": "ingress",
+   "name": "IP rating test to IEC 60529 (only if you claim an IP code)",
+   "if": {
+    "any": [
+     {
+      "trait": "ip_rating_claim",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    800,
+    3000
+   ],
+   "lead_weeks": [
+    1,
+    2
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Not a legal requirement, but a claim you make must be backed by a test. Run in-house immersion and pressure-decay pre-tests first. A sealed device without a vent needs pressure and temperature cycling too.",
+   "levers": "Fewer openings: molded contacts, membranes, adhesive seals."
+  },
+  {
+   "id": "privacy-recording",
+   "markets": [
+    "*"
+   ],
+   "area": "privacy",
+   "name": "Recording-device privacy: consent laws, a visible recording indicator, data-protection law (GDPR, LGPD, US state laws)",
+   "if": {
+    "any": [
+     {
+      "trait": "audio_recording",
+      "op": "truthy"
+     },
+     {
+      "trait": "camera",
+      "op": "truthy"
+     },
+     {
+      "trait": "location_tracking",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    5000
+   ],
+   "lead_weeks": [
+    0,
+    4
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "Not a certification. Some jurisdictions require consent from all parties to record a conversation. A hardware-driven indicator (an LED that cannot be disabled in firmware while recording) is the accepted design answer. Personal data needs a privacy policy, encryption and deletion. Trackers must follow anti-stalking specs (for example the IETF DULT draft and platform finder-network rules).",
+   "levers": "A recording LED wired so that firmware cannot record without it; on-device encryption."
+  },
+  {
+   "id": "finder-networks",
+   "markets": [
+    "*"
+   ],
+   "area": "ecosystem",
+   "name": "Finder networks (Apple Find My via MFi, Google Find Hub): program certification and anti-stalking features",
+   "if": {
+    "any": [
+     {
+      "trait": "finder_network",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    10000
+   ],
+   "lead_weeks": [
+    4,
+    16
+   ],
+   "evidence": "estimate",
+   "source": "earlier research read the Find Hub spec and the DULT draft; costs not verified",
+   "notes": "Each program requires enrolment, its own certification and features such as an audible alert (DULT and Find Hub require at least 60 phon from a speaker).",
+   "levers": ""
+  },
+  {
+   "id": "mfi",
+   "markets": [
+    "*"
+   ],
+   "area": "ecosystem",
+   "name": "Apple MFi program (only for MFi features: Lightning/USB accessory protocols, Find My, AirPlay, MFi authentication)",
+   "if": {
+    "any": [
+     {
+      "trait": "apple_mfi_features",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    100,
+    10000
+   ],
+   "lead_weeks": [
+    4,
+    16
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "A plain BLE GATT accessory does not need MFi.",
+   "levers": "Use plain BLE GATT unless an MFi-only feature is essential."
+  },
+  {
+   "id": "wpc-qi",
+   "markets": [
+    "*"
+   ],
+   "area": "ecosystem",
+   "name": "WPC Qi certification (only to use the Qi name and logo or join MPP/Qi2)",
+   "if": {
+    "any": [
+     {
+      "trait": "wireless_charging_claims_qi",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    3000,
+    15000
+   ],
+   "lead_weeks": [
+    4,
+    10
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "A proprietary inductive coil and dock need no Qi certification but still count as radio/EMC equipment in several markets.",
+   "levers": ""
+  },
+  {
+   "id": "prescan",
+   "markets": [
+    "*"
+   ],
+   "area": "process",
+   "name": "Pre-compliance scan at a lab on EVT/DVT units (radiated emissions, conducted, ESD IEC 61000-4-2, radio)",
+   "if": {
+    "any": [
+     {
+      "trait": "has_digital_electronics",
+      "op": "truthy"
+     }
+    ]
+   },
+   "cost_usd": [
+    1000,
+    4000
+   ],
+   "lead_weeks": [
+    1,
+    2
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge, not verified in a primary source",
+   "notes": "A day or two of chamber time before formal tests. Failing the formal test costs a board revision and a retest, which costs more than the pre-scan.",
+   "levers": ""
+  },
+  {
+   "id": "coin-cell-62368",
+   "markets": [
+    "EU",
+    "UK"
+   ],
+   "area": "safety",
+   "name": "EN IEC 62368-1 clause 4.8: equipment containing coin/button cells (compartment, warnings, instructions)",
+   "if": {
+    "any": [
+     {
+      "trait": "battery.chemistry",
+      "op": "in",
+      "value": [
+       "coin-cell",
+       "button-cell"
+      ]
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    2000
+   ],
+   "lead_weeks": [
+    0,
+    2
+   ],
+   "evidence": "estimate",
+   "source": "prior knowledge of IEC 62368-1:2018 clause 4.8, not re-read in a primary source — verify before relying on it (rule added 2026-11-08)",
+   "notes": "Tested in the same EN 62368-1 session as the RED art. 3.1(a) safety report. Similar intent to UL 4200A: a compartment that needs a tool or two independent actions, warning marking and instructions. Under the EU GPSR the coin-cell hazard is a known risk the safety assessment must address.",
+   "levers": "Design the lid once to pass both UL 4200A option 1 and EN IEC 62368-1 clause 4.8; test both in one lab."
+  },
+  {
+   "id": "dult-item-finder",
+   "markets": [
+    "*"
+   ],
+   "area": "ecosystem",
+   "name": "Unwanted-tracking expectations for item finders (IETF DULT accessory protocol draft; Apple/Google industry specification)",
+   "if": {
+    "any": [
+     {
+      "trait": "product_category",
+      "op": "eq",
+      "value": "item_finder"
+     }
+    ]
+   },
+   "cost_usd": [
+    0,
+    3000
+   ],
+   "lead_weeks": [
+    0,
+    4
+   ],
+   "evidence": "verified",
+   "source": "datatracker.ietf.org draft-ietf-dult-accessory-protocol-01 (2026-10-27), read 2026-11-08 — verify before relying on it (rule added 2026-11-08)",
+   "notes": "The draft makes its best practices REQUIRED for small, not easily discoverable location-enabled accessories: sound maker >= 60 phon at 25 cm, 5-30 s (12 s recommended); address rotation every 15 min near the owner and every 24 h when separated; separated mode after 30 min; a physical disable; a readable identifier. A tag without any location report to its owner is outside the definition, but joining a finder network brings it in. The cost range is firmware work.",
+   "levers": "Keep v1 without location reporting, and implement address rotation and the 12 s / >= 60 phon ring now so a finder-network v2 needs no hardware change."
+  }
+ ]
+}

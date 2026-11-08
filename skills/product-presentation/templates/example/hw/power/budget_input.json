@@ -1,0 +1,44 @@
+{
+  "product": "Fixture Tag (fictional example)",
+  "target_runtime_h": 8760,
+  "battery": {
+    "nominal_v": 3.0,
+    "rated_mah": 225,
+    "usable_fraction": 0.85,
+    "eol_fraction": 0.90,
+    "evidence": "[assumption] CR2032 rated at 0.2 mA drain; capacity falls at higher pulse loads and in the cold"
+  },
+  "rails": {
+    "VBAT": {"min": 2.0, "max": 3.3, "max_ma": 15, "type": "direct", "evidence": "[assumption: coin-cell pulse capability without a reservoir capacitor]"}
+  },
+  "modes": [
+    {"name": "idle", "duty": 0.9989, "note": "advertising every 2 s, motion wake armed"},
+    {"name": "connected", "duty": 0.0010, "note": "phone connection events"},
+    {"name": "ring", "duty": 0.0001, "note": "3 rings of 20 s per week"}
+  ],
+  "parts": [
+    {"ref": "U1", "name": "BLE SoC", "rail": "VBAT", "rail_v": 3.0,
+     "currents_ma": {"idle": 0.0075, "connected": 0.9, "ring": 1.2}, "peak_ma": 5.5, "peak_modes": ["connected", "ring"],
+     "evidence": "[estimate: datasheet TX 0 dBm and sleep figures, duty-weighted]"},
+    {"ref": "U2", "name": "Accelerometer", "rail": "VBAT", "rail_v": 3.0, "currents_ma": {"*": 0.002},
+     "evidence": "[estimate: datasheet low-power wake-up mode]"},
+    {"ref": "LS1", "name": "Buzzer via Q1", "rail": "VBAT", "rail_v": 3.0,
+     "currents_ma": {"idle": 0, "connected": 0, "ring": 42}, "peak_ma": 85, "peak_modes": ["ring"],
+     "evidence": "[estimate: 50 % drive duty at 85 mA peak]"},
+    {"ref": "D1", "name": "White LED", "rail": "VBAT", "rail_v": 3.0,
+     "currents_ma": {"idle": 0.0005, "connected": 0.05, "ring": 2.5}, "peak_ma": 5, "peak_modes": ["ring"],
+     "evidence": "[assumption: 0.01 % blink duty in idle]"},
+    {"ref": "C1", "name": "Reservoir capacitor leakage", "rail": "VBAT", "rail_v": 3.0, "currents_ma": {"*": 0.0022},
+     "evidence": "[estimate: datasheet max leakage at 3 V]"}
+  ],
+  "scenario_factors": {"optimistic": 0.8, "baseline": 1.0, "pessimistic": 2.0},
+  "comparables": [
+    {"name": "Typical coin-cell item finder (fill in)", "capacity_mah": 225, "runtime_h": 8760, "usable_fraction": 0.85,
+     "evidence": "[assumption: replace with a shipped product's published capacity and battery life]"}
+  ],
+  "measured_avg_ma": null,
+  "limits": [
+    {"name": "Coin cell pulse without reservoir", "max_ma": 15, "evidence": "[assumption: cell datasheet pulse curve]"},
+    {"name": "Coin cell + 220 µF reservoir (20 ms pulses)", "max_ma": 120, "evidence": "[estimate: ESR and droop calculation]"}
+  ]
+}

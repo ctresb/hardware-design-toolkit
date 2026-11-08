@@ -1,0 +1,11 @@
+{
+ "shot": "lineup",
+ "engine": "Cycles OptiX",
+ "device": "1x NVIDIA L4 (g6.12xlarge, one process per GPU)",
+ "samples": 512,
+ "seconds": 79.7,
+ "master": "16-bit PNG on the render host, delivered as 8-bit PNG",
+ "config": "scenes/shots.json",
+ "validated_from": "hw/mech/assembly_golden.blend + hw/validation/assembly.json (re-validated in memory after posing)",
+ "revision": "fix round 1 (coordinator review)"
+}

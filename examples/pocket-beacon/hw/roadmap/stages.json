@@ -1,0 +1,252 @@
+{
+ "project": "Pocket Beacon (fictional toolkit PoC)",
+ "start": "2026-11-16",
+ "stages": [
+  {
+   "id": "S0",
+   "name": "Dev-kit bench",
+   "weeks": [
+    3,
+    6
+   ],
+   "evidence": "estimate",
+   "gate": "measured average current <= 20 uA with the chosen advertising (1285 ms) and 10 rings/month (power.md M1-M9); ring >= 75 dB(A) at 25 cm in 3x on a fresh cell",
+   "detail": "CC2340 LaunchPad + PPK2 power profiler, PAM8904 + piezo on a breadboard"
+  },
+  {
+   "id": "S1",
+   "name": "Works-like / looks-like",
+   "weeks": [
+    3,
+    5
+   ],
+   "depends_on": [
+    "S0"
+   ],
+   "lag_weeks": -2,
+   "evidence": "estimate",
+   "gate": "printed enclosure closes on the real stack (10.0 mm limit); bayonet turns >= 90 deg with a coin; IPX7 pre-test in a bucket passes",
+   "detail": "printed shell and lid, real holder, cell and membranes"
+  },
+  {
+   "id": "E0",
+   "name": "EVT-0 build and bring-up",
+   "weeks": [
+    5,
+    8
+   ],
+   "depends_on": [
+    "S0"
+   ],
+   "lag_weeks": -2,
+   "evidence": "estimate: JLCPCB PCBA build >= 4 days (verified) + shipping + bring-up",
+   "gate": "all rails up, BLE link at 10 m, current within 20 % of the bench, antenna matched in the printed shell",
+   "detail": "10 units at JLCPCB; bring-up; VNA antenna match"
+  },
+  {
+   "id": "E1",
+   "name": "EVT-1 revision + pre-scan",
+   "weeks": [
+    4,
+    7
+   ],
+   "depends_on": [
+    "E0"
+   ],
+   "evidence": "estimate",
+   "gate": "pre-scan passes FCC 15.247 / EN 300 328 margins; ESD +/-8 kV contact on the button and lid; engineering freeze",
+   "detail": "board revision, lab pre-scan, ESD"
+  },
+  {
+   "id": "T1",
+   "name": "Tooling T1",
+   "weeks": [
+    5,
+    9
+   ],
+   "depends_on": [
+    "E1"
+   ],
+   "evidence": "estimate: aluminum 3-4 weeks (Formlabs) to pilot runs 6-8 weeks (Hubs) [verified ranges 2026-11-08]",
+   "gate": "T1 parts within drawing tolerances; bayonet torque and O-ring compression measured; cosmetic spec agreed for three colors",
+   "detail": "aluminum shell + lid tools, membrane mold"
+  },
+  {
+   "id": "D0",
+   "name": "DVT build (100 units)",
+   "weeks": [
+    5,
+    8
+   ],
+   "depends_on": [
+    "T1"
+   ],
+   "evidence": "estimate",
+   "gate": "IP67, 1.5 m drop (26 drops), -10 C ring, button life, UL 4200A pre-check passed; 12-month life confirmed from measured current"
+  },
+  {
+   "id": "R0",
+   "name": "US certification",
+   "weeks": [
+    5,
+    9
+   ],
+   "depends_on": [
+    "D0"
+   ],
+   "evidence": "estimate (compliance.md)",
+   "gate": "FCC grant, UL 4200A test report, IP67 report, Bluetooth listing",
+   "detail": "FCC 15C/15B, UL 4200A report, IP67, Bluetooth SIG listing"
+  },
+  {
+   "id": "P0",
+   "name": "PVT line validation",
+   "weeks": [
+    3,
+    6
+   ],
+   "depends_on": [
+    "D0"
+   ],
+   "evidence": "estimate",
+   "gate": "fixtures validated; first-pass yield >= 95 %; packaging with coin-cell warnings approved",
+   "detail": "fixtures, yield, launch-batch pack-out"
+  },
+  {
+   "id": "M0",
+   "name": "Launch batch (100, US)",
+   "weeks": [
+    3,
+    5
+   ],
+   "depends_on": [
+    "P0",
+    "R0"
+   ],
+   "evidence": "estimate",
+   "gate": "100 units shipped to US customers"
+  },
+  {
+   "id": "R1",
+   "name": "EU/UK/BR certification",
+   "weeks": [
+    8,
+    16
+   ],
+   "depends_on": [
+    "D0"
+   ],
+   "evidence": "estimate (compliance.md): formal tests 4-8 weeks, then Anatel 4-10 weeks after the reports",
+   "gate": "EU DoC with reports, UK DoC, Anatel certificate",
+   "detail": "RED + EN 18031 + EN 62368-1, UKCA, Anatel"
+  },
+  {
+   "id": "M1",
+   "name": "1k production run",
+   "weeks": [
+    5,
+    8
+   ],
+   "depends_on": [
+    "M0",
+    "R1"
+   ],
+   "evidence": "estimate",
+   "gate": "first 1k lot shipped",
+   "detail": "US, EU, UK, Brazil"
+  }
+ ],
+ "milestones": [
+  {
+   "name": "Engineering freeze",
+   "after": "E1"
+  },
+  {
+   "name": "First legal sale (US)",
+   "after": "R0"
+  },
+  {
+   "name": "First legal sale in Brazil",
+   "after": "R1"
+  }
+ ],
+ "long_lead": [
+  {
+   "item": "U1 CC2340R52E0RGER (TI 26 wk factory; buy 130 from LCSC/DigiKey stock now)",
+   "lead_weeks": 26,
+   "needed_by": "D0",
+   "qty_needed": 130,
+   "stock": {
+    "on_hand": 9278,
+    "source": "LCSC",
+    "date": "2026-11-08"
+   }
+  },
+  {
+   "item": "Q1 DMG2305UX-7 (40 wk at DigiKey; buy 130 of LCSC C150470 now)",
+   "lead_weeks": 40,
+   "needed_by": "D0",
+   "qty_needed": 130,
+   "stock": {
+    "on_hand": 31853,
+    "source": "LCSC",
+    "date": "2026-11-08"
+   }
+  },
+  {
+   "item": "Y2 ABS06-32.768KHZ-9-T (26 wk factory; 1,925 at LCSC)",
+   "lead_weeks": 26,
+   "needed_by": "D0",
+   "qty_needed": 130,
+   "stock": {
+    "on_hand": 1925,
+    "source": "LCSC",
+    "date": "2026-11-08"
+   }
+  },
+  {
+   "item": "D2 TPD1E10B06DPYR (26 wk factory; deep stock)",
+   "lead_weeks": 26,
+   "needed_by": "D0",
+   "qty_needed": 130,
+   "stock": {
+    "on_hand": 86161,
+    "source": "DigiKey",
+    "date": "2026-11-08"
+   }
+  },
+  {
+   "item": "ANT1 2450AT18A0100001E (18 wk factory; consign from DigiKey)",
+   "lead_weeks": 18,
+   "needed_by": "E0",
+   "qty_needed": 130,
+   "stock": {
+    "on_hand": 160791,
+    "source": "DigiKey",
+    "date": "2026-11-08"
+   }
+  },
+  {
+   "item": "LS1 CPT-9019A-SMT-TR (13 wk factory; consign from DigiKey)",
+   "lead_weeks": 13,
+   "needed_by": "E0",
+   "qty_needed": 130,
+   "stock": {
+    "on_hand": 47328,
+    "source": "DigiKey",
+    "date": "2026-11-08"
+   }
+  },
+  {
+   "item": "BT1 3034TR (14 wk factory; 644 at JLCPCB)",
+   "lead_weeks": 14,
+   "needed_by": "D0",
+   "qty_needed": 130,
+   "stock": {
+    "on_hand": 121030,
+    "source": "DigiKey",
+    "date": "2026-11-08"
+   }
+  }
+ ]
+}

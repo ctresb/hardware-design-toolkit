@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="490" viewBox="0 0 1120 490" font-family="-apple-system, Helvetica Neue, Helvetica, Arial, sans-serif">
+<rect width="1120" height="490" fill="#ffffff"/>
+<text x="24" y="30" font-size="16" font-weight="600" fill="#111111">Pocket Beacon (fictional toolkit PoC)</text>
+<text x="1090" y="30" font-size="11" fill="#6b6b6b" text-anchor="end">solid = best case · light = range to worst case · red = critical path</text>
+<text x="250.0" y="62" font-size="10" font-weight="600" fill="#111111">16 Nov 2026</text>
+<line x1="280.0" y1="66" x2="280.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<line x1="342.0" y1="66" x2="342.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<text x="345.0" y="62" font-size="10" fill="#6b6b6b" paint-order="stroke" stroke="#ffffff" stroke-width="4" stroke-linejoin="round">Jan 2027</text>
+<line x1="404.0" y1="66" x2="404.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<line x1="460.0" y1="66" x2="460.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<line x1="522.0" y1="66" x2="522.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<text x="525.0" y="62" font-size="10" fill="#6b6b6b" paint-order="stroke" stroke="#ffffff" stroke-width="4" stroke-linejoin="round">Apr</text>
+<line x1="582.0" y1="66" x2="582.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<line x1="644.0" y1="66" x2="644.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<line x1="704.0" y1="66" x2="704.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<text x="707.0" y="62" font-size="10" fill="#6b6b6b" paint-order="stroke" stroke="#ffffff" stroke-width="4" stroke-linejoin="round">Jul</text>
+<line x1="766.0" y1="66" x2="766.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<line x1="828.0" y1="66" x2="828.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<line x1="888.0" y1="66" x2="888.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<text x="891.0" y="62" font-size="10" fill="#6b6b6b" paint-order="stroke" stroke="#ffffff" stroke-width="4" stroke-linejoin="round">Oct</text>
+<line x1="950.0" y1="66" x2="950.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<line x1="1010.0" y1="66" x2="1010.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<line x1="1072.0" y1="66" x2="1072.0" y2="460" stroke="#e6e6e6" stroke-width="1"/>
+<text x="1075.0" y="62" font-size="10" fill="#6b6b6b" paint-order="stroke" stroke="#ffffff" stroke-width="4" stroke-linejoin="round">Jan 2028</text>
+<text x="24" y="95.0" font-size="12" fill="#111111"><title>Dev-kit bench</title><tspan font-weight="600">S0</tspan><tspan x="44.5">Dev-kit bench</tspan></text>
+<rect x="250.0" y="84.0" width="84.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="250.0" y="84.0" width="42.0" height="14" rx="3" fill="#d9472b"/>
+<text x="24" y="125.0" font-size="12" fill="#111111"><title>Works-like / looks-like</title><tspan font-weight="600">S1</tspan><tspan x="44.5">Works-like / looks-like</tspan></text>
+<rect x="264.0" y="114.0" width="112.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="264.0" y="114.0" width="42.0" height="14" rx="3" fill="#111111"/>
+<text x="24" y="155.0" font-size="12" fill="#111111"><title>EVT-0 build and bring-up</title><tspan font-weight="600">E0</tspan><tspan x="44.5">EVT-0 build and bring-up</tspan></text>
+<rect x="264.0" y="144.0" width="154.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="264.0" y="144.0" width="70.0" height="14" rx="3" fill="#d9472b"/>
+<text x="24" y="185.0" font-size="12" fill="#111111"><title>EVT-1 revision + pre-scan</title><tspan font-weight="600">E1</tspan><tspan x="44.5">EVT-1 revision + pre-scan</tspan></text>
+<rect x="334.0" y="174.0" width="182.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="334.0" y="174.0" width="56.0" height="14" rx="3" fill="#d9472b"/>
+<text x="24" y="215.0" font-size="12" fill="#111111"><title>Tooling T1</title><tspan font-weight="600">T1</tspan><tspan x="44.5">Tooling T1</tspan></text>
+<rect x="390.0" y="204.0" width="252.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="390.0" y="204.0" width="70.0" height="14" rx="3" fill="#d9472b"/>
+<text x="24" y="245.0" font-size="12" fill="#111111"><title>DVT build (100 units)</title><tspan font-weight="600">D0</tspan><tspan x="44.5">DVT build (100 units)</tspan></text>
+<rect x="460.0" y="234.0" width="294.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="460.0" y="234.0" width="70.0" height="14" rx="3" fill="#d9472b"/>
+<text x="24" y="275.0" font-size="12" fill="#111111"><title>US certification</title><tspan font-weight="600">R0</tspan><tspan x="44.5">US certification</tspan></text>
+<rect x="530.0" y="264.0" width="350.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="530.0" y="264.0" width="70.0" height="14" rx="3" fill="#111111"/>
+<text x="24" y="305.0" font-size="12" fill="#111111"><title>PVT line validation</title><tspan font-weight="600">P0</tspan><tspan x="44.5">PVT line validation</tspan></text>
+<rect x="530.0" y="294.0" width="308.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="530.0" y="294.0" width="42.0" height="14" rx="3" fill="#111111"/>
+<text x="24" y="335.0" font-size="12" fill="#111111"><title>Launch batch (100, US)</title><tspan font-weight="600">M0</tspan><tspan x="44.5">Launch batch (100, US)</tspan></text>
+<rect x="600.0" y="324.0" width="350.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="600.0" y="324.0" width="42.0" height="14" rx="3" fill="#111111"/>
+<text x="24" y="365.0" font-size="12" fill="#111111"><title>EU/UK/BR certification</title><tspan font-weight="600">R1</tspan><tspan x="44.5">EU/UK/BR certification</tspan></text>
+<rect x="530.0" y="354.0" width="448.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="530.0" y="354.0" width="112.0" height="14" rx="3" fill="#d9472b"/>
+<text x="24" y="395.0" font-size="12" fill="#111111"><title>1k production run</title><tspan font-weight="600">M1</tspan><tspan x="44.5">1k production run</tspan></text>
+<rect x="642.0" y="384.0" width="448.0" height="14" rx="3" fill="#cfcfcf" opacity="0.6"/>
+<rect x="642.0" y="384.0" width="70.0" height="14" rx="3" fill="#d9472b"/>
+<text x="24" y="425" font-size="12" fill="#6b6b6b">Milestones</text>
+<path d="M390.0 414 l6 7 l-6 7 l-6 -7 z" fill="#d9472b"><title>Engineering freeze</title></path>
+<text x="399.0" y="425" font-size="10" fill="#111111" paint-order="stroke" stroke="#ffffff" stroke-width="4" stroke-linejoin="round">Engineering freeze</text>
+<path d="M600.0 414 l6 7 l-6 7 l-6 -7 z" fill="#d9472b"><title>First legal sale (US)</title></path>
+<text x="609.0" y="439" font-size="10" fill="#111111" paint-order="stroke" stroke="#ffffff" stroke-width="4" stroke-linejoin="round">First legal sale (US)</text>
+<path d="M642.0 414 l6 7 l-6 7 l-6 -7 z" fill="#d9472b"><title>First legal sale in Brazil</title></path>
+<text x="651.0" y="425" font-size="10" fill="#111111" paint-order="stroke" stroke="#ffffff" stroke-width="4" stroke-linejoin="round">First legal sale in Brazil</text>
+</svg>

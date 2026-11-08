@@ -1,0 +1,355 @@
+{
+ "name": "pocket-beacon",
+ "ok": true,
+ "errors": [],
+ "warnings": [
+  "shell: 134.02 mm2 of faces with draft under 0.5 deg, near [[11.83, 10.82, 4.63], [12.03, 13.41, 7.32], [10.83, 11.82, 7.32]]",
+  "plate: 237.66 mm2 of faces with draft under 0.5 deg, near [[-8.05, 7.93, 1.79], [-10.11, 12.09, 1.72], [5.99, 8.26, 1.62]]",
+  "door: 94.236 mm2 of faces with draft under 0.5 deg, near [[-8.1, 11.5, 1.23], [-8.1, 10.55, 1.23], [5.9, 11.5, 1.23]]"
+ ],
+ "notes": [
+  "keyring slot 2.0 x 5.0 mm, vertical (straight pull, no side action); tube wall 1.0 mm; outer wall 2.14 mm",
+  "door: 2 captive 2x thread-forming screw for plastics, 1.4 x 3 mm, pan head, stainless, captive (retaining washer) at [60, 120] deg, r 14.0 mm; flat gasket 0.3 -> 0.23 mm, set by the ear-to-cap stop; blind pilot holes; all parts release in a straight pull"
+ ],
+ "frame": {
+  "rim_z": 1.9500000000000002,
+  "ceiling_z": 9.1,
+  "pcb_z": [
+   6.1,
+   6.699999999999999
+  ],
+  "recess_z": 1.03,
+  "plate_t": 1.85
+ },
+ "rules": {
+  "min_wall": 0.8,
+  "max_wall": 3.0,
+  "min_draft_deg": 0.5,
+  "min_window": 0.3,
+  "keepout_clearance": 0.0,
+  "min_rib": 0.5,
+  "min_flag_area_mm2": 0.3
+ },
+ "parts": [
+  {
+   "part": "shell",
+   "surface_area_mm2": 3622.2,
+   "samples": 5000,
+   "wall_min_mm": 0.8,
+   "wall_max_mm": 25.287,
+   "thin_wall_area_mm2": 0,
+   "thin_wall": [],
+   "thin_window_area_mm2": 0,
+   "thin_window": [],
+   "thick_area_mm2": 0,
+   "thick": [],
+   "undrafted_area_mm2": 134.02,
+   "undrafted": [
+    {
+     "near": [
+      11.83,
+      10.82,
+      4.63
+     ],
+     "area_mm2": 19.56,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      12.03,
+      13.41,
+      7.32
+     ],
+     "area_mm2": 15.938,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      10.83,
+      11.82,
+      7.32
+     ],
+     "area_mm2": 15.213,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      14.35,
+      9.84,
+      4.35
+     ],
+     "area_mm2": 12.315,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      13.18,
+      12.25,
+      4.63
+     ],
+     "area_mm2": 11.591,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      9.95,
+      14.23,
+      4.4
+     ],
+     "area_mm2": 9.418,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      10.15,
+      13.55,
+      7.32
+     ],
+     "area_mm2": 7.244,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      13.92,
+      11.47,
+      7.31
+     ],
+     "area_mm2": 4.347,
+     "min": 0.0,
+     "max": 0.0
+    }
+   ],
+   "undercut_area_mm2": 0,
+   "undercuts": []
+  },
+  {
+   "part": "plate",
+   "surface_area_mm2": 1874.3,
+   "samples": 5000,
+   "wall_min_mm": 0.8,
+   "wall_max_mm": 24.891,
+   "thin_wall_area_mm2": 0,
+   "thin_wall": [],
+   "thin_window_area_mm2": 0,
+   "thin_window": [],
+   "thick_area_mm2": 0,
+   "thick": [],
+   "undrafted_area_mm2": 237.66,
+   "undrafted": [
+    {
+     "near": [
+      -8.05,
+      7.93,
+      1.79
+     ],
+     "area_mm2": 5.248,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      -10.11,
+      12.09,
+      1.72
+     ],
+     "area_mm2": 4.123,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      5.99,
+      8.26,
+      1.62
+     ],
+     "area_mm2": 4.123,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      -8.07,
+      10.54,
+      2.31
+     ],
+     "area_mm2": 3.749,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      5.7,
+      9.87,
+      1.85
+     ],
+     "area_mm2": 3.749,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      6.15,
+      11.69,
+      2.3
+     ],
+     "area_mm2": 3.749,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      13.17,
+      12.29,
+      1.23
+     ],
+     "area_mm2": 3.749,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      12.3,
+      13.16,
+      0.62
+     ],
+     "area_mm2": 3.749,
+     "min": 0.0,
+     "max": 0.0
+    }
+   ],
+   "undercut_area_mm2": 0,
+   "undercuts": []
+  },
+  {
+   "part": "door",
+   "surface_area_mm2": 1136.4,
+   "samples": 1704,
+   "wall_min_mm": 0.8,
+   "wall_max_mm": 26.162,
+   "thin_wall_area_mm2": 0,
+   "thin_wall": [],
+   "thin_window_area_mm2": 0,
+   "thin_window": [],
+   "thick_area_mm2": 0,
+   "thick": [],
+   "undrafted_area_mm2": 94.236,
+   "undrafted": [
+    {
+     "near": [
+      -8.1,
+      11.5,
+      1.23
+     ],
+     "area_mm2": 2.942,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      -8.1,
+      10.55,
+      1.23
+     ],
+     "area_mm2": 2.942,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      5.9,
+      11.5,
+      1.23
+     ],
+     "area_mm2": 2.942,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      5.9,
+      10.55,
+      1.22
+     ],
+     "area_mm2": 2.942,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      6.08,
+      12.43,
+      0.35
+     ],
+     "area_mm2": 2.578,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      -7.93,
+      12.43,
+      0.35
+     ],
+     "area_mm2": 2.578,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      4.4,
+      11.88,
+      0.38
+     ],
+     "area_mm2": 2.425,
+     "min": 0.0,
+     "max": 0.0
+    },
+    {
+     "near": [
+      -9.61,
+      11.86,
+      0.38
+     ],
+     "area_mm2": 2.425,
+     "min": 0.0,
+     "max": 0.0
+    }
+   ],
+   "undercut_area_mm2": 0,
+   "undercuts": []
+  }
+ ],
+ "keepouts": [
+  {
+   "keepout": "PCB",
+   "clearance": 0.0,
+   "collides_with": {},
+   "inside_envelope": true
+  },
+  {
+   "keepout": "LS1",
+   "clearance": 0.0,
+   "collides_with": {},
+   "inside_envelope": true
+  },
+  {
+   "keepout": "SW1",
+   "clearance": 0.0,
+   "collides_with": {},
+   "inside_envelope": true
+  },
+  {
+   "keepout": "BT1 + cell",
+   "clearance": 0.0,
+   "collides_with": {},
+   "inside_envelope": true
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+{
+ "ok": true,
+ "tolerance": 0.02,
+ "objects": 54,
+ "pairs_tested": 73,
+ "n_interpenetrations": 0,
+ "interpenetrations": [],
+ "n_mesh_warnings": 0,
+ "mesh_issues": [],
+ "seconds": 1.0
+}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120mm" height="84mm" viewBox="-30 -17 60 42" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <title>CR2032 coin cell in its holder, top view, mm</title>
+  <rect x="-30" y="-17" width="60" height="42" fill="#ffffff"/>
+  <!-- holder outline: estimate until the TE drawing is read (Q-PB-01) -->
+  <rect x="-11.5" y="-10.5" width="23" height="21" rx="1.2" fill="none" stroke="#8a8f98" stroke-width="0.25" stroke-dasharray="1 0.8"/>
+  <!-- cell: 20.0 mm diameter max, round -->
+  <circle cx="0" cy="0" r="10" fill="#e9ebee" stroke="#111214" stroke-width="0.35"/>
+  <circle cx="0" cy="0" r="8.85" fill="none" stroke="#b9bdc4" stroke-width="0.2"/>
+  <text x="0" y="-1" font-size="2.6" text-anchor="middle" fill="#111214" font-weight="600">CR2032</text>
+  <text x="0" y="2.4" font-size="1.7" text-anchor="middle" fill="#4a4f57">3.0 V · 225 mAh rated</text>
+  <!-- diameter dimension -->
+  <line x1="-10" y1="16.5" x2="10" y2="16.5" stroke="#111214" stroke-width="0.2"/>
+  <line x1="-10" y1="10.8" x2="-10" y2="17.5" stroke="#111214" stroke-width="0.15"/>
+  <line x1="10" y1="10.8" x2="10" y2="17.5" stroke="#111214" stroke-width="0.15"/>
+  <path d="M-10 16.5 l1.2 -0.45 v0.9 z M10 16.5 l-1.2 -0.45 v0.9 z" fill="#111214"/>
+  <text x="0" y="15.6" font-size="1.8" text-anchor="middle" fill="#111214">Ø 20.0 max (19.7 min)</text>
+  <!-- holder dimension -->
+  <text x="0" y="-12.2" font-size="1.6" text-anchor="middle" fill="#6b7079">holder ≈ 23 × 21 mm (estimate, Q-PB-01)</text>
+  <text x="0" y="21.8" font-size="1.6" text-anchor="middle" fill="#6b7079">height: cell 3.2 max · holder ≈ 4.3 (estimate)</text>
+</svg>

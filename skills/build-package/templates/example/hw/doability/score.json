@@ -1,0 +1,14 @@
+{
+ "overall": "READY TO BUILD (prototype)",
+ "areas": [],
+ "blockers": [],
+ "fixes": {},
+ "prototype_checks": [
+  {
+   "what": "Average current while advertising",
+   "method": "Power profiler at 3.0 V, 10 min",
+   "instrument": "Power profiler (for example Nordic PPK2)",
+   "pass_criteria": "≤ 0.015 mA"
+  }
+ ]
+}

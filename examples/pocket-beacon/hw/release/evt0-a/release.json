@@ -1,0 +1,321 @@
+{
+  "product": "Pocket Beacon",
+  "rev": "evt0-a",
+  "target": "prototype",
+  "build_qty": 10,
+  "stock_max_age_days": 14,
+  "warnings_fail": false,
+  "assembler": {
+    "name": "jlcpcb",
+    "options": {
+      "PCB": "4 layers, 0.6 mm, FR-4 TG155, ENIG, black solder mask both sides, white silkscreen, impedance control on (RF net, 50 Ω microstrip F.Cu/In1.Cu)",
+      "Stack-up": "JLCPCB standard 4-layer 0.6 mm stack-up; take the RF trace width from JLC's impedance calculator (stackup.md)",
+      "PCBA type": "Standard",
+      "Assembly side": "Both sides (BT1 on the bottom)",
+      "Tooling holes": "Added by JLCPCB",
+      "Panel": "single board; JLC adds rails (board is under the 70 × 70 mm assembly minimum)",
+      "Confirm parts placement": "Yes: check U1 pin 1, D1, D2, Q1, Y1 and LS1 rotation in the DFM preview before paying",
+      "X-ray": "Yes for U1 (QFN24) and U2"
+    },
+    "consigned_refs": []
+  },
+  "boards": [
+    {
+      "name": "main",
+      "kicad_pcb": "pcb/main/main.kicad_pcb",
+      "drc": "pcb/main/drc.json",
+      "erc": "pcb/main/erc.json",
+      "netlist": "pcb/main/main.net",
+      "fab_dir": "pcb/fab/main",
+      "pos": "pcb/fab/main/main_cpl.csv",
+      "fab_notes": {
+        "Layers": "4",
+        "Thickness": "0.60 mm ± 10 % (D-510)",
+        "Material": "FR-4 TG155",
+        "Surface finish": "ENIG",
+        "Solder mask": "Black, both sides",
+        "Silkscreen": "White",
+        "Board size": "28.4 × 28.4 mm, rounded",
+        "Min track / space": "see DRC rules in main.kicad_pcb (JLC 4-layer capability)",
+        "Min drill": "0.20 mm",
+        "Impedance": "RF net 50 Ω microstrip on F.Cu over In1.Cu (stackup.md)",
+        "Stack-up": "JLCPCB 4-layer 0.6 mm standard",
+        "Panel": "Single board, assembler adds rails"
+      },
+      "rotation_offsets": {}
+    }
+  ],
+  "enclosure_parts": [
+    {
+      "name": "shell",
+      "step": "mech/cad/pocket-beacon_shell.step",
+      "stl": "mech/cad/pocket-beacon_shell.stl",
+      "process": "SLA",
+      "material": "Tough or Grey Pro class resin (graphite); Clear resin (smoke)",
+      "qty": 1
+    },
+    {
+      "name": "plate",
+      "step": "mech/cad/pocket-beacon_plate.step",
+      "stl": "mech/cad/pocket-beacon_plate.stl",
+      "process": "SLA",
+      "material": "same resin as the shell",
+      "qty": 1
+    },
+    {
+      "name": "door",
+      "step": "mech/cad/pocket-beacon_door.step",
+      "stl": "mech/cad/pocket-beacon_door.stl",
+      "process": "SLA",
+      "material": "same resin as the shell",
+      "qty": 1
+    },
+    {
+      "name": "button",
+      "step": "mech/cad/pocket-beacon_button.step",
+      "stl": "mech/cad/pocket-beacon_button.stl",
+      "process": "SLA",
+      "material": "flexible resin 80A",
+      "qty": 1
+    },
+    {
+      "name": "membrane",
+      "step": "mech/cad/pocket-beacon_membrane.step",
+      "stl": "mech/cad/pocket-beacon_membrane.stl",
+      "process": "die-cut",
+      "material": "acoustic vent, ePTFE or PFAS-free, with PSA",
+      "qty": 1
+    },
+    {
+      "name": "port_gasket",
+      "step": "mech/cad/pocket-beacon_port_gasket.step",
+      "stl": "mech/cad/pocket-beacon_port_gasket.stl",
+      "process": "die-cut",
+      "material": "extra-soft PU foam 0.8 mm with PSA (D-702)",
+      "qty": 1
+    },
+    {
+      "name": "door_gasket",
+      "step": "mech/cad/pocket-beacon_door_gasket.step",
+      "stl": "mech/cad/pocket-beacon_door_gasket.stl",
+      "process": "die-cut",
+      "material": "silicone 40A, 0.35 mm free (D-701); the CAD shows it compressed",
+      "qty": 1
+    },
+    {
+      "name": "adhesive",
+      "step": "mech/cad/pocket-beacon_adhesive.step",
+      "stl": "mech/cad/pocket-beacon_adhesive.stl",
+      "process": "die-cut",
+      "material": "double-sided tape, 0.10 mm",
+      "qty": 1
+    },
+    {
+      "name": "screws",
+      "step": "mech/cad/pocket-beacon_screws.step",
+      "stl": "mech/cad/pocket-beacon_screws.stl",
+      "process": "catalog",
+      "material": "stainless thread-forming 1.4 × 3 mm, pan head",
+      "qty": 2
+    }
+  ],
+  "cad_sources": [
+    "mech/enclosure.json",
+    "mech/cad_pocket_beacon.py"
+  ],
+  "validator": "validation/assembly.json",
+  "drawing": "drawings/ortho.pdf",
+  "mech_bom": [
+    {
+      "item": "Thread-forming screw for plastics 1.4 × 3 mm, pan head, PH000, stainless, with retaining washer",
+      "vendor": "catalog micro-screw supplier (RFQ)",
+      "mpn": "spec per D-511",
+      "qty_per_unit": 2,
+      "unit": "pcs",
+      "url": ""
+    },
+    {
+      "item": "Door gasket, silicone 40A, 0.35 mm, Ø21.9/Ø23.7 mm die-cut",
+      "vendor": "die-cut converter (RFQ)",
+      "mpn": "spec per D-701",
+      "qty_per_unit": 1,
+      "unit": "pcs",
+      "url": ""
+    },
+    {
+      "item": "Sounder port gasket, extra-soft PU foam 0.8 mm + PSA, Ø3.0/Ø1.6 mm",
+      "vendor": "die-cut converter (RFQ)",
+      "mpn": "e.g. Rogers PORON 4701-30 0.031 in (D-702)",
+      "qty_per_unit": 1,
+      "unit": "pcs",
+      "url": "https://rogerscorp.com/elastomeric-material-solutions/poron-industrial-polyurethanes"
+    },
+    {
+      "item": "Acoustic vent Ø2.6 mm with PSA, IP67 class",
+      "vendor": "membrane maker (RFQ)",
+      "mpn": "spec per hw/cost/rfq.md",
+      "qty_per_unit": 1,
+      "unit": "pcs",
+      "url": ""
+    },
+    {
+      "item": "Double-sided tape ring 0.10 mm, die-cut to the plate lip",
+      "vendor": "die-cut converter (RFQ)",
+      "mpn": "e.g. tesa 4982 class PET tape",
+      "qty_per_unit": 1,
+      "unit": "pcs",
+      "url": ""
+    },
+    {
+      "item": "Micro screwdriver PH000 (in the launch-batch box, D-703)",
+      "vendor": "tool supplier",
+      "mpn": "-",
+      "qty_per_unit": 1,
+      "unit": "pcs",
+      "url": ""
+    }
+  ],
+  "docs": {
+    "assembly_guide": "release/src/assembly-guide.md",
+    "assembly_images": [
+      "drawings/blueprint.png",
+      "drawings/ortho.png"
+    ],
+    "test_plan": "release/src/test-plan.md",
+    "battery": "release/src/battery.md",
+    "print_settings": "release/src/print-settings.md"
+  },
+  "doability": "doability/score.json",
+  "firmware": {
+    "board": "main",
+    "mcu_ref": "U1"
+  },
+  "attrition": {
+    "default_pct": 5,
+    "min_extra": 1,
+    "passive_prefixes": [
+      "R",
+      "C",
+      "L"
+    ],
+    "passive_min_extra": 10
+  },
+  "order_steps": [
+    {
+      "title": "Order 10 boards with assembly at JLCPCB",
+      "where": "https://jlcpcb.com/",
+      "upload": [
+        "fab/main/main_gerbers.zip",
+        "assembly/main/main_bom_jlcpcb.csv",
+        "assembly/main/main_cpl_jlcpcb.csv"
+      ],
+      "options": "See fab/main/fab-notes.md and assembly/main/options.md",
+      "cost_usd": [
+        260,
+        330
+      ],
+      "lead_time_days": [
+        10,
+        18
+      ],
+      "receiver": "Builder",
+      "source": "cost/model.json tier 10: PCBA batch $138.67 [verified tariff], bare boards $30–90 [estimate], BOM $7.72 × 10 [verified], placement $1.84 × 10"
+    },
+    {
+      "title": "Order 12 CR2032 cells from an authorized distributor",
+      "where": "https://www.digikey.com/",
+      "upload": [
+        "purchasing/digikey.csv"
+      ],
+      "options": "Panasonic CR2032 (not the marketplace CR-2032/BN); ship to the builder, not to the PCB fab",
+      "cost_usd": [
+        8,
+        20
+      ],
+      "lead_time_days": [
+        2,
+        5
+      ],
+      "receiver": "Builder",
+      "source": "bom.csv BAT1, sourcing.md"
+    },
+    {
+      "title": "Order 12 enclosure sets as SLA prints",
+      "where": "an SLA service bureau (e.g. JLC3DP, Protolabs, Xometry) or an in-house SLA printer",
+      "upload": [
+        "mech/shell.stl",
+        "mech/plate.stl",
+        "mech/door.stl",
+        "mech/button.stl"
+      ],
+      "options": "See mech/print-settings.md",
+      "cost_usd": [
+        140,
+        700
+      ],
+      "lead_time_days": [
+        5,
+        12
+      ],
+      "receiver": "Builder",
+      "source": "cost/model.json tier 10: enclosure $14–70 per set [estimate]"
+    },
+    {
+      "title": "Order the mechanical parts (screws, gaskets, foam, acoustic vents, tape rings)",
+      "where": "die-cut converter and fastener supplier",
+      "upload": [
+        "mech/mech-bom.csv",
+        "mech/door_gasket.step",
+        "mech/port_gasket.step",
+        "mech/adhesive.step"
+      ],
+      "options": "12 sets; die-cut from the STEP outlines",
+      "cost_usd": [
+        42,
+        190
+      ],
+      "lead_time_days": [
+        5,
+        15
+      ],
+      "receiver": "Builder",
+      "source": "cost/model.json tier 10: mechanical $4.2–19 per unit [estimate]"
+    },
+    {
+      "title": "Buy the long-lead parts for DVT from stock (optional now, needed by DVT)",
+      "where": "LCSC and DigiKey",
+      "upload": [
+        "purchasing/purchasing.md"
+      ],
+      "options": "130 each of U1, Q1 (LCSC C150470), Y2, D2 (LCSC C48260), ANT1, LS1 — FR-11",
+      "cost_usd": [
+        200,
+        300
+      ],
+      "lead_time_days": [
+        3,
+        10
+      ],
+      "receiver": "Builder",
+      "source": "roadmap/schedule.md, bom.csv prices [verified 2026-11-08]"
+    },
+    {
+      "title": "Get the bring-up tools if not on hand",
+      "where": "TI store / DigiKey, Tag-Connect, Nordic distributors",
+      "upload": [
+        "test/test-plan.md"
+      ],
+      "options": "TI XDS110 debug probe, Tag-Connect TC2030-CTX-NL, Nordic PPK2",
+      "cost_usd": [
+        150,
+        260
+      ],
+      "lead_time_days": [
+        2,
+        7
+      ],
+      "receiver": "Builder",
+      "source": "estimate: catalog prices of the three tools"
+    }
+  ]
+}

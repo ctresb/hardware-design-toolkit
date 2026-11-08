@@ -1,0 +1,107 @@
+{
+ "inputs": "power/budget_input.json",
+ "rails": {
+  "VBAT": {
+   "min": 2.0,
+   "max": 3.3,
+   "max_ma": 15
+  }
+ },
+ "rail_worst_load_ma": {
+  "VBAT": 95.5042
+ },
+ "battery": {
+  "nominal_v": 3.0,
+  "usable_fraction": 0.85,
+  "eol_fraction": 0.9,
+  "rated_mah": 225
+ },
+ "target_runtime_h": 8760,
+ "per_mode_ma": {
+  "idle": 0.0122,
+  "connected": 0.9542,
+  "ring": 45.7042
+ },
+ "peak_ma": {
+  "idle": 0.0122,
+  "connected": 5.5542,
+  "ring": 95.5042
+ },
+ "scenarios": [
+  {
+   "scenario": "optimistic",
+   "avg_ma": 0.014,
+   "runtime_new_h": 13497.8,
+   "runtime_eol_h": 12148.0,
+   "rated_mah_needed": 162.2,
+   "max_avg_ma_new": 0.022,
+   "max_avg_ma_eol": 0.02
+  },
+  {
+   "scenario": "baseline",
+   "avg_ma": 0.018,
+   "runtime_new_h": 10798.3,
+   "runtime_eol_h": 9718.4,
+   "rated_mah_needed": 202.8,
+   "max_avg_ma_new": 0.022,
+   "max_avg_ma_eol": 0.02
+  },
+  {
+   "scenario": "pessimistic",
+   "avg_ma": 0.035,
+   "runtime_new_h": 5399.1,
+   "runtime_eol_h": 4859.2,
+   "rated_mah_needed": 405.6,
+   "max_avg_ma_new": 0.022,
+   "max_avg_ma_eol": 0.02
+  },
+  {
+   "scenario": "empirical",
+   "avg_ma": 0.022,
+   "runtime_new_h": 8693.2,
+   "runtime_eol_h": 7823.9,
+   "rated_mah_needed": 251.9,
+   "max_avg_ma_new": 0.022,
+   "max_avg_ma_eol": 0.02
+  }
+ ],
+ "contributors_ma": {
+  "U1": 0.00851175,
+  "U2": 0.002,
+  "LS1": 0.004200000000000001,
+  "D1": 0.00079945,
+  "C1": 0.0022,
+  "rail VBAT": 0.0
+ },
+ "comparables": [
+  {
+   "name": "Typical coin-cell item finder (fill in)",
+   "capacity_mah": 225,
+   "runtime_h": 8760,
+   "usable_fraction": 0.85,
+   "evidence": "[assumption: replace with a shipped product's published capacity and battery life]",
+   "avg_ma": 0.022
+  }
+ ],
+ "limits": [
+  {
+   "name": "Coin cell pulse without reservoir",
+   "max_ma": 15.0,
+   "worst_peak_ma": 95.5,
+   "ok": false,
+   "evidence": "[assumption: cell datasheet pulse curve]"
+  },
+  {
+   "name": "Coin cell + 220 \u00b5F reservoir (20 ms pulses)",
+   "max_ma": 120.0,
+   "worst_peak_ma": 95.5,
+   "ok": true,
+   "evidence": "[estimate: ESR and droop calculation]"
+  }
+ ],
+ "warnings": [
+  "peak 96 mA exceeds Coin cell pulse without reservoir (15 mA)",
+  "rail VBAT: worst-case load 96 mA exceeds its max_ma 15",
+  "no measured_avg_ma yet: measure on a dev kit before ordering a custom cell or a mold"
+ ]
+}

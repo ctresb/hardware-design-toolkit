@@ -1,0 +1,11 @@
+{
+  "name": "hardware-design",
+  "displayName": "Hardware Design Toolkit",
+  "version": "0.1.0",
+  "description": "Skills that take an idea for an electronic device to a doable design: interview, specs, part research, battery reality, KiCad PCB, enclosure and assembly validation, photoreal renders, blueprint, cost at 1 to 10k units, certifications, roadmap, an adversarial doability review and a final presentation.",
+  "author": { "name": "Hardware Design Toolkit contributors" },
+  "homepage": "https://github.com/supersoniclabsai/hardware-design-toolkit",
+  "repository": "https://github.com/supersoniclabsai/hardware-design-toolkit",
+  "license": "MIT",
+  "keywords": ["hardware", "electronics", "pcb", "kicad", "blender", "bom", "dfm", "injection-molding", "battery", "certification", "product-design", "prototyping"]
+}

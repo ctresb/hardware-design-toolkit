@@ -1,0 +1,779 @@
+{
+ "main": {
+  "BT1": {
+   "symbol": "Battery_Cell",
+   "footprint": "BatteryHolder_Keystone_3034_1x20mm",
+   "pins": {
+    "1": "VBAT_RAW",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "U1": {
+   "symbol": "CC2340R52_RGE",
+   "footprint": "TI_RGE0024B_VQFN24_4x4_P0.5",
+   "pins": {
+    "1": "RF_P",
+    "2": "VDDR",
+    "3": "PZ_EN1",
+    "4": "PZ_EN2",
+    "5": null,
+    "6": "UART_TX",
+    "7": "SWDIO",
+    "8": "SWDCK",
+    "9": "PZ_DIN",
+    "10": "BTN",
+    "11": "VBAT",
+    "12": "LED",
+    "13": "nRESET",
+    "14": "X32P",
+    "15": "X32N",
+    "16": "VDDD",
+    "17": "DCDC",
+    "18": "VBAT",
+    "19": "SPARE2",
+    "20": "VDDR",
+    "21": "X48P",
+    "22": "X48N",
+    "23": "GND",
+    "24": "VBAT",
+    "25": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "13": "input",
+    "14": "passive",
+    "15": "passive",
+    "21": "passive",
+    "22": "passive",
+    "3": "bidirectional",
+    "4": "bidirectional",
+    "5": "bidirectional",
+    "6": "bidirectional",
+    "7": "bidirectional",
+    "8": "bidirectional",
+    "9": "bidirectional",
+    "10": "bidirectional",
+    "12": "bidirectional",
+    "19": "bidirectional",
+    "2": "power_in",
+    "11": "power_in",
+    "16": "power_out",
+    "17": "power_out",
+    "18": "power_in",
+    "20": "power_in",
+    "24": "power_in",
+    "23": "power_in",
+    "25": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "Y1": {
+   "symbol": "Crystal_GND24_Small",
+   "footprint": "Crystal_SMD_2016-4Pin_2.0x1.6mm",
+   "pins": {
+    "1": "X48P",
+    "3": "X48N",
+    "2": "GND",
+    "4": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive",
+    "3": "passive",
+    "4": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C16": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "X48P",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C17": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "X48N",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "Y2": {
+   "symbol": "Crystal_Small",
+   "footprint": "Crystal_SMD_2012-2Pin_2.0x1.2mm",
+   "pins": {
+    "1": "X32P",
+    "2": "X32N"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C13": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "X32P",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C14": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "X32N",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "L1": {
+   "symbol": "L_Small",
+   "footprint": "L_0805_2012Metric",
+   "pins": {
+    "1": "DCDC",
+    "2": "VDDR"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C4": {
+   "symbol": "C_Small",
+   "footprint": "C_0603_1608Metric",
+   "pins": {
+    "1": "VDDR",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C22": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "VDDR",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C23": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "VDDR",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C19": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "VDDD",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C5": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "VBAT",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C6": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "VBAT",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C21": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "VBAT",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C1": {
+   "symbol": "C_Small",
+   "footprint": "C_0603_1608Metric",
+   "pins": {
+    "1": "VBAT",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C2": {
+   "symbol": "C_Small",
+   "footprint": "C_0603_1608Metric",
+   "pins": {
+    "1": "VBAT",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C15": {
+   "symbol": "C_Small",
+   "footprint": "C_0603_1608Metric",
+   "pins": {
+    "1": "VBAT",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C3": {
+   "symbol": "C_Small",
+   "footprint": "C_0603_1608Metric",
+   "pins": {
+    "1": "VBAT",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "R3": {
+   "symbol": "R_Small",
+   "footprint": "R_0402_1005Metric",
+   "pins": {
+    "1": "nRESET",
+    "2": "VBAT"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C20": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "nRESET",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C11": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "RF_P",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "L2": {
+   "symbol": "L_Small",
+   "footprint": "L_0402_1005Metric",
+   "pins": {
+    "1": "RF_P",
+    "2": "RF_F"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C12": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "RF_F",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "R2": {
+   "symbol": "R_Small",
+   "footprint": "R_0402_1005Metric",
+   "pins": {
+    "1": "RF_F",
+    "2": "RF_ANT"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C18": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "RF_ANT",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "ANT1": {
+   "symbol": "Antenna_Chip",
+   "footprint": "Johanson_2450AT18x100",
+   "pins": {
+    "1": "RF_ANT",
+    "2": null
+   },
+   "types": {
+    "1": "input",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "U2": {
+   "symbol": "PAM8904E_WQFN12",
+   "footprint": "DIODES_WQFN2020_12_US",
+   "pins": {
+    "1": "PZ_EN1",
+    "2": "PZ_EN2",
+    "3": "PZ_DIN",
+    "4": "PZ_CP1N",
+    "5": "GND",
+    "6": "PZ_VO2",
+    "7": "PZ_VO1",
+    "8": "PZ_CP2N",
+    "9": "PZ_CP1P",
+    "10": "PZ_VCP",
+    "11": "PZ_CP2P",
+    "12": "VBAT",
+    "13": "GND"
+   },
+   "types": {
+    "1": "input",
+    "2": "input",
+    "3": "input",
+    "6": "output",
+    "7": "output",
+    "10": "power_out",
+    "9": "passive",
+    "11": "passive",
+    "12": "power_in",
+    "4": "passive",
+    "5": "power_in",
+    "8": "passive",
+    "13": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C7": {
+   "symbol": "C_Small",
+   "footprint": "C_0603_1608Metric",
+   "pins": {
+    "1": "VBAT",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C8": {
+   "symbol": "C_Small",
+   "footprint": "C_0603_1608Metric",
+   "pins": {
+    "1": "PZ_VCP",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C9": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "PZ_CP1P",
+    "2": "PZ_CP1N"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "C10": {
+   "symbol": "C_Small",
+   "footprint": "C_0402_1005Metric",
+   "pins": {
+    "1": "PZ_CP2P",
+    "2": "PZ_CP2N"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "LS1": {
+   "symbol": "Buzzer",
+   "footprint": "SAMESKY_CPT9019A_SMT",
+   "pins": {
+    "1": "PZ_VO1",
+    "2": "PZ_VO2"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "SW1": {
+   "symbol": "KMR2_G",
+   "footprint": "SW_Push_1P1T-SH_NO_CK_KMR2xxG",
+   "pins": {
+    "1": "BTN",
+    "2": "GND",
+    "SH": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive",
+    "SH": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "D1": {
+   "symbol": "LED_Small",
+   "footprint": "LED_0603_1608Metric",
+   "pins": {
+    "1": "GND",
+    "2": "LED_A"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "R1": {
+   "symbol": "R_Small",
+   "footprint": "R_0402_1005Metric",
+   "pins": {
+    "1": "LED",
+    "2": "LED_A"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "Q1": {
+   "symbol": "DMG2305UX",
+   "footprint": "SOT-23-3",
+   "pins": {
+    "1": "GND",
+    "2": "VBAT",
+    "3": "VBAT_RAW"
+   },
+   "types": {
+    "1": "input",
+    "2": "passive",
+    "3": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "D2": {
+   "symbol": "D_TVS_Small",
+   "footprint": "TI_DPY0002A_X1SON2",
+   "pins": {
+    "1": "VBAT_RAW",
+    "2": "GND"
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "J1": {
+   "symbol": "Conn_02x03_Odd_Even",
+   "footprint": "Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical",
+   "pins": {
+    "1": "VBAT",
+    "2": "SWDIO",
+    "3": "nRESET",
+    "4": "SWDCK",
+    "5": "GND",
+    "6": null
+   },
+   "types": {
+    "1": "passive",
+    "2": "passive",
+    "3": "passive",
+    "4": "passive",
+    "5": "passive",
+    "6": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "TP1": {
+   "symbol": "TestPoint",
+   "footprint": "TestPoint_Pad_D1.0mm",
+   "pins": {
+    "1": "VBAT"
+   },
+   "types": {
+    "1": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "TP2": {
+   "symbol": "TestPoint",
+   "footprint": "TestPoint_Pad_D1.0mm",
+   "pins": {
+    "1": "GND"
+   },
+   "types": {
+    "1": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "TP3": {
+   "symbol": "TestPoint",
+   "footprint": "TestPoint_Pad_D1.0mm",
+   "pins": {
+    "1": "PZ_VCP"
+   },
+   "types": {
+    "1": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "TP4": {
+   "symbol": "TestPoint",
+   "footprint": "TestPoint_Pad_D1.0mm",
+   "pins": {
+    "1": "PZ_DIN"
+   },
+   "types": {
+    "1": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "TP5": {
+   "symbol": "TestPoint",
+   "footprint": "TestPoint_Pad_D1.0mm",
+   "pins": {
+    "1": "UART_TX"
+   },
+   "types": {
+    "1": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "TP6": {
+   "symbol": "TestPoint",
+   "footprint": "TestPoint_Pad_D1.0mm",
+   "pins": {
+    "1": "BTN"
+   },
+   "types": {
+    "1": "passive"
+   },
+   "units": [
+    1
+   ]
+  },
+  "TP8": {
+   "symbol": "TestPoint",
+   "footprint": "TestPoint_Pad_D1.0mm",
+   "pins": {
+    "1": "SPARE2"
+   },
+   "types": {
+    "1": "passive"
+   },
+   "units": [
+    1
+   ]
+  }
+ }
+}

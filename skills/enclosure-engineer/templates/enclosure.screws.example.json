@@ -1,0 +1,157 @@
+{
+ "name": "example-tag-screws",
+ "units": "mm",
+ "comment": "Fictional 40 x 30 x 12 mm tag, lid held by 4 captive thread-forming screws into shell bosses, flat die-cut gasket under the rim (no lip, straight pull).",
+ "outline": {
+  "type": "rounded_rect",
+  "width": 40.0,
+  "depth": 30.0,
+  "corner_radius": 6.0
+ },
+ "height": 12.0,
+ "wall": 1.2,
+ "top_fillet": 2.0,
+ "bottom_fillet": 0.6,
+ "draft_deg": 1.0,
+ "lid": {
+  "joint": "screws",
+  "thickness": 1.6,
+  "clearance": 0.1,
+  "screws": {
+   "count": 4,
+   "screw_d": 1.4,
+   "boss_d": 3.2,
+   "pilot_d": 1.1,
+   "part": "4x thread-forming screw 1.4 x 4 mm"
+  },
+  "gasket": {
+   "free_t": 0.3,
+   "compressed_t": 0.25
+  }
+ },
+ "features": [
+  {
+   "type": "window",
+   "at": [
+    0.0,
+    6.0
+   ],
+   "shape": "circle",
+   "diameter": 3.0,
+   "thickness": 0.45,
+   "comment": "LED shines through a thin window; keep the rest of the wall uniform"
+  },
+  {
+   "type": "sound_port",
+   "at": [
+    -8.0,
+    -6.0
+   ],
+   "diameter": 0.8,
+   "seat_diameter": 3.0,
+   "seat_depth": 0.15,
+   "comment": "acoustic membrane bonded in the seat from inside"
+  },
+  {
+   "type": "lanyard",
+   "path": [
+    [
+     21.0,
+     8.0,
+     9.4
+    ],
+    [
+     14.0,
+     8.0,
+     9.4
+    ],
+    [
+     14.0,
+     16.0,
+     9.4
+    ]
+   ],
+   "diameter": 1.0,
+   "boss_diameter": 2.8,
+   "comment": "L-shaped cord tunnel: two straight holes, each exiting perpendicular to a flat side; two side actions"
+  },
+  {
+   "type": "boss",
+   "part": "body",
+   "at": [
+    12.0,
+    -8.0
+   ],
+   "od": 2.6,
+   "hole": 1.2,
+   "height": 2.0,
+   "hole_depth": 1.6
+  },
+  {
+   "type": "rib",
+   "part": "body",
+   "from": [
+    -16.0,
+    0.0
+   ],
+   "to": [
+    -6.0,
+    0.0
+   ],
+   "thickness": 0.6,
+   "height": 1.5
+  }
+ ],
+ "keepouts": [
+  {
+   "name": "PCB",
+   "center": [
+    0.0,
+    0.0,
+    2.4
+   ],
+   "size": [
+    28,
+    18,
+    0.8
+   ],
+   "corner_radius": 3.0
+  },
+  {
+   "name": "Components",
+   "center": [
+    0.0,
+    0.0,
+    3.5
+   ],
+   "size": [
+    26,
+    16,
+    1.2
+   ]
+  },
+  {
+   "name": "Battery",
+   "center": [
+    0.0,
+    0.0,
+    6.3500000000000005
+   ],
+   "size": [
+    24,
+    16,
+    3.5
+   ],
+   "comment": "cell at maximum thickness incl. swelling allowance",
+   "corner_radius": 1.0
+  }
+ ],
+ "dfm": {
+  "min_wall": 0.8,
+  "max_wall": 3.0,
+  "min_draft_deg": 0.5,
+  "min_window": 0.3,
+  "keepout_clearance": 0.2,
+  "min_rib": 0.5
+ }
+}

@@ -1,0 +1,152 @@
+{
+  "product": "Fixture board (test fixture)",
+  "rev": "A",
+  "target": "prototype",
+  "build_qty": 10,
+  "stock_max_age_days": 14,
+  "assembler": {
+    "name": "jlcpcb",
+    "options": {
+      "PCBA type": "Standard",
+      "Assembly side": "Both",
+      "Tooling holes": "Added by JLCPCB",
+      "Confirm parts placement": "Yes"
+    },
+    "consigned_refs": [
+      "J1"
+    ]
+  },
+  "boards": [
+    {
+      "name": "main",
+      "kicad_pcb": "pcb/main/main.kicad_pcb",
+      "drc": "pcb/main/drc.json",
+      "erc": "pcb/main/erc.json",
+      "netlist": "pcb/main/main.net",
+      "fab_dir": "pcb/fab/main",
+      "pos": "pcb/fab/main/main_pos.csv",
+      "fab_notes": {
+        "Layers": "4",
+        "Thickness": "0.8 mm ± 10 %",
+        "Material": "FR-4 TG155",
+        "Surface finish": "ENIG",
+        "Solder mask": "Black, both sides",
+        "Silkscreen": "White",
+        "Min track / space": "0.10 mm / 0.10 mm",
+        "Min drill": "0.20 mm",
+        "Stack-up": "JLC04081H-7628",
+        "Panel": "Single board, assembler adds rails (board smaller than the 70 × 70 mm assembly minimum)"
+      },
+      "rotation_offsets": {
+        "QFN-32*": 90
+      }
+    }
+  ],
+  "enclosure_parts": [
+    {
+      "name": "shell",
+      "step": "mech/cad/shell.step",
+      "stl": "mech/cad/shell.stl",
+      "process": "SLA",
+      "material": "Clear resin",
+      "qty": 1
+    }
+  ],
+  "cad_sources": [
+    "mech/cad/enclosure.json"
+  ],
+  "validator": "validation/assembly.json",
+  "drawing": "drawings/blueprint.pdf",
+  "mech_bom": [
+    {
+      "item": "Lid snap insert (test fixture)",
+      "vendor": "Fixture Mech",
+      "mpn": "FIXTURE-SNAP-1",
+      "qty_per_unit": 1,
+      "unit": "pcs",
+      "url": ""
+    }
+  ],
+  "docs": {
+    "assembly_guide": "release/src/assembly-guide.md",
+    "assembly_images": [],
+    "test_plan": "release/src/test-plan.md",
+    "battery": "release/src/battery.md",
+    "print_settings": "release/src/print-settings.md"
+  },
+  "doability": "doability/score.json",
+  "verify_on_prototype": "doability/verify-on-prototype.md",
+  "firmware": {
+    "board": "main",
+    "mcu_ref": "U1"
+  },
+  "attrition": {
+    "default_pct": 5,
+    "min_extra": 1,
+    "passive_prefixes": [
+      "R",
+      "C",
+      "L",
+      "FB"
+    ],
+    "passive_min_extra": 10
+  },
+  "order_steps": [
+    {
+      "title": "Order boards with assembly",
+      "where": "https://jlcpcb.com/",
+      "upload": [
+        "fab/main/main_gerbers.zip",
+        "assembly/main/main_bom_jlcpcb.csv",
+        "assembly/main/main_cpl_jlcpcb.csv"
+      ],
+      "options": "See fab/main/fab-notes.md and assembly/main/options.md",
+      "cost_usd": [
+        80,
+        140
+      ],
+      "lead_time_days": [
+        8,
+        14
+      ],
+      "receiver": "Builder",
+      "source": "cost/cost.md"
+    },
+    {
+      "title": "Print enclosure",
+      "where": "in-house SLA printer",
+      "upload": [
+        "mech/shell.stl"
+      ],
+      "options": "See mech/print-settings.md",
+      "cost_usd": [
+        15,
+        30
+      ],
+      "lead_time_days": [
+        1,
+        2
+      ],
+      "receiver": "Builder",
+      "source": "cost/cost.md"
+    },
+    {
+      "title": "Buy cells, holders and mechanical parts",
+      "where": "https://www.digikey.com/",
+      "upload": [
+        "purchasing/digikey.csv"
+      ],
+      "options": "BOM Manager upload",
+      "cost_usd": [
+        15,
+        25
+      ],
+      "lead_time_days": [
+        2,
+        5
+      ],
+      "receiver": "Builder",
+      "source": "cost/cost.md"
+    }
+  ]
+}

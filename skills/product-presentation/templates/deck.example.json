@@ -1,0 +1,17 @@
+{
+  "title": "Fixture Tag",
+  "date": "2026-11-08",
+  "maturity": "pre-EVT",
+  "theme": "auto",
+  "hero": "renders/hero.png",
+  "slides": ["cover", "idea", "highlights", "use", "renders", "drawings", "architecture", "components", "power",
+             "doability", "risks", "cost", "nre", "compliance", "roadmap", "next", "pending", "sources"],
+  "highlights": [
+    {"value": "28 × 28 × 6.5 mm", "label": "Size"},
+    {"value": "13–15 months", "label": "On one coin cell, baseline", "evidence": "estimate"},
+    {"value": "$7.14–10.43", "label": "Unit cost at 1,000 units", "evidence": "estimate"}
+  ],
+  "captions": {"hero": "Graphite. One button, a year on a coin cell."},
+  "nre_tier": 1000,
+  "next_steps": ["Measure idle current on the dev kit", "Quote the enclosure set from two molders"]
+}

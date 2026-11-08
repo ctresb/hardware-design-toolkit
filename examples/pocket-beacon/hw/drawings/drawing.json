@@ -1,0 +1,273 @@
+{
+ "frame_object": "Assembly",
+ "root": "Assembly",
+ "skip_prefixes": [
+  "Solder",
+  "Marking",
+  "Label",
+  "Light",
+  "Fiber"
+ ],
+ "explode_axis": "z",
+ "view": {
+  "azimuth_deg": 35,
+  "elevation_deg": 22
+ },
+ "sheet": "A3",
+ "standard_scale": true,
+ "themes": [
+  "blueprint",
+  "print"
+ ],
+ "decimal": ".",
+ "projection": "third",
+ "hidden_lines": false,
+ "title": {
+  "product": "Pocket Beacon · EVT-0 · A",
+  "subtitle": "Exploded isometric view · assembly for quotation",
+  "revision": "EVT-0 · A",
+  "date": "auto",
+  "units": "mm",
+  "sheet": "1/1",
+  "overall_size": "32 × 32 × 10 mm"
+ },
+ "footer": "Hidden lines removed. Electronic parts shown as manufacturer 3D envelopes. Reference dimensions in mm; general tolerances ISO 2768-f unless stated.",
+ "groups": [
+  {
+   "name": "screws",
+   "offset_mm": -41.0,
+   "match": {
+    "names": [
+     "screws"
+    ]
+   }
+  },
+  {
+   "name": "door",
+   "offset_mm": -27.0,
+   "match": {
+    "names": [
+     "door"
+    ]
+   }
+  },
+  {
+   "name": "door_gasket",
+   "offset_mm": -14.0,
+   "match": {
+    "names": [
+     "door_gasket"
+    ]
+   }
+  },
+  {
+   "name": "cell",
+   "offset_mm": -8.0,
+   "match": {
+    "prefixes": [
+     "CR2032"
+    ]
+   }
+  },
+  {
+   "name": "plate",
+   "offset_mm": 6.0,
+   "match": {
+    "names": [
+     "plate"
+    ]
+   }
+  },
+  {
+   "name": "adhesive",
+   "offset_mm": 18.0,
+   "match": {
+    "names": [
+     "adhesive"
+    ]
+   }
+  },
+  {
+   "name": "board",
+   "offset_mm": 24.0,
+   "match": {
+    "collections": [
+     "Board"
+    ]
+   },
+   "fine": true
+  },
+  {
+   "name": "port_gasket",
+   "offset_mm": 29.0,
+   "match": {
+    "names": [
+     "port_gasket"
+    ]
+   }
+  },
+  {
+   "name": "membrane",
+   "offset_mm": 33.0,
+   "match": {
+    "names": [
+     "membrane"
+    ]
+   }
+  },
+  {
+   "name": "shell",
+   "offset_mm": 44.0,
+   "match": {
+    "names": [
+     "shell"
+    ]
+   }
+  },
+  {
+   "name": "button",
+   "offset_mm": 56.0,
+   "match": {
+    "names": [
+     "button"
+    ]
+   }
+  }
+ ],
+ "items": [
+  {
+   "id": 1,
+   "name": "Button",
+   "spec": "TPU 80A translucent, 2-shot molded into the shell; light path for status LED D1",
+   "qty": "1",
+   "match": {
+    "names": [
+     "button"
+    ]
+   }
+  },
+  {
+   "id": 2,
+   "name": "Front shell",
+   "spec": "PC/ABS, injection molded, 0.9 mm wall, 1° draft, R6 corners; vertical keyring slot 2.0 × 5.0 mm through the +X+Y corner; Ø1.0 sound hole",
+   "qty": "1",
+   "match": {
+    "names": [
+     "shell"
+    ]
+   }
+  },
+  {
+   "id": 3,
+   "name": "Acoustic vent",
+   "spec": "ePTFE membrane, die-cut Ø2.5, PSA backed, over the sound hole",
+   "qty": "1",
+   "match": {
+    "names": [
+     "membrane"
+    ]
+   }
+  },
+  {
+   "id": 4,
+   "name": "Port gasket",
+   "spec": "Soft PU foam, die-cut 3.0 × 3.0, 0.8 mm free height; seals the LS1 top port to the shell",
+   "qty": "1",
+   "match": {
+    "names": [
+     "port_gasket"
+    ]
+   }
+  },
+  {
+   "id": 5,
+   "name": "CR2032 retainer",
+   "spec": "Keystone 3034TR, SMD, on the PCBA back side (LCSC C5213768)",
+   "qty": "1",
+   "fine": false,
+   "match": {
+    "ancestors": [
+     "BT1"
+    ]
+   }
+  },
+  {
+   "id": 6,
+   "name": "Main board (PCBA)",
+   "spec": "FR4 4 layers, 0.6 mm, ENIG, black mask; CC2340R52 BLE SoC, PAM8904 + CPT-9019A sounder; JLCPCB assembly",
+   "qty": "1",
+   "match": {
+    "collections": [
+     "Board"
+    ]
+   }
+  },
+  {
+   "id": 7,
+   "name": "PSA ring",
+   "spec": "Die-cut acrylic PSA, 0.10 mm; bonds the back plate to the shell",
+   "qty": "1",
+   "match": {
+    "names": [
+     "adhesive"
+    ]
+   }
+  },
+  {
+   "id": 8,
+   "name": "Back plate",
+   "spec": "PC/ABS, shell color, injection molded; 2 blind screw bosses; laser-marked regulatory text",
+   "qty": "1",
+   "match": {
+    "names": [
+     "plate"
+    ]
+   }
+  },
+  {
+   "id": 9,
+   "name": "Coin cell",
+   "spec": "CR2032 lithium 3 V, Ø20.0 × 3.2 mm (Panasonic CR2032); user replaceable",
+   "qty": "1",
+   "match": {
+    "prefixes": [
+     "CR2032"
+    ]
+   }
+  },
+  {
+   "id": 10,
+   "name": "Door gasket",
+   "spec": "Silicone 50A, flat die-cut, 0.23 mm compressed; IP67 face seal",
+   "qty": "1",
+   "match": {
+    "names": [
+     "door_gasket"
+    ]
+   }
+  },
+  {
+   "id": 11,
+   "name": "Cell door",
+   "spec": "PC/ABS, shell color; tool-secured per UL 4200A; laser-marked warning icons",
+   "qty": "1",
+   "match": {
+    "names": [
+     "door"
+    ]
+   }
+  },
+  {
+   "id": 12,
+   "name": "Captive screw",
+   "spec": "Thread-forming 1.4 × 3 mm, stainless A2, captive in the door",
+   "qty": "2",
+   "envelope": false,
+   "match": {
+    "names": [
+     "screws"
+    ]
+   }
+  }
+ ]
+}

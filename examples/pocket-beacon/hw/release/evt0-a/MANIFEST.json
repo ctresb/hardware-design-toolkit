@@ -1,0 +1,289 @@
+{
+ "product": "Pocket Beacon",
+ "rev": "evt0-a",
+ "assembled": "2026-11-08T05:21:28",
+ "files": [
+  {
+   "path": "ORDER.md",
+   "sha256": "1d006f95b24e74cfb92e094d56819ef3ee2db71fb061e3a4f4ec716a3051d8fe",
+   "bytes": 2847,
+   "source": "build-package: release.json order_steps"
+  },
+  {
+   "path": "README.md",
+   "sha256": "11cd59c49768cb5f87707d044126029d74dc753b28d50dba44db4023519de936",
+   "bytes": 877,
+   "source": "generated"
+  },
+  {
+   "path": "assembly/main/consigned.csv",
+   "sha256": "c7bafe58e328c16cf4218ce0d7b0ec80116153d967a4d79af576393fcdaa3612",
+   "bytes": 43,
+   "source": "generated from hw/bom.csv"
+  },
+  {
+   "path": "assembly/main/main_bom_jlcpcb.csv",
+   "sha256": "b0d060990bc1a7bef44c87bd937f82c9f3ba740f5aaf1d52ebf555ea4f2ce7df",
+   "bytes": 1916,
+   "source": "pcb-engineer: hw/pcb/fab/main/main_bom.csv"
+  },
+  {
+   "path": "assembly/main/main_cpl_jlcpcb.csv",
+   "sha256": "f071958cef8ec2e140fc006b84631cbf1e36b15449f59e8f2c08148801376a70",
+   "bytes": 1297,
+   "source": "pcb-engineer: hw/pcb/fab/main/main_cpl.csv"
+  },
+  {
+   "path": "assembly/main/options.md",
+   "sha256": "52baac8e1ff4a971e6efa8d2457c67f9647cf9bee3b995c017928ae61e20e5cc",
+   "bytes": 798,
+   "source": "build-package: release.json assembler"
+  },
+  {
+   "path": "assembly/main/stock.md",
+   "sha256": "d894bcd7cf509abac4b65a4f986f492891a55711d05f0a128db5450a648a764c",
+   "bytes": 3461,
+   "source": "generated from hw/bom.csv"
+  },
+  {
+   "path": "assembly-guide/assembly-guide.md",
+   "sha256": "fbc63d28958cb39a552c0646da5a50942edadd422fe75650d0a0ae52c2d301dc",
+   "bytes": 5689,
+   "source": "build-package: hw/release/src/assembly-guide.md"
+  },
+  {
+   "path": "assembly-guide/blueprint.png",
+   "sha256": "a7cb78bbb4ea02cca3e989225ecaa1992e2cbb5f1f06693245c017b5fa3c16aa",
+   "bytes": 1039173,
+   "source": "technical-drawing / product-render: hw/drawings/blueprint.png"
+  },
+  {
+   "path": "assembly-guide/ortho.png",
+   "sha256": "cfd2fc4a23149756703b20e12a740d63cc7db3d33eca9a3f67c9d068e0f54c69",
+   "bytes": 251052,
+   "source": "technical-drawing / product-render: hw/drawings/ortho.png"
+  },
+  {
+   "path": "battery/battery.md",
+   "sha256": "6704d07ce63486b20031aa949c9252d5c5f08cd70e92b3a2c064ad2e3a7d6421",
+   "bytes": 1334,
+   "source": "build-package: hw/release/src/battery.md"
+  },
+  {
+   "path": "checks/doability.json",
+   "sha256": "b6d47a4119c8163f33f43115f70609f8728fc9db6250516a02d855951a5f66b2",
+   "bytes": 7773,
+   "source": "doability-review: hw/doability/score.json"
+  },
+  {
+   "path": "checks/main_drc.json",
+   "sha256": "e9e4fccb4677ba7988971c1b419fbd57df02f45572132ffc4b6e160983d55599",
+   "bytes": 1196,
+   "source": "pcb-engineer: hw/pcb/main/drc.json"
+  },
+  {
+   "path": "checks/main_erc.json",
+   "sha256": "fc1c2f7e888c918d5b42038e9144a98939cdec9ff85d7d4716b72181970de413",
+   "bytes": 998,
+   "source": "pcb-engineer: hw/pcb/main/erc.json"
+  },
+  {
+   "path": "checks/validator.json",
+   "sha256": "b1df4416083c078b025eae97e6fa21e5f251de58dd441f546697a48ff568be02",
+   "bytes": 185,
+   "source": "enclosure-engineer: hw/validation/assembly.json"
+  },
+  {
+   "path": "fab/main/fab-notes.md",
+   "sha256": "8da8a49894e66b95b7126a67c87ba387a42fced973d8f6fe80bed2a00a3597f3",
+   "bytes": 532,
+   "source": "build-package: release.json boards[].fab_notes"
+  },
+  {
+   "path": "fab/main/main_gerbers.zip",
+   "sha256": "db636d00e69c940f0721b303dbded76caf726104a1334fa9461efe8d71b46e5d",
+   "bytes": 108610,
+   "source": "pcb-engineer: hw/pcb/fab/main/main_gerbers.zip"
+  },
+  {
+   "path": "firmware/pins.h",
+   "sha256": "3afde57b3122f7ab2b48d9aa86327f27a7478d45f877dbb6c9c69c2e4cce547a",
+   "bytes": 1585,
+   "source": "generated from hw/pcb/main/main.net"
+  },
+  {
+   "path": "firmware/pins.json",
+   "sha256": "2146ce8ac8b855dba9224511f463e316d221a4a2f4b5aaea753d113f69cc99bc",
+   "bytes": 1791,
+   "source": "generated from hw/pcb/main/main.net"
+  },
+  {
+   "path": "mech/adhesive.step",
+   "sha256": "d4c80e6928b35690594a2cfaeb068ffebd8a2c6a7f94db29b8f6952a251305f9",
+   "bytes": 63155,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_adhesive.step"
+  },
+  {
+   "path": "mech/adhesive.stl",
+   "sha256": "7068a4d6c6e4a2c9875466f7bf38704f0bcb8bb1bead6c7d3ff83bfe44e1a9d7",
+   "bytes": 27284,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_adhesive.stl"
+  },
+  {
+   "path": "mech/button.step",
+   "sha256": "aab4e7aa66cbe1e9df0d02c3c75088ab81b57dfa0fa2d79e3a7c7e9f8d0524c6",
+   "bytes": 9453,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_button.step"
+  },
+  {
+   "path": "mech/button.stl",
+   "sha256": "b6bf839d21f97becd7bb3b96b8d4d31a4fa77280d04bd8303446abfca5497a1d",
+   "bytes": 25084,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_button.stl"
+  },
+  {
+   "path": "mech/door.step",
+   "sha256": "2f9107c13b93210ae0a8f96d1d53524ea500f14c6efa53ce3ddc1594bb5fcecd",
+   "bytes": 63485,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_door.step"
+  },
+  {
+   "path": "mech/door.stl",
+   "sha256": "82f1c94b412f8dd4abcee4601b200352215c96e34905e8a50d4886799098f103",
+   "bytes": 133684,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_door.stl"
+  },
+  {
+   "path": "mech/door_gasket.step",
+   "sha256": "75fcad582c071f0f187adaddbacb657806052de093af43d11e51ef2f4311c899",
+   "bytes": 9232,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_door_gasket.step"
+  },
+  {
+   "path": "mech/door_gasket.stl",
+   "sha256": "cdb845af79c7079d0e861db579d8819a3055737a01ed031ead7cf66297f27207",
+   "bytes": 25284,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_door_gasket.stl"
+  },
+  {
+   "path": "mech/mech-bom.csv",
+   "sha256": "ebf67ff99fe32241adbece6f2751c6bba748e6c229f1467ba4658c0e09fbb54e",
+   "bytes": 851,
+   "source": "build-package: release.json mech_bom"
+  },
+  {
+   "path": "mech/membrane.step",
+   "sha256": "2a479c28e50d0c0d9326b33f5ceb99566ee59d4d6ec5eac5ddae6e0cbeee8ddb",
+   "bytes": 7154,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_membrane.step"
+  },
+  {
+   "path": "mech/membrane.stl",
+   "sha256": "d216d567fd8221945d036f56068bcf22d10b2475715cb7fcce67cf7bd40ec7d5",
+   "bytes": 12484,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_membrane.stl"
+  },
+  {
+   "path": "mech/ortho.pdf",
+   "sha256": "7511504dc33dca789713bf48201a2c1d66bcba5ec6af1e837e40c534dddc9dec",
+   "bytes": 78482,
+   "source": "technical-drawing: hw/drawings/ortho.pdf"
+  },
+  {
+   "path": "mech/plate.step",
+   "sha256": "0c84034f2524ef594ca582a571e2bd3e5a9e1836fb6deb7bcfd6be261513f30e",
+   "bytes": 235689,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_plate.step"
+  },
+  {
+   "path": "mech/plate.stl",
+   "sha256": "9fcbc4c86d4a90f2239f68f95216ffc2448049efe279826ef277d557f7ffd26d",
+   "bytes": 526884,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_plate.stl"
+  },
+  {
+   "path": "mech/port_gasket.step",
+   "sha256": "91acfeb8956c95b20b4c9888f3ff2e45ac8d261571610703bde87aa069c0aea4",
+   "bytes": 9195,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_port_gasket.step"
+  },
+  {
+   "path": "mech/port_gasket.stl",
+   "sha256": "67e0bb969c27826a15c2b6e71f7ecfb8b32f218dab9d1521c21acc63fe27d51f",
+   "bytes": 25284,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_port_gasket.stl"
+  },
+  {
+   "path": "mech/print-settings.md",
+   "sha256": "0b98e3a9033150d3154550421041bf3f7dd71fcfa162eef5f2c591f6a6332ec2",
+   "bytes": 1898,
+   "source": "build-package: hw/release/src/print-settings.md"
+  },
+  {
+   "path": "mech/screws.step",
+   "sha256": "3724977d4159eafdded671907177af73de56c717ab0b2ffd1b2ae5e5792f41bb",
+   "bytes": 17789,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_screws.step"
+  },
+  {
+   "path": "mech/screws.stl",
+   "sha256": "440cc0d73b69b62495222d0348330100c9b5815361b94a8fe2a5c5a68703f280",
+   "bytes": 50084,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_screws.stl"
+  },
+  {
+   "path": "mech/shell.step",
+   "sha256": "2ee98fea5acc6a59dfef13b0e9d94b8221d811c0fa91aca6c03ad1ea4400b6db",
+   "bytes": 199617,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_shell.step"
+  },
+  {
+   "path": "mech/shell.stl",
+   "sha256": "fafdd12acd2536f386fbfd8bea8e0f40818c666e54815dfb2acb899a8688776a",
+   "bytes": 498584,
+   "source": "enclosure-engineer: hw/mech/cad/pocket-beacon_shell.stl"
+  },
+  {
+   "path": "purchasing/digikey.csv",
+   "sha256": "cc058a3d175bb0cea3823a7a586b73a38f9db83928dbe2be15852f86163107b3",
+   "bytes": 100,
+   "source": "generated from hw/bom.csv"
+  },
+  {
+   "path": "purchasing/mechanical.csv",
+   "sha256": "ebf67ff99fe32241adbece6f2751c6bba748e6c229f1467ba4658c0e09fbb54e",
+   "bytes": 851,
+   "source": "build-package: release.json mech_bom"
+  },
+  {
+   "path": "purchasing/mouser.csv",
+   "sha256": "0f00c981436b8e30980d0b1819b505f7dbc5f6c0f143d6b3486a6d37b44e5d3a",
+   "bytes": 94,
+   "source": "generated from hw/bom.csv"
+  },
+  {
+   "path": "purchasing/purchasing.md",
+   "sha256": "1c929a9863dfa8215b285fc85e383ed7d15172bcf6d30e99d61a2006f0a2e116",
+   "bytes": 568,
+   "source": "generated"
+  },
+  {
+   "path": "release.json",
+   "sha256": "bf107cadc85c90885961f3192a0c35dc55714ed1fb92a06b4bfb5d3d29b100a1",
+   "bytes": 9609,
+   "source": "build-package: release/release.json"
+  },
+  {
+   "path": "test/test-plan.md",
+   "sha256": "9faf6743584ff6bfd2af65bff7514f4dc5f48349d71e7a4a0524ed19d5cae1e5",
+   "bytes": 2609,
+   "source": "build-package: hw/release/src/test-plan.md"
+  },
+  {
+   "path": "test/verify-on-prototype.md",
+   "sha256": "12697c8b887e972cedff02276409417a40e69b55d783ac4ff5fe0f3be82cd4e5",
+   "bytes": 4428,
+   "source": "generated from doability-review findings"
+  }
+ ]
+}

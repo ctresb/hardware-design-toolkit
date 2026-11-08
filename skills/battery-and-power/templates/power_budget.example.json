@@ -1,0 +1,51 @@
+{
+  "product": "Example: BLE voice-note clip (fictional)",
+  "target_runtime_h": 12,
+  "battery": {
+    "nominal_v": 3.7,
+    "rated_mah": 80,
+    "usable_fraction": 0.85,
+    "eol_fraction": 0.80,
+    "evidence": "[assumption] candidate off-the-shelf pouch cell, to be quoted"
+  },
+  "rails": {
+    "VSYS": {"min": 3.0, "max": 4.4, "max_ma": 125, "type": "direct", "evidence": "[assumption: PMIC system output = battery voltage range, PMIC load limit]"},
+    "1V8": {"nom": 1.8, "tol": 0.05, "max_ma": 150, "type": "buck", "efficiency": 0.85, "iq_ma": 0.0008, "evidence": "[estimate: typical nano-power buck in a PMIC]"},
+    "3V0": {"nom": 3.0, "tol": 0.06, "max_ma": 50, "type": "ldo", "iq_ma": 0.0005, "off_modes": ["ship"], "evidence": "[estimate: typical LDO in a PMIC]"}
+  },
+  "modes": [
+    {"name": "record", "duty": 0.30, "note": "mic on, audio encoded and written to flash"},
+    {"name": "sync", "duty": 0.05, "note": "BLE upload to the phone"},
+    {"name": "idle", "duty": 0.65, "note": "advertising slowly, wake-on-touch armed"}
+  ],
+  "parts": [
+    {"ref": "U1", "name": "BLE SoC", "rail": "1V8", "rail_v": 1.8,
+     "currents_ma": {"record": 3.2, "sync": 5.5, "idle": 0.012},
+     "peak_ma": 8.0, "peak_modes": ["sync"],
+     "evidence": "[estimate: datasheet CPU + radio TX 0 dBm figures, duty-weighted]"},
+    {"name": "Digital MEMS mic", "ref": "MK1", "rail": "1V8", "rail_v": 1.8,
+     "currents_ma": {"record": 0.33, "sync": 0, "idle": 0.02},
+     "evidence": "[estimate: datasheet low-power mode; idle = acoustic activity detect]"},
+    {"name": "SPI NAND flash", "ref": "U2", "rail": "1V8", "rail_v": 1.8,
+     "currents_ma": {"record": 0.6, "sync": 1.5, "idle": 0.01},
+     "peak_ma": 25, "peak_modes": ["record", "sync"],
+     "evidence": "[estimate: program current x write duty; standby from datasheet]"},
+    {"name": "Accelerometer", "ref": "U3", "rail": "1V8", "rail_v": 1.8,
+     "currents_ma": {"*": 0.006},
+     "evidence": "[estimate: datasheet low-power 10 Hz]"},
+    {"name": "Status LED", "ref": "D1", "rail": "3V0", "rail_v": 3.0,
+     "currents_ma": {"record": 0.05, "sync": 0.05, "idle": 0},
+     "peak_ma": 10, "peak_modes": ["record"],
+     "evidence": "[assumption: 0.5 % blink duty at 10 mA]"}
+  ],
+  "scenario_factors": {"optimistic": 0.8, "baseline": 1.0, "pessimistic": 2.0},
+  "comparables": [
+    {"name": "Comparable product A (fill in)", "capacity_mah": 150, "runtime_h": 12, "usable_fraction": 0.9,
+     "evidence": "[assumption: replace with the maker's published capacity and runtime]"}
+  ],
+  "measured_avg_ma": null,
+  "limits": [
+    {"name": "Cell max continuous discharge (1C)", "c_rate": 1.0, "evidence": "[assumption: cell datasheet]"},
+    {"name": "PMIC system load limit", "max_ma": 125, "evidence": "[assumption: PMIC datasheet]"}
+  ]
+}

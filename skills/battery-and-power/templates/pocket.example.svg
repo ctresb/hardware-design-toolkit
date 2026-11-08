@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26mm" height="24mm" viewBox="0 0 260 240">
+  <!-- Example battery pocket (fictional): rounded body with a notch for a board connector, bottom-right. -->
+  <path d="M50 0 H210 C237.6 0 260 22.4 260 50 V150 H180 V240 H50 C22.4 240 0 217.6 0 190 V50 C0 22.4 22.4 0 50 0 Z"
+        fill="none" stroke="#000" stroke-width="1"/>
+</svg>

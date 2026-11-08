@@ -1,0 +1,224 @@
+{
+ "round": 3,
+ "max_rounds": 3,
+ "overall": "READY TO BUILD (prototype)",
+ "next": "build the prototype and run the 'Verify on the prototype' list",
+ "areas": [
+  {
+   "area": "parts",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 1,
+   "info": 0
+  },
+  {
+   "area": "electrical",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 2,
+   "info": 0
+  },
+  {
+   "area": "power",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 1,
+   "info": 0
+  },
+  {
+   "area": "pcb",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 1,
+   "info": 0
+  },
+  {
+   "area": "mechanical",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 2,
+   "info": 0
+  },
+  {
+   "area": "compliance",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 0,
+   "info": 0
+  },
+  {
+   "area": "cost",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 1,
+   "info": 0
+  },
+  {
+   "area": "schedule",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 1,
+   "info": 0
+  },
+  {
+   "area": "claims",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 0,
+   "info": 0
+  }
+ ],
+ "blockers": [],
+ "fixes": {},
+ "minor_open": [
+  "FR-10",
+  "FR-11"
+ ],
+ "waiting_on_prototype": [
+  "PR-14",
+  "PR-15",
+  "PR-16",
+  "PR-17",
+  "FR-05",
+  "FR-06",
+  "FR-07"
+ ],
+ "missing_build_package": [],
+ "missing_production": [
+  "measurements_done",
+  "quotes_received"
+ ],
+ "build_package": {
+  "routed_board": true,
+  "drc_erc_zero": true,
+  "fab_files": true,
+  "bom_in_stock": true,
+  "enclosure_step": true,
+  "assembly_validated": true,
+  "test_plan": true
+ },
+ "production": {
+  "measurements_done": false,
+  "quotes_received": false,
+  "certifications_planned": true
+ },
+ "prototype_checks": [
+  {
+   "id": "V-001",
+   "what": "Standby floor and weighted daily average current (power.md M1, M6)",
+   "method": "bench supply 3.0 V at TP1/TP2, cell removed; 60 s idle, then the 24 h use-pattern script with a real phone",
+   "instrument": "power profiler (Nordic PPK2 or Joulescope), \u2265 100 kHz sampling",
+   "pass_criteria": "standby \u2264 1.2 \u00b5A; daily average \u2264 14 \u00b5A (21.2 \u00b5A limit, REQ-002)"
+  },
+  {
+   "id": "V-002",
+   "what": "Charge per slow advertising event and per connection event (M2, M3)",
+   "method": "3.0 V source, 0 dBm, 31-byte payload, 100 events averaged; 1000 ms connection, empty packets",
+   "instrument": "power profiler (Nordic PPK2 or Joulescope), \u2265 100 kHz sampling",
+   "pass_criteria": "\u2264 12 \u00b5C per advertising event (else 2000 ms interval); \u2264 4.5 \u00b5C per connection event"
+  },
+  {
+   "id": "V-003",
+   "what": "Ring current in 2\u00d7 and 3\u00d7 and the adaptive ring rule (M4, D-028)",
+   "method": "source 3.0 V and 2.5 V; ring command from the app; log PZ_EN1/PZ_EN2 and VBAT",
+   "instrument": "power profiler (Nordic PPK2 or Joulescope), \u2265 100 kHz sampling + logic analyzer",
+   "pass_criteria": "3\u00d7 \u2264 15.5 mA, 2\u00d7 \u2264 7.5 mA; firmware selects 2\u00d7 at 2.5 V under load and 3\u00d7 at 3.0 V"
+  },
+  {
+   "id": "V-004",
+   "what": "Ring loudness (REQ-006)",
+   "method": "assembled unit hanging free, mic at 25 cm on axis, 4 kHz ring, fresh cell and a cell at 2.4 V under load",
+   "instrument": "class 2 sound level meter, A-weighted, IEC 61672",
+   "pass_criteria": "\u2265 75 dB(A) in 3\u00d7 on a fresh cell; \u2265 65 dB(A) in 2\u00d7 at 2.4 V loaded"
+  },
+  {
+   "id": "V-005",
+   "what": "Antenna match and harmonic filter tuning (D-020, D-030)",
+   "method": "assembled unit with cell and closed enclosure; S11 at the RF_P reference plane via a semi-rigid pigtail; tune C11/L2/C12, R2/C18; then conducted harmonics",
+   "instrument": "VNA 2\u20136 GHz (e.g. NanoVNA V2 or lab VNA) + spectrum analyzer",
+   "pass_criteria": "S11 \u2264 \u221210 dB across 2402\u20132480 MHz; 2nd and 3rd harmonics \u2265 6 dB below the FCC 15.209 / EN 300 328 limits in the pre-scan"
+  },
+  {
+   "id": "V-006",
+   "what": "48 MHz frequency offset with C16/C17 fitted (D-019)",
+   "method": "CW tone at 2440 MHz from the TI test firmware, 25 \u00b0C and \u221210 \u00b0C",
+   "instrument": "spectrum analyzer or frequency counter, \u2264 1 ppm resolution",
+   "pass_criteria": "offset within \u00b120 ppm at both temperatures (BLE \u00b150 ppm budget with margin); else change C16/C17"
+  },
+  {
+   "id": "V-007",
+   "what": "32.768 kHz start-up at cold with ESR 90 k\u03a9 (D-025, F-105)",
+   "method": "10 power cycles at \u221210 \u00b0C; measure LFXT start time and sleep-clock accuracy",
+   "instrument": "oscilloscope + TI SDK clock test",
+   "pass_criteria": "starts every time within 1 s; accuracy \u2264 \u00b150 ppm"
+  },
+  {
+   "id": "V-008",
+   "what": "Loaded cell voltage at cold and brown-out margin (M7, M8)",
+   "method": "CR2032 discharged to 50 % (15 k\u03a9 for 680 h), \u221210 \u00b0C chamber, 2\u00d7 ring; fast advertising through 1 k\u03a9 from 2.7 V",
+   "instrument": "power profiler (Nordic PPK2 or Joulescope), \u2265 100 kHz sampling in ammeter mode + climate chamber",
+   "pass_criteria": "VBAT \u2265 2.3 V during the ring; VBAT \u2265 2.0 V and no reset over 30 s"
+  },
+  {
+   "id": "V-009",
+   "what": "BLE range through a bag (REQ-010)",
+   "method": "phone app RSSI and connection at 5 m and 10 m indoor, unit inside a fabric bag with keys",
+   "instrument": "phone app log",
+   "pass_criteria": "connected at 10 m indoor (\u2265 5 m limit)"
+  },
+  {
+   "id": "V-010",
+   "what": "Sound port alignment over the LS1 top port (Q-CD-01)",
+   "method": "view the assembled front shell hole against LS1 under a stereo microscope; then V-004",
+   "instrument": "stereo microscope with reticle",
+   "pass_criteria": "port centre within 0.3 mm of the \u00d81.0 shell hole centre"
+  },
+  {
+   "id": "V-011",
+   "what": "CR2032 insertion and removal through the \u00d822.0 door bore (Q-CD-06)",
+   "method": "10 insert/remove cycles with fingers only, door open; check the 3034 retainer after cycling",
+   "instrument": "visual check, 4-wire milliohm meter on cell contacts",
+   "pass_criteria": "cell seats without tools; contact resistance \u2264 100 m\u03a9 after 10 cycles; no retainer deformation"
+  },
+  {
+   "id": "V-012",
+   "what": "SW1 internal terminal links (Q-PCB-01, D-520)",
+   "method": "bare assembled board, probe SW1 pads 1-1 and 2-2 unpressed, then 1-2 pressed",
+   "instrument": "DMM continuity",
+   "pass_criteria": "1-1 and 2-2 < 1 \u03a9 unpressed; 1-2 < 1 \u03a9 pressed and open when released"
+  },
+  {
+   "id": "V-013",
+   "what": "Ingress seal of the door and port gaskets (REQ IP67 target)",
+   "method": "assembled EVT unit (machined or molded parts; SLA parts only for a pre-check), immersion 1 m for 30 min per IEC 60529 IPX7, then open and inspect",
+   "instrument": "immersion tank, moisture indicator paper inside",
+   "pass_criteria": "no water inside, indicator unchanged, unit still advertises"
+  },
+  {
+   "id": "V-014",
+   "what": "Child-resistant compartment pre-test (UL 4200A securement)",
+   "method": "door closed with both screws at 0.08 N\u00b7m; apply the UL 4200A abuse sequence on 3 units (drop, crush, torque on the door)",
+   "instrument": "torque driver, drop rig 1 m, force gauge",
+   "pass_criteria": "door stays secured and the cell stays inaccessible on all 3 units"
+  },
+  {
+   "id": "V-015",
+   "what": "Button press force through the TPU membrane",
+   "method": "press the button cap centre at 1 mm/s, 10 presses",
+   "instrument": "force gauge with \u2265 0.01 N resolution",
+   "pass_criteria": "2.3\u20133.3 N actuation force, tactile click felt, no pre-press at rest"
+  }
+ ],
+ "maturity": "EVT-0 release candidate (design complete, prototype not built)",
+ "project": "Pocket Beacon",
+ "date": "2026-11-08"
+}

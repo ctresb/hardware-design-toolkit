@@ -1,0 +1,36 @@
+{
+ "product": "Fixture Tag (fictional example)",
+ "markets": [
+  "US",
+  "EU",
+  "UK"
+ ],
+ "product_category": "consumer-electronics",
+ "radios": [
+  "ble"
+ ],
+ "radio_module_precertified": false,
+ "tx_power_dbm": 4,
+ "connected": true,
+ "body_worn": false,
+ "skin_contact": false,
+ "battery": {
+  "chemistry": "lithium-metal-coin",
+  "wh": 0.7,
+  "user_removable": true,
+  "custom_cell": false,
+  "sold_separately": false
+ },
+ "wired_charging": false,
+ "ships_mains_adapter": false,
+ "ip_rating_claim": "IP67",
+ "audio_recording": false,
+ "camera": false,
+ "location_tracking": false,
+ "for_children": false,
+ "finder_network": false,
+ "apple_mfi_features": false,
+ "wireless_charging_claims_qi": false,
+ "uses_ptfe_membranes": true,
+ "uses_fluoropolymers": false
+}

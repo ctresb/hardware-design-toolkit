@@ -1,0 +1,171 @@
+{
+ "comment": "Final Pocket Beacon shots. Each runs on the GPU host as: HDT_SHOT='<shot json>' blender -b hw/mech/assembly_golden.blend --python shot.py -- --validator-json hw/validation/assembly.json --out <name>.png <studio args>. Env: HDT_SCRIPTS=skills/product-render/scripts, HDT_VALIDATOR=skills/enclosure-engineer/scripts, HDT_TEX=<ambientCG wear set folder>, HDT_PADS=hw/pcb/export/pads.json. Rendered on 4x NVIDIA L4 (OptiX), one process per GPU.",
+ "shots": {
+  "hero": [
+   {
+    "solder": false,
+    "pose": "upright",
+    "variants": [
+     "graphite"
+    ],
+    "wear": 0.7,
+    "extra_lights": [
+     [
+      "Key upper-left",
+      -45,
+      42,
+      8,
+      5,
+      5,
+      9.0
+     ],
+     [
+      "Rim strip L",
+      -118,
+      14,
+      6,
+      0.25,
+      8,
+      14.0
+     ],
+     [
+      "Rim strip R",
+      118,
+      14,
+      6,
+      0.25,
+      8,
+      12.0
+     ]
+    ]
+   },
+   "--target Assembly --recipe hero-float --view hero --format 4k-vertical --preset final --fstop 8 --exposure 1.4"
+  ],
+  "desk": [
+   {
+    "solder": false,
+    "pose": "flat",
+    "variants": [
+     "chalk"
+    ],
+    "spare_cell": [
+     [
+      30,
+      -9
+     ]
+    ]
+   },
+   "--target Assembly --recipe tabletop-hdri --hdri studio_small_09_4k.exr --az -28 --el 38 --format 4k-horizontal --preset final --fstop 8 --fill 0.42 --floor-color 0.50,0.40,0.29"
+  ],
+  "dark": [
+   {
+    "solder": false,
+    "pose": "upright",
+    "variants": [
+     "smoke"
+    ],
+    "led": true,
+    "led_strength": 120,
+    "led_light": 80,
+    "tpu_scatter": 1.2,
+    "tpu_absorb": 1.5
+   },
+   "--target Assembly --recipe dark-studio --az -16 --el 8 --format 4k-vertical --preset final --fstop 8 --exposure 1.4"
+  ],
+  "exploded": [
+   {
+    "solder": false,
+    "pose": "explode",
+    "gap": 6.0,
+    "center_layers": true,
+    "layers": [
+     [
+      "Enclosure door",
+      "Enclosure screws"
+     ],
+     [
+      "Enclosure door_gasket"
+     ],
+     [
+      "Enclosure plate"
+     ],
+     [
+      "Enclosure adhesive"
+     ],
+     [
+      "BAT1 CR2032"
+     ],
+     [
+      "Board main"
+     ],
+     [
+      "Enclosure port_gasket",
+      "Enclosure membrane"
+     ],
+     [
+      "Enclosure shell"
+     ],
+     [
+      "Enclosure button"
+     ]
+    ],
+    "variants": [
+     "graphite"
+    ],
+    "wear": 0.5
+   },
+   "--target Assembly --recipe white-seamless --az -32 --el 22 --format 4k-vertical --preset final --fstop 11 --fill 0.78 --floor-color 0.62,0.62,0.62 --exposure 0.3"
+  ],
+  "lineup": [
+   {
+    "solder": false,
+    "pose": "lineup",
+    "variants": [
+     "graphite",
+     "chalk",
+     "smoke"
+    ],
+    "spacing": [
+     40,
+     0,
+     0
+    ],
+    "rz": -12,
+    "wear": 0.6,
+    "extra_lights": [
+     [
+      "Key large",
+      -35,
+      40,
+      9,
+      8,
+      8,
+      6.0
+     ]
+    ]
+   },
+   "--target Enclosure --recipe white-seamless --az 0 --el 16 --format 4k-horizontal --preset final --fstop 11 --fill 0.85 --floor-color 0.66,0.63,0.58 --exposure 0.2"
+  ],
+  "banner_product": [
+   {
+    "solder": false,
+    "pose": "upright",
+    "variants": [
+     "graphite"
+    ],
+    "shift_x": -0.2,
+    "formats": {
+     "banner": [
+      3840,
+      1920
+     ]
+    }
+   },
+   "--target Assembly --recipe white-seamless --view hero --format banner --preset final --fstop 8 --fill 0.5 --floor-color 0.92,0.91,0.88 --exposure 1.8"
+  ]
+ },
+ "not_rendered": {
+  "hand": "skipped: no rigged, scanned hand model available on the render host; a missing slide is better than a fake hand",
+  "solder": "solder fillets disabled: solder.py on hw/pcb/export/pads.json fails the in-memory validator against the top solder-mask sheet (Q1 pad 3 by 0.99 mm; D1, L1, Y1, C2, C4 by 0.03-0.05 mm). See hw/agents/2026-11-08-renders.md."
+ }
+}

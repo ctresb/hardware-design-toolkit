@@ -1,0 +1,504 @@
+{
+  "project": "Pocket Beacon",
+  "date": "2026-11-08",
+  "round": 3,
+  "stage": "final",
+  "reviewed_areas": [
+    "parts",
+    "electrical",
+    "power",
+    "pcb",
+    "mechanical",
+    "compliance",
+    "cost",
+    "schedule",
+    "claims"
+  ],
+  "build_package": {
+    "routed_board": true,
+    "drc_erc_zero": true,
+    "fab_files": true,
+    "bom_in_stock": true,
+    "enclosure_step": true,
+    "assembly_validated": true,
+    "test_plan": true
+  },
+  "production": {
+    "measurements_done": false,
+    "quotes_received": false,
+    "certifications_planned": true
+  },
+  "prototype_checks": [
+    {
+      "id": "V-001",
+      "what": "Standby floor and weighted daily average current (power.md M1, M6)",
+      "method": "bench supply 3.0 V at TP1/TP2, cell removed; 60 s idle, then the 24 h use-pattern script with a real phone",
+      "instrument": "power profiler (Nordic PPK2 or Joulescope), ≥ 100 kHz sampling",
+      "pass_criteria": "standby ≤ 1.2 µA; daily average ≤ 14 µA (21.2 µA limit, REQ-002)"
+    },
+    {
+      "id": "V-002",
+      "what": "Charge per slow advertising event and per connection event (M2, M3)",
+      "method": "3.0 V source, 0 dBm, 31-byte payload, 100 events averaged; 1000 ms connection, empty packets",
+      "instrument": "power profiler (Nordic PPK2 or Joulescope), ≥ 100 kHz sampling",
+      "pass_criteria": "≤ 12 µC per advertising event (else 2000 ms interval); ≤ 4.5 µC per connection event"
+    },
+    {
+      "id": "V-003",
+      "what": "Ring current in 2× and 3× and the adaptive ring rule (M4, D-028)",
+      "method": "source 3.0 V and 2.5 V; ring command from the app; log PZ_EN1/PZ_EN2 and VBAT",
+      "instrument": "power profiler (Nordic PPK2 or Joulescope), ≥ 100 kHz sampling + logic analyzer",
+      "pass_criteria": "3× ≤ 15.5 mA, 2× ≤ 7.5 mA; firmware selects 2× at 2.5 V under load and 3× at 3.0 V"
+    },
+    {
+      "id": "V-004",
+      "what": "Ring loudness (REQ-006)",
+      "method": "assembled unit hanging free, mic at 25 cm on axis, 4 kHz ring, fresh cell and a cell at 2.4 V under load",
+      "instrument": "class 2 sound level meter, A-weighted, IEC 61672",
+      "pass_criteria": "≥ 75 dB(A) in 3× on a fresh cell; ≥ 65 dB(A) in 2× at 2.4 V loaded"
+    },
+    {
+      "id": "V-005",
+      "what": "Antenna match and harmonic filter tuning (D-020, D-030)",
+      "method": "assembled unit with cell and closed enclosure; S11 at the RF_P reference plane via a semi-rigid pigtail; tune C11/L2/C12, R2/C18; then conducted harmonics",
+      "instrument": "VNA 2–6 GHz (e.g. NanoVNA V2 or lab VNA) + spectrum analyzer",
+      "pass_criteria": "S11 ≤ −10 dB across 2402–2480 MHz; 2nd and 3rd harmonics ≥ 6 dB below the FCC 15.209 / EN 300 328 limits in the pre-scan"
+    },
+    {
+      "id": "V-006",
+      "what": "48 MHz frequency offset with C16/C17 fitted (D-019)",
+      "method": "CW tone at 2440 MHz from the TI test firmware, 25 °C and −10 °C",
+      "instrument": "spectrum analyzer or frequency counter, ≤ 1 ppm resolution",
+      "pass_criteria": "offset within ±20 ppm at both temperatures (BLE ±50 ppm budget with margin); else change C16/C17"
+    },
+    {
+      "id": "V-007",
+      "what": "32.768 kHz start-up at cold with ESR 90 kΩ (D-025, F-105)",
+      "method": "10 power cycles at −10 °C; measure LFXT start time and sleep-clock accuracy",
+      "instrument": "oscilloscope + TI SDK clock test",
+      "pass_criteria": "starts every time within 1 s; accuracy ≤ ±50 ppm"
+    },
+    {
+      "id": "V-008",
+      "what": "Loaded cell voltage at cold and brown-out margin (M7, M8)",
+      "method": "CR2032 discharged to 50 % (15 kΩ for 680 h), −10 °C chamber, 2× ring; fast advertising through 1 kΩ from 2.7 V",
+      "instrument": "power profiler (Nordic PPK2 or Joulescope), ≥ 100 kHz sampling in ammeter mode + climate chamber",
+      "pass_criteria": "VBAT ≥ 2.3 V during the ring; VBAT ≥ 2.0 V and no reset over 30 s"
+    },
+    {
+      "id": "V-009",
+      "what": "BLE range through a bag (REQ-010)",
+      "method": "phone app RSSI and connection at 5 m and 10 m indoor, unit inside a fabric bag with keys",
+      "instrument": "phone app log",
+      "pass_criteria": "connected at 10 m indoor (≥ 5 m limit)"
+    },
+    {
+      "id": "V-010",
+      "what": "Sound port alignment over the LS1 top port (Q-CD-01)",
+      "method": "view the assembled front shell hole against LS1 under a stereo microscope; then V-004",
+      "instrument": "stereo microscope with reticle",
+      "pass_criteria": "port centre within 0.3 mm of the Ø1.0 shell hole centre"
+    },
+    {
+      "id": "V-011",
+      "what": "CR2032 insertion and removal through the Ø22.0 door bore (Q-CD-06)",
+      "method": "10 insert/remove cycles with fingers only, door open; check the 3034 retainer after cycling",
+      "instrument": "visual check, 4-wire milliohm meter on cell contacts",
+      "pass_criteria": "cell seats without tools; contact resistance ≤ 100 mΩ after 10 cycles; no retainer deformation"
+    },
+    {
+      "id": "V-012",
+      "what": "SW1 internal terminal links (Q-PCB-01, D-520)",
+      "method": "bare assembled board, probe SW1 pads 1-1 and 2-2 unpressed, then 1-2 pressed",
+      "instrument": "DMM continuity",
+      "pass_criteria": "1-1 and 2-2 < 1 Ω unpressed; 1-2 < 1 Ω pressed and open when released"
+    },
+    {
+      "id": "V-013",
+      "what": "Ingress seal of the door and port gaskets (REQ IP67 target)",
+      "method": "assembled EVT unit (machined or molded parts; SLA parts only for a pre-check), immersion 1 m for 30 min per IEC 60529 IPX7, then open and inspect",
+      "instrument": "immersion tank, moisture indicator paper inside",
+      "pass_criteria": "no water inside, indicator unchanged, unit still advertises"
+    },
+    {
+      "id": "V-014",
+      "what": "Child-resistant compartment pre-test (UL 4200A securement)",
+      "method": "door closed with both screws at 0.08 N·m; apply the UL 4200A abuse sequence on 3 units (drop, crush, torque on the door)",
+      "instrument": "torque driver, drop rig 1 m, force gauge",
+      "pass_criteria": "door stays secured and the cell stays inaccessible on all 3 units"
+    },
+    {
+      "id": "V-015",
+      "what": "Button press force through the TPU membrane",
+      "method": "press the button cap centre at 1 mm/s, 10 presses",
+      "instrument": "force gauge with ≥ 0.01 N resolution",
+      "pass_criteria": "2.3–3.3 N actuation force, tactile click felt, no pre-press at rest"
+    }
+  ],
+  "findings": [
+    {
+      "id": "PR-01",
+      "area": "parts",
+      "severity": "critical",
+      "status": "fixed",
+      "title": "LS1 Murata PKMCS0909E4000-R1 is Last Time Buy with 0 stock at DigiKey",
+      "evidence": "[verified: F-102, 2026-11-08]",
+      "owner": "specs-engineer",
+      "fix": "Replace LS1 with Same Sky CPT-9019A-SMT-TR (top port) and hand the port to enclosure-engineer (D-021)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-02",
+      "area": "parts",
+      "severity": "major",
+      "status": "fixed",
+      "title": "Y1, BT1, L2, C13/C14 cannot be ordered at the chosen assembler in build quantity",
+      "evidence": "[verified: F-104, F-107, F-201, F-307, 2026-11-08]",
+      "owner": "specs-engineer",
+      "fix": "Y1 → ABM11W-48.0000MHZ-7-B1U-T3; BT1 → Keystone 3034TR; L2 → LQG15HS family; C13/C14 → C1547 (D-018 to D-020, D-025)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-03",
+      "area": "electrical",
+      "severity": "critical",
+      "status": "fixed",
+      "title": "U1 VDDD (pin 16, internal 1.28 V regulator) has no decoupling capacitor",
+      "evidence": "[verified: SWRS272F Table 6-10; TI SWRC397 C9 1 µF, F-502]",
+      "owner": "specs-engineer",
+      "fix": "Add C19 1 µF X5R 0402 at pin 16 (D-031)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-04",
+      "area": "electrical",
+      "severity": "major",
+      "status": "fixed",
+      "title": "RF path has no harmonic low-pass filter: the stage-2 pi match was the only network",
+      "evidence": "[verified: TI SWRC397 C33-L33-C34 filter before the antenna match, F-502]",
+      "owner": "specs-engineer",
+      "fix": "C11/L2/C12 = TI filter start values 1.5 pF / 2.7 nH / 1.5 pF; R2 + C18 form the antenna match (D-030)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-05",
+      "area": "electrical",
+      "severity": "minor",
+      "status": "fixed",
+      "title": "Only 2 of 3 VDDS pins decoupled, VDDR pins without 100 nF, RSTN without pull-up and capacitor",
+      "evidence": "[verified: TI SWRC397, F-502]",
+      "owner": "specs-engineer",
+      "fix": "One 100 nF per VDDS and VDDR pin (C5, C6, C21, C22, C23); R3 100 kΩ + C20 100 nF on RSTN (D-031)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-06",
+      "area": "electrical",
+      "severity": "major",
+      "status": "fixed",
+      "title": "VBAT bulk margin 1.39× against the CC2340 VDDS falling-slew limit at ring start",
+      "evidence": "[estimate: F-301, F-302 from Samsung DC-bias curves; verified limit: F-303]",
+      "owner": "specs-engineer",
+      "fix": "Add C15 22 µF; the slew rule (14.2 µF) governs over the SWRA349 pulse method (6.7 µF) (D-022)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-07",
+      "area": "power",
+      "severity": "major",
+      "status": "fixed",
+      "title": "3× ring pulls a cold, 80 %-used CR2032 to about 1.0 V (reset)",
+      "evidence": "[estimate: E-402 from F-203, F-204]",
+      "owner": "specs-engineer",
+      "fix": "Adaptive ring rule: start 2×, 3× only at VBAT ≥ 2.7 V under load, 1× + low-battery report below 2.3 V (D-028, architecture.md §4)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-08",
+      "area": "electrical",
+      "severity": "minor",
+      "status": "fixed",
+      "title": "LED at 680 Ω is about 1 mcd at a 2.0 V cell",
+      "evidence": "[estimate: F-207]",
+      "owner": "specs-engineer",
+      "fix": "R1 = 330 Ω (C25104) (D-024)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-09",
+      "area": "parts",
+      "severity": "major",
+      "status": "fixed",
+      "title": "Look-alike LCSC listings carry the genuine MPN for Q1 and D2",
+      "evidence": "[verified: F-209]",
+      "owner": "electronics-researcher",
+      "fix": "Order by LCSC number C150470 (Diodes) and C48260 (TI); lcsc column filled (D-029, L-005)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-10",
+      "area": "parts",
+      "severity": "minor",
+      "status": "fixed",
+      "title": "C9/C10 MPN and LCSC number named two different parts",
+      "evidence": "[verified: parts/CL05A105KA5NQNC.md]",
+      "owner": "specs-engineer",
+      "fix": "Adopt CL05A105KA5NQNC 25 V, C52923 (D-023)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-11",
+      "area": "parts",
+      "severity": "minor",
+      "status": "fixed",
+      "title": "LS1 (13) and ANT1 (105) JLC stock below a 100-unit build",
+      "evidence": "[verified: JLCPCB parts API, 2026-11-08]",
+      "owner": "cost-and-sourcing",
+      "fix": "Consign LS1 and ANT1 from DigiKey for builds above JLC stock (D-029)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-12",
+      "area": "compliance",
+      "severity": "major",
+      "status": "fixed",
+      "title": "Coin-cell compartment requirement was a one-line wish, not the US mandatory rule",
+      "evidence": "[verified: F-501, 16 CFR 1263 + 88 FR 65274 Table 3]",
+      "owner": "specs-engineer",
+      "fix": "REQ-015 rewritten with UL 4200A-2023 securement, preconditioning and abuse tests; lid = coin-operated bayonet (D-026); enclosure-engineer implements (Q-PB-204)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-13",
+      "area": "mechanical",
+      "severity": "minor",
+      "status": "fixed",
+      "title": "SW1 is IP40 and the stage-2 force target ignored the membrane force",
+      "evidence": "[verified: F-208]",
+      "owner": "specs-engineer",
+      "fix": "Sealed TPU membrane; REQ-009 total force 2.3–3.3 N (D-027)",
+      "auto_fixable": true,
+      "round_fixed": 1
+    },
+    {
+      "id": "PR-14",
+      "area": "parts",
+      "severity": "minor",
+      "status": "open",
+      "title": "Y2 ESR 90 kΩ leaves 10 % margin to the CC2340 100 kΩ limit",
+      "evidence": "[verified: F-105]",
+      "owner": "specs-engineer",
+      "fix": "Cold start-up check on the prototype; fallback LFOSC or a lower-ESR 2012 crystal",
+      "auto_fixable": false,
+      "prototype_check": "V-007"
+    },
+    {
+      "id": "PR-15",
+      "area": "power",
+      "severity": "minor",
+      "status": "open",
+      "title": "Advertising and connection event charges are estimates",
+      "evidence": "[estimate: power.md §3 from SWRS272F currents]",
+      "owner": "battery-and-power",
+      "fix": "Measure on the prototype; fallback 2000 ms advertising interval",
+      "auto_fixable": false,
+      "prototype_check": "V-002"
+    },
+    {
+      "id": "PR-16",
+      "area": "electrical",
+      "severity": "minor",
+      "status": "open",
+      "title": "48 MHz external load capacitors: the TI LaunchPad leaves them unfitted, the datasheet requires them for compliance",
+      "evidence": "[verified: F-101, F-502]",
+      "owner": "pcb-engineer",
+      "fix": "Fit 9 pF start values; tune on the prototype",
+      "auto_fixable": false,
+      "prototype_check": "V-006"
+    },
+    {
+      "id": "PR-17",
+      "area": "electrical",
+      "severity": "minor",
+      "status": "open",
+      "title": "Antenna match values are start values",
+      "evidence": "[verified: F-106, F-502]",
+      "owner": "pcb-engineer",
+      "fix": "VNA tuning on the assembled prototype",
+      "auto_fixable": false,
+      "prototype_check": "V-005"
+    },
+    {
+      "id": "PR-18",
+      "area": "claims",
+      "severity": "info",
+      "status": "open",
+      "title": "Calibrated battery life is 13.1 months against 12 required: the margin rests on the empirical case",
+      "evidence": "[estimate: power.md §3, F-404]",
+      "owner": "battery-and-power",
+      "fix": "No change; V-001 confirms",
+      "auto_fixable": false,
+      "prototype_check": "V-001"
+    },
+    {
+      "id": "FR-01",
+      "area": "pcb",
+      "severity": "info",
+      "status": "open",
+      "title": "Antenna keep-out 0.96 mm from the cell edge against the 1.0 mm planning value",
+      "evidence": "[verified: F-51x co-design report, 2026-11-08]",
+      "owner": "pcb-engineer",
+      "fix": "No layout change; matching on the prototype covers it",
+      "auto_fixable": false,
+      "prototype_check": "V-005"
+    },
+    {
+      "id": "FR-02",
+      "area": "mechanical",
+      "severity": "major",
+      "status": "fixed",
+      "title": "Door gasket compression only 3 % at the low tolerance end (T-4)",
+      "evidence": "[estimate: mech/tolerances.md T-4]",
+      "owner": "enclosure-engineer",
+      "fix": "Order the gasket at 0.35 mm free (D-701)",
+      "auto_fixable": true,
+      "round_fixed": 2
+    },
+    {
+      "id": "FR-03",
+      "area": "mechanical",
+      "severity": "minor",
+      "status": "fixed",
+      "title": "Sounder port gasket grade unspecified (T-5)",
+      "evidence": "[estimate: mech/tolerances.md T-5]",
+      "owner": "enclosure-engineer",
+      "fix": "0.8 mm extra-soft PU foam with PSA (D-702)",
+      "auto_fixable": true,
+      "round_fixed": 2
+    },
+    {
+      "id": "FR-04",
+      "area": "mechanical",
+      "severity": "major",
+      "status": "accepted",
+      "decision": "D-703",
+      "title": "Coin bayonet does not fit the 10.0 mm stack; screw door replaces it",
+      "evidence": "[verified: D-511 CAD study]",
+      "owner": "enclosure-engineer",
+      "fix": "Accept the screw door for EVT-0 (D-703)",
+      "auto_fixable": false
+    },
+    {
+      "id": "FR-05",
+      "area": "mechanical",
+      "severity": "minor",
+      "status": "open",
+      "title": "Seal, cell access, button force and child-resistance are untested",
+      "evidence": "[assumption]",
+      "owner": "enclosure-engineer",
+      "fix": "Run V-011, V-013, V-014, V-015 on EVT-0",
+      "auto_fixable": false,
+      "prototype_check": "V-013"
+    },
+    {
+      "id": "FR-06",
+      "area": "mechanical",
+      "severity": "minor",
+      "status": "open",
+      "title": "Sound port position rests on the datasheet drawing, not the vendor footprint file",
+      "evidence": "[verified: F-513]",
+      "owner": "enclosure-engineer",
+      "fix": "Inspect on EVT-0",
+      "auto_fixable": false,
+      "prototype_check": "V-010"
+    },
+    {
+      "id": "FR-07",
+      "area": "pcb",
+      "severity": "minor",
+      "status": "open",
+      "title": "SW1 internal links assumed from the KMR2 family drawing (D-520)",
+      "evidence": "[estimate: F-522]",
+      "owner": "pcb-engineer",
+      "fix": "Continuity check on the bare assembled board",
+      "auto_fixable": false,
+      "prototype_check": "V-012"
+    },
+    {
+      "id": "FR-08",
+      "area": "compliance",
+      "severity": "minor",
+      "status": "fixed",
+      "title": "compliance.md still described the coin bayonet",
+      "evidence": "[verified: compliance.md, 2026-11-08]",
+      "owner": "compliance-planner",
+      "fix": "Rewrite the UL 4200A and EU art. 11 rows for the screw door (D-511, D-703)",
+      "auto_fixable": true,
+      "round_fixed": 2
+    },
+    {
+      "id": "FR-09",
+      "area": "compliance",
+      "severity": "minor",
+      "status": "fixed",
+      "title": "Marking plan missing (Q-BZ-03)",
+      "evidence": "[estimate]",
+      "owner": "compliance-planner",
+      "fix": "D-704",
+      "auto_fixable": true,
+      "round_fixed": 2
+    },
+    {
+      "id": "FR-10",
+      "area": "cost",
+      "severity": "minor",
+      "status": "open",
+      "title": "Unit cost at 1k is $8.89–17.1 against the $12 target: not proven",
+      "evidence": "[estimate: cost/cost.md, 2026-11-08; 41 % verified]",
+      "owner": "cost-and-sourcing",
+      "fix": "Replace the three largest estimates (box-build, molded set, color runs) with quotes",
+      "auto_fixable": false,
+      "blocker": "quote",
+      "action": "Send cost/rfq.md RFQ-2 (molder) and RFQ-3 (box-build) to two vendors each; paste replies in hw/cost/ and re-run cost_model.py"
+    },
+    {
+      "id": "FR-11",
+      "area": "schedule",
+      "severity": "minor",
+      "status": "open",
+      "title": "Six long-lead parts must be bought from stock now (U1, Q1, Y2, D2, ANT1, LS1)",
+      "evidence": "[verified: stock 2026-11-08, roadmap/schedule.md]",
+      "owner": "prototype-roadmap",
+      "fix": "Buy 130 of each from the listed stock",
+      "auto_fixable": false,
+      "blocker": "purchase",
+      "action": "Order 130 × U1 (LCSC C20416850), Q1 (LCSC C150470), Y2 (LCSC C1985410), D2 (LCSC C48260), ANT1 and LS1 (DigiKey) — about $230 [estimate: bom.csv prices]"
+    },
+    {
+      "id": "FR-12",
+      "area": "cost",
+      "severity": "info",
+      "status": "fixed",
+      "title": "Cost model used pre-layout counts",
+      "evidence": "[verified: manufacturing.json refreshed]",
+      "owner": "cost-and-sourcing",
+      "fix": "126 pads, 26 part types, 2 X-ray parts, 4 printed parts, screws and gaskets",
+      "auto_fixable": true,
+      "round_fixed": 2
+    }
+  ],
+  "notes": "Paper pass (stage 5). Round 1 found PR-01 to PR-13; all were fixed in specs, power and the BOM, then verified again in round 2. PCB, mechanical, compliance, cost and schedule are NOT-REVIEWED until their stages produce files. bom_check 0 errors; bom_merge 0 errors; check_rails 0 failed; power_budget exit 0.",
+  "maturity": "EVT-0 release candidate (design complete, prototype not built)"
+}

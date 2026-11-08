@@ -1,0 +1,417 @@
+{
+  "project": "Pocket Beacon",
+  "depth": "full",
+  "created": "2026-11-08",
+  "stages": {
+    "toolchain": "todo",
+    "discovery": "done",
+    "specs": "done",
+    "research": "done",
+    "power": "done",
+    "paper_review": "done",
+    "enclosure": "done",
+    "pcb": "done",
+    "validation": "done",
+    "renders": "done",
+    "drawing": "done",
+    "cost": "done",
+    "compliance": "done",
+    "roadmap": "done",
+    "final_review": "done",
+    "presentation": "todo",
+    "build_package": "done"
+  },
+  "gates": [
+    {
+      "stage": "discovery",
+      "passed": "2026-11-08",
+      "evidence": "brief v1 approved by toolkit PoC product-owner role (D-001)"
+    },
+    {
+      "stage": "specs",
+      "passed": "2026-11-08",
+      "evidence": "requirements issue 1, architecture issue 1, bom_check 0 errors / 1 explained warning; IC rows U1 U2 LS1 verified, others pending research (specs gate on 'every IC verified' completes after electronics-researcher)"
+    },
+    {
+      "stage": "power",
+      "passed": "2026-11-08",
+      "evidence": "power_budget.py exit 0 (peaks OK vs REQ-005 limit and SWRA349); check_rails.py 2 passed 0 failed; 12-month life met in baseline/pessimistic/empirical; catalog CR2032; measurement plan M1-M9 in power/power.md"
+    },
+    {
+      "stage": "research",
+      "passed": "2026-11-08",
+      "evidence": "30 dossiers in hw/parts; bom_merge.py --overwrite exit 0; every IC row verified (see retros/2026-11-08-research-power-review.md)"
+    },
+    {
+      "stage": "paper_review",
+      "passed": "2026-11-08",
+      "evidence": "doability/findings.json round 2: 13 findings fixed (PR-01..PR-13), 5 tied to prototype checks V-001..V-009; parts/electrical/power/claims GO; pcb, mechanical, compliance, cost, schedule NOT-REVIEWED until their stages; report in doability/review.md"
+    },
+    {
+      "stage": "specs",
+      "passed": "2026-11-08",
+      "evidence": "issue 2: every IC row verified with a dossier; bom_check 0 errors; pin budget 10/12 GPIO, 2 spare"
+    },
+    {
+      "stage": "cost",
+      "passed": "2026-11-08",
+      "evidence": "cost_model.py: 5 tiers, 0 warnings; 1k recurring USD 8.79-16.4 vs target 12 (not proven, RFQs 2-3 close it); 41 % verified at 1k; rfq.md covers every estimate > 5 %"
+    },
+    {
+      "stage": "compliance",
+      "passed": "2026-11-08",
+      "evidence": "compliance_matrix.py with rules.local.json: 32 rows for US/EU/UK/BR + global; blocking item (Anatel) and US coin-cell rule owned (D-601, D-026); budget USD 33.05k-128.5k [estimate]"
+    },
+    {
+      "stage": "roadmap",
+      "passed": "2026-11-08",
+      "evidence": "roadmap.py: 11 stages, 33-60 weeks, critical path S0-E0-E1-T1-D0-R1-M1; first US sale 2027-05-10 to 2027-09-27; long-lead buys listed"
+    },
+    {
+      "stage": "enclosure",
+      "passed": "2026-11-08",
+      "evidence": "hw/mech/cad/pocket-beacon_dfm.md DFM PASS 0 errors; stackup.md 10.00 mm"
+    },
+    {
+      "stage": "validation",
+      "passed": "2026-11-08",
+      "evidence": "hw/validation/assembly.json 0 interpenetrations (73 pairs); free_space.json no leak"
+    },
+    {
+      "stage": "pcb",
+      "passed": "2026-11-08",
+      "evidence": "release_check.py READY TO ORDER; DRC 0 / unconnected 0 / parity 0; ERC 0 (F-520)"
+    },
+    {
+      "stage": "drawing",
+      "passed": "2026-11-08",
+      "evidence": "BLUEPRINT ok, 12/12 items visible, 0 hidden; ORTHO ok 32.0 x 32.0 x 10.0 mm; PNGs reviewed"
+    },
+    {
+      "stage": "final_review",
+      "passed": "2026-11-08",
+      "evidence": "doability_score.py: READY TO BUILD (prototype), round 3/3, 0 fixes, 0 blockers, 15 prototype checks (doability/score.json)"
+    },
+    {
+      "stage": "build_package",
+      "passed": "2026-11-08",
+      "evidence": "release_check.py release/evt0-a: READY TO BUILD (prototype), 0 failures, 0 warnings"
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "Q-PB-01",
+      "for": "electronics-researcher",
+      "question": "BAT-HLD-001-TR drawing: footprint, height, negative pad, reverse insertion; fallback Keystone 3034 / MPD BU2032SM",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: BAT-HLD-001 drawing read (F-201); replaced by Keystone 3034TR, 21.2 x 23.1 x 4.1 mm, LCSC C5213768 (D-018)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-02",
+      "for": "firmware",
+      "question": "Peak-path rules: no TX above 0 dBm while ringing; drop to 2x mode if VBAT under load < 2.6 V; low-battery report < 2.3 V",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: adaptive ring rule adopted in architecture.md §4 (D-028)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-03",
+      "for": "electronics-researcher",
+      "question": "RF pi-match starting values for CC2340 RF_P + Johanson 2450AT18A0100001E (TI reference design, Johanson layout note)",
+      "blocking": false,
+      "note": "Eval-board match 1.0 pF + 2.7 nH + 3.9 nH; Johanson recommends tee slots; see F-106 and Q-PB-104",
+      "resolved": "resolved 2026-11-08: 5-slot match: C11 shunt, L2 series, C12 shunt, R2 series 0 ohm, C18 shunt DNP footprint; values tuned on EVT (D-020, V-005)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-04",
+      "for": "electronics-researcher",
+      "question": "48 MHz crystal: ABM11W 8 pF within CC2340 5-9 pF range and ESR <= 60 ohm; TZ3908AAAO43 availability",
+      "blocking": false,
+      "resolved": "2026-11-08: ABM11W 8 pF fits (CL 5-9 pF, ESR 40 ohm) but is out of stock; TZ3908AAAO43 not stocked; use ABM11W-48.0000MHZ-7-B1U-T3 (Q-PB-105)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-05",
+      "for": "electronics-researcher",
+      "question": "CC2340 RGE0024 package maximum height (assumed 1.0 mm)",
+      "blocking": false,
+      "resolved": "2026-11-08: RGE24 is 1 mm max height (F-101)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-06",
+      "for": "enclosure-engineer",
+      "question": "Sound port + acoustic membrane + 4 kHz cavity; translucent button membrane for LED; child-resistant lid action",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "D-511, D-514, D-516"
+    },
+    {
+      "id": "Q-PW-01",
+      "for": "specs-engineer",
+      "question": "Ring peak 15.05 mA typ vs REQ-005 target 15 mA: accept within the 20 mA limit (recommended), or change the ring pattern/U1 state?",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: accepted: 3x ring only on a healthy cell (D-028); 15.05 mA stays below the 20 mA limit (REQ-005)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PW-02",
+      "for": "specs-engineer",
+      "question": "Adopt adaptive ring rule: start 2x, 3x if VBAT >= 2.7 V under load, 1x + low-battery alert below 2.3 V (power.md §5); re-check REQ-006 at 2x.",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: adopted (D-028)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PW-03",
+      "for": "electronics-researcher",
+      "question": "DC-bias curves at 3 V for CL10A226MQ8NRNC and CL10A106KP8NNNC (26 uF effective assumed); PAM8904 1x mode current.",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: DC-bias curves read (F-301, F-302); bulk resized (D-022)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PW-04",
+      "for": "electronics-researcher",
+      "question": "TPD1E10B06 leakage at 3.3 V; DMG2305UX RDS(on) and VGS(th) max at VGS = -2.0 V.",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: F-205 (DMG2305UX fully on at -1.8 V) and F-206 (TPD1E10B06 <= 100 nA)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-07",
+      "for": "specs-engineer",
+      "question": "VBAT bulk: effective capacitance is 28 µF at 3.0 V (19.7 µF worst case) against ≥ 14.2 µF for the ring-start slew rule (margin 1.39×). Add a third CL10A226MQ8NRNC (C15, +US$ 0.011, basic), or use 2× CL21A226MAQNNNE (0805, 1.40 mm, +US$ 0.22)? See parts/CL10A226MQ8NRNC.md.",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: third 22 uF added as C15 (D-022)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-08",
+      "for": "specs-engineer",
+      "question": "C9/C10: the BOM MPN CL05A105KO5NNNC (16 V, JLC extended C29266) does not match the BOM LCSC C52923 (CL05A105KA5NQNC, 25 V, basic). Adopt CL05A105KA5NQNC: it doubles the effective flying capacitance at 6.6 V. See parts/CL05A105KO5NNNC.md.",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: CL05A105KA5NQNC adopted (D-023)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-09",
+      "for": "specs-engineer",
+      "question": "JLC stock blocks Y1 (4), BT1 (12) and L2 (0); ANT1 (95) and LS1 (535) limit the build size. Choose substitutes or consigned parts: parts/_jlc_availability.md. L1 is 1.45 mm tall, not 1.0 mm: re-check the stack-up.",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: substitutes chosen (D-018, D-019, D-020); LS1 and ANT1 consigned from DigiKey for builds above JLC stock (D-029)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-101",
+      "for": "specs-engineer",
+      "question": "Add two 0402 C0G footprints for HFXT external load capacitors at Y1 (TI SWRS272F 7.20.3.1 note 1: required for systems targeting regulatory compliance); start about 9 pF, set on EVT",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: C16/C17 9 pF C0G footprints fitted (D-019)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-102",
+      "for": "specs-engineer",
+      "question": "Confirm in the TI BLE stack (Low Power F3 SDK) that LFOSC is accepted as the BLE sleep clock; if yes remove Y2, C13, C14 (saves about USD 0.42 at 1k and board area; LFOSC standby is 0.71 uA vs 0.74 uA)",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: keep Y2 in v1 (D-025); LFOSC is a v2 cost-down experiment after EVT",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-103",
+      "for": "specs-engineer",
+      "question": "Replace LS1 PKMCS0909E4000-R1 (DigiKey Last Time Buy 2027-03-31, 0 stock) with Same Sky CPT-9019A-SMT-TR (Active, 47k at DigiKey, 8.4-15.6 nF, 72 dB min at 3 Vpp, top port, 9.5x9.5x2.1 mm max); enclosure-engineer updates the acoustic cavity for a top port (Q-PB-06)",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: CPT-9019A-SMT-TR adopted, top port (D-021)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-104",
+      "for": "specs-engineer",
+      "question": "Replace L2 LQP15MN2N2B02D (obsolete) with LQG15HS2N2B02D (LCSC C162540); pcb-engineer lays out a 5-pad match that fits either pi or tee (Johanson asks for tee slots); ANT1 max height is 1.4 mm, corner mount",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: LQG15HS2N2B02D adopted (D-020)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-105",
+      "for": "specs-engineer",
+      "question": "Replace Y1 ABM11W-48.0000MHZ-8-D1X-T3 (0 DigiKey, 4 LCSC) with ABM11W-48.0000MHZ-7-B1U-T3 (drop-in, CL 7 pF, -20 to 70 C, 3,758 at LCSC C1985532); EVT crystal start-up and offset test because only TZ3908AAAO43 is TI-validated",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: ABM11W-48.0000MHZ-7-B1U-T3 adopted (D-019)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-106",
+      "for": "specs-engineer",
+      "question": "If Y2 stays, replace C13/C14 GRM1555C1H120JA01D (0 stock at DigiKey and LCSC) with FH 0402CG120J500NT (JLCPCB Basic C1547)",
+      "blocking": false,
+      "resolved": "resolved 2026-11-08: 0402CG120J500NT (C1547) adopted (D-025)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-201",
+      "for": "specs-engineer",
+      "question": "Replace BT1 BAT-HLD-001-TR with Keystone 3034TR (proposed in agents/2026-11-08-research-power-mech.md as 'Q-PB-07', renumbered: ID collision, L-004)",
+      "blocking": false,
+      "resolved": "2026-11-08: adopted (D-018)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-202",
+      "for": "specs-engineer",
+      "question": "R1 value 680 ohm vs 330 ohm for LED visibility at a 2.0 V cell (proposed as 'Q-PB-08', renumbered, L-004)",
+      "blocking": false,
+      "resolved": "2026-11-08: 330 ohm (D-024)",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-203",
+      "for": "compliance-planner",
+      "question": "Coin-cell child-safety rules for US/EU/UK: compartment, warnings, packaging (proposed as 'Q-PB-09', renumbered, L-004)",
+      "blocking": false,
+      "resolved": "2026-11-08: REQ-015 rewritten from 16 CFR 1263 / UL 4200A-2023 (D-026, F-501); compliance-planner confirms EU/UK/BR equivalents",
+      "status": "closed",
+      "resolution": "resolved in stages 3-5 (D-018…D-031)"
+    },
+    {
+      "id": "Q-PB-204",
+      "for": "enclosure-engineer",
+      "question": "Lid: tool-operated (coin slot) bayonet, >= 90 deg rotation, O-ring face seal, abuse tests of UL 4200A §6 (D-026); button membrane force budget 2.3-3.3 N (D-027); top-port sound path for CPT-9019A with ePTFE membrane; see hw/mech/constraints.md",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "D-511, D-703"
+    },
+    {
+      "id": "Q-BZ-01",
+      "for": "user",
+      "question": "Confirm market sequencing (D-601): US launch batch of 100, then EU/UK/BR certification for the 1k run, or certify all four markets before the launch batch (+USD 12.75k-82k NRE).",
+      "blocking": false
+    },
+    {
+      "id": "Q-BZ-02",
+      "for": "firmware",
+      "question": "Implement D-604 (address rotation 15 min/24 h, 12 s ring >= 60 phon) and a lab test mode (continuous TX/RX per channel) before the EVT-1 pre-scan.",
+      "blocking": false
+    },
+    {
+      "id": "Q-BZ-03",
+      "for": "enclosure-engineer",
+      "question": "Lid markings: molded coin-cell safety icons and 'CR2032 +'; room for FCC ID and CE/UKCA marks at legible size, or move them to the manual and packaging (confirm with the lab).",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "D-704"
+    },
+    {
+      "id": "Q-BZ-04",
+      "for": "cost-and-sourcing",
+      "question": "Refresh after co-design: bare-board price from Gerbers, joints and part types from the final CPL (model uses 120 joints, 24 part types, 3 X-ray parts), enclosure parts, side action, O-ring size and membrane design; re-run cost_model.py and update cost.md.",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "cost refreshed 2026-11-08 (manufacturing.json: 126 pads, 26 part types)"
+    },
+    {
+      "id": "Q-BZ-05",
+      "for": "cost-and-sourcing",
+      "question": "Buy now: about 130 each of U1, Q1 (LCSC C150470), Y2, D2, ANT1 and LS1 from stock (factory lead times 13-40 weeks exceed the time to DVT); see cost/sourcing.md and roadmap/schedule.md.",
+      "blocking": false
+    },
+    {
+      "id": "Q-CD-01",
+      "for": "pcb-engineer",
+      "question": "Confirm the CPT-9019A port corner against the Same Sky footprint download (F-513)",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "prototype check V-010"
+    },
+    {
+      "id": "Q-CD-02",
+      "for": "user",
+      "question": "Accept the screw-secured cell door (D-511) instead of the coin bayonet (D-026)?",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "D-703"
+    },
+    {
+      "id": "Q-CD-03",
+      "for": "enclosure-engineer",
+      "question": "Door gasket 0.35 mm free or recess ±0.02 mm (T-4)",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "D-701"
+    },
+    {
+      "id": "Q-CD-04",
+      "for": "cost-and-sourcing",
+      "question": "Port gasket foam grade, 0.8 mm free (D-514)",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "D-702"
+    },
+    {
+      "id": "Q-CD-06",
+      "for": "enclosure-engineer",
+      "question": "Verify CR2032 insertion and removal through the Ø22.0 door bore with the 3034 retainer on EVT",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "prototype check V-011"
+    },
+    {
+      "id": "Q-PCB-01",
+      "for": "doability-review",
+      "question": "Add prototype check: continuity between SW1's two '1' terminals and between its two '2' terminals unpressed/pressed (D-520 relies on the KMR2 internal joins, F-522)",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "prototype check V-012"
+    },
+    {
+      "id": "Q-PCB-02",
+      "for": "product-render",
+      "question": "Board preview PNGs in hw/pcb/export/ predate the final routing; regenerate them (export.py --what render) before any presentation use",
+      "blocking": false,
+      "status": "closed",
+      "answer": "pcb/export/plot_front.svg|png and plot_back.svg|png from the final routed board (kicad-cli vector plots)"
+    },
+    {
+      "id": "Q-RN-01",
+      "for": "pcb-engineer",
+      "question": "pads.json vs solder mask: Q1 pad 3 solder lands under mask (0.99 mm), and 0 mm mask margin on D1/L1/Y1/C2/C4; set JLC-style solder-mask expansion (~0.05 mm) and check the Q1 footprint, then re-run solder.py + validator so renders can show fillets",
+      "blocking": false,
+      "status": "closed",
+      "resolution": "render-only: KiCad mask expansion 0 with every pad on F.Mask is correct for JLC; pads.json orientation for Q1 pad 3 is a render export issue (product-render), not a fab issue"
+    }
+  ],
+  "golden": {
+    "assembly": "hw/mech/assembly_golden.blend",
+    "validated": "2026-11-08",
+    "report": "hw/validation/assembly.json"
+  },
+  "refresh_after_codesign": [
+    "cost: bare board, joints/part types, enclosure parts and tooling, side action, O-ring, membranes (Q-BZ-04)",
+    "roadmap: EVT-0 start if the co-design finishes later than 2026-11-23",
+    "compliance: lid marking space (Q-BZ-03)"
+  ]
+}

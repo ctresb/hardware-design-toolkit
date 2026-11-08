@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 406" width="900" height="406" font-family="Inter, Helvetica Neue, Arial, sans-serif" role="img" aria-label="Cost per unit by order size. Unit-cost target not proven yet at 1,000 and 10,000 units: the estimates decide">
+<style>.bg{fill:#fcfcfb}.t1{fill:#1d1f23}.t2{fill:#5b6170}.grid{stroke:#e6e6e3}.tg{stroke:#1d1f23}.halo{paint-order:stroke;stroke:#fcfcfb;stroke-width:4px;stroke-linejoin:round}@media (prefers-color-scheme: dark){.bg{fill:#1a1a19}.t1{fill:#ededeb}.t2{fill:#a2a6ae}.grid{stroke:#2e2e2c}.tg{stroke:#ededeb}.halo{stroke:#1a1a19}}</style>
+<rect class="bg" width="900" height="406"/>
+<text class="t1" x="104" y="30" font-size="16" font-weight="600">Unit-cost target not proven yet at 1,000 and 10,000 units: the estimates decide</text>
+<text class="t2" x="104" y="52" font-size="12">Cost per unit by order size, USD, log scale. Each bar is the low–high range; the black mark is the recurring (FOB) target.</text>
+<text class="t2" x="742" y="82" font-size="11" font-weight="600">TARGET</text>
+<line class="grid" x1="104.0" y1="88" x2="104.0" y2="336" stroke-width="1"/>
+<text class="t2" x="104.0" y="354" font-size="11" text-anchor="middle">$1</text>
+<line class="grid" x1="308.7" y1="88" x2="308.7" y2="336" stroke-width="1"/>
+<text class="t2" x="308.7" y="354" font-size="11" text-anchor="middle">$10</text>
+<line class="grid" x1="513.3" y1="88" x2="513.3" y2="336" stroke-width="1"/>
+<text class="t2" x="513.3" y="354" font-size="11" text-anchor="middle">$100</text>
+<line class="grid" x1="718.0" y1="88" x2="718.0" y2="336" stroke-width="1"/>
+<text class="t2" x="718.0" y="354" font-size="11" text-anchor="middle">$1k</text>
+<text class="t1" x="90" y="120" font-size="12" text-anchor="end">1 unit</text>
+<rect x="592.6" y="102" width="61.2" height="12" rx="4" fill="#3a72c0"><title>1 units · Recurring: $244–486</title></rect>
+<text class="t2 halo" x="661.8" y="112" font-size="11">$244–486</text>
+<rect x="617.8" y="120" width="78.7" height="12" rx="4" fill="#d9542b"><title>1 units · Total incl. NRE: $324–786</title></rect>
+<text class="t2 halo" x="609.8" y="130" font-size="11" text-anchor="end">$324–786</text>
+<text class="t1" x="90" y="168" font-size="12" text-anchor="end">10 units</text>
+<rect x="454.1" y="150" width="97.1" height="12" rx="4" fill="#3a72c0"><title>10 units · Recurring: $51.4–153</title></rect>
+<text class="t2 halo" x="559.2" y="160" font-size="11">$51.4–153</text>
+<rect x="467.0" y="168" width="100.1" height="12" rx="4" fill="#d9542b"><title>10 units · Total incl. NRE: $59.4–183</title></rect>
+<text class="t2 halo" x="575.1" y="178" font-size="11">$59.4–183</text>
+<text class="t1" x="90" y="216" font-size="12" text-anchor="end">100 units</text>
+<rect x="381.9" y="198" width="84.8" height="12" rx="4" fill="#3a72c0"><title>100 units · Recurring: $22.8–59.2</title></rect>
+<text class="t2 halo" x="474.7" y="208" font-size="11">$22.8–59.2</text>
+<rect x="605.0" y="216" width="80.8" height="12" rx="4" fill="#d9542b"><title>100 units · Total incl. NRE: $281–696</title></rect>
+<text class="t2 halo" x="597.0" y="226" font-size="11" text-anchor="end">$281–696</text>
+<text class="t1" x="90" y="264" font-size="12" text-anchor="end">1,000 units</text>
+<text class="t1" x="742" y="258" font-size="12" font-weight="600">$12</text>
+<text class="t2" x="742" y="274" font-size="11">not proven</text>
+<rect x="298.2" y="246" width="58.3" height="12" rx="4" fill="#3a72c0"><title>1,000 units · Recurring: $8.89–17.1</title></rect>
+<line class="tg halo" x1="324.9" y1="242" x2="324.9" y2="262" stroke-width="2" stroke-linecap="round"><title>Target $12</title></line>
+<line class="tg" x1="324.9" y1="242" x2="324.9" y2="262" stroke-width="2" stroke-linecap="round"/>
+<text class="t2 halo" x="364.6" y="256" font-size="11">$8.89–17.1</text>
+<rect x="453.0" y="264" width="109.5" height="12" rx="4" fill="#d9542b"><title>1,000 units · Total incl. NRE: $50.7–174</title></rect>
+<text class="t2 halo" x="570.5" y="274" font-size="11">$50.7–174</text>
+<text class="t1" x="90" y="312" font-size="12" text-anchor="end">10,000 units</text>
+<text class="t1" x="742" y="306" font-size="12" font-weight="600">$8</text>
+<text class="t2" x="742" y="322" font-size="11">not proven</text>
+<rect x="257.5" y="294" width="41.9" height="12" rx="4" fill="#3a72c0"><title>10,000 units · Recurring: $5.62–9.01</title></rect>
+<line class="tg halo" x1="288.8" y1="290" x2="288.8" y2="310" stroke-width="2" stroke-linecap="round"><title>Target $8</title></line>
+<line class="tg" x1="288.8" y1="290" x2="288.8" y2="310" stroke-width="2" stroke-linecap="round"/>
+<text class="t2 halo" x="307.4" y="304" font-size="11">$5.62–9.01</text>
+<rect x="322.7" y="312" width="79.0" height="12" rx="4" fill="#d9542b"><title>10,000 units · Total incl. NRE: $11.7–28.5</title></rect>
+<text class="t2 halo" x="409.7" y="322" font-size="11">$11.7–28.5</text>
+<rect x="104" y="374" width="12" height="12" rx="3" fill="#3a72c0"/><text class="t1" x="122" y="384" font-size="12">Recurring (one more unit)</text>
+<rect x="330" y="374" width="12" height="12" rx="3" fill="#d9542b"/><text class="t1" x="348" y="384" font-size="12">Total, with one-time costs spread over the order</text>
+<line class="tg" x1="722" y1="372" x2="722" y2="386" stroke-width="2" stroke-linecap="round"/><text class="t1" x="732" y="384" font-size="12">Target (recurring)</text>
+</svg>

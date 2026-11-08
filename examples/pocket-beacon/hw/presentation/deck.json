@@ -1,0 +1,7 @@
+{
+  "highlights": [
+    {"value": "32 × 32 × 10 mm", "label": "Overall size, from the validated CAD", "evidence": "verified"},
+    {"value": "13–36 months", "label": "On one CR2032, calibrated to baseline", "evidence": "estimate"},
+    {"value": "$8.89–17.14", "label": "Unit cost at 1,000 units, before one-time costs", "evidence": "estimate"}
+  ]
+}

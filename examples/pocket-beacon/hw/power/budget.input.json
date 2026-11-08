@@ -1,0 +1,160 @@
+{
+ "product": "Pocket Beacon (fictional BLE item finder, toolkit proof of concept)",
+ "date": "2026-11-08",
+ "target_runtime_h": 8760,
+ "battery": {
+  "type": "CR2032 Li-MnO2 primary coin cell, 20.0 x 3.2 mm, round",
+  "nominal_v": 3.0,
+  "rated_mah": 225,
+  "usable_fraction": 0.85,
+  "eol_fraction": 0.97,
+  "evidence": "[verified: DigiKey listing Panasonic CR2032 225 mAh, 2026-11-08] rated; usable 0.85 [verified: TI SWRA349 Fig. 8/9, worst vendor with a buffer capacitor delivered 181 of 220 mAh = 82 % to 2.0 V under 15-30 mA pulses]; eol 0.97 [estimate: ~1 %/year self-discharge, Energizer CR2032 datasheet UltimateCR2032EU0920, x 3 years shelf + use]"
+ },
+ "rails": {
+  "VBAT": {
+   "min": 2.0,
+   "max": 3.3,
+   "max_ma": 15,
+   "type": "direct",
+   "evidence": "[estimate: CR2032 open-circuit 3.0-3.3 V fresh, 2.0 V end-of-life cutoff (Energizer and SWRA349 test cutoff); max_ma = REQ-005 ring target]"
+  }
+ },
+ "modes": [
+  {
+   "name": "connected_idle",
+   "duty": 0.55,
+   "note": "phone in range: BLE connection, 1000 ms interval, peripheral latency 1 (one event per 2 s)"
+  },
+  {
+   "name": "adv_slow",
+   "duty": 0.4478678,
+   "note": "phone away: connectable advertising every 1285 ms (Apple accessory guideline value), 3 channels, 0 dBm"
+  },
+  {
+   "name": "adv_fast",
+   "duty": 0.001389,
+   "note": "20 ms advertising for 30 s after each disconnect or button press, 4 times per day = 120 s/day"
+  },
+  {
+   "name": "app_active",
+   "duty": 0.000694,
+   "note": "app open in the foreground: 30 ms connection interval with GATT traffic, 60 s/day"
+  },
+  {
+   "name": "ring",
+   "duty": 4.57e-05,
+   "note": "10 rings x 12 s per month = 3.95 s/day; piezo driver 3x mode; LED off while ringing in 3x mode"
+  },
+  {
+   "name": "button_led",
+   "duty": 3.5e-06,
+   "note": "3 presses/day, 100 ms LED flash + wake processing"
+  }
+ ],
+ "parts": [
+  {
+   "ref": "U1",
+   "name": "BLE SoC CC2340R52 (incl. RF, DC/DC on)",
+   "rail": "VBAT",
+   "rail_v": 3.0,
+   "currents_ma": {
+    "connected_idle": 0.00254,
+    "adv_slow": 0.00876,
+    "adv_fast": 0.515,
+    "app_active": 0.167,
+    "ring": 0.85,
+    "button_led": 2.6
+   },
+   "peak_ma": 5.1,
+   "peak_modes": [
+    "connected_idle",
+    "adv_slow",
+    "adv_fast",
+    "app_active",
+    "button_led"
+   ],
+   "evidence": "[estimate: event charge built from verified SWRS272F 7.9/7.10 figures (TX 0 dBm 5.1 mA, RX 5.3 mA, idle 0.8 mA, active 2.6 mA, standby 0.74 uA with LFXT): advertising event 10.3 uC (3 x [TX 0.30 ms + RX 0.20 ms + hop 0.15 ms] + 1.2 ms pre/post at 1.5 mA), connection event 3.6 uC; ring = idle 0.8 mA with timer PWM + connection events]"
+  },
+  {
+   "ref": "U2",
+   "name": "Piezo driver PAM8904EGPR",
+   "rail": "VBAT",
+   "rail_v": 3.0,
+   "currents_ma": {
+    "*": 8e-06,
+    "ring": 14.2
+   },
+   "peak_ma": 14.2,
+   "peak_modes": [
+    "ring"
+   ],
+   "evidence": "[verified: Diodes DS41667 Rev 4-2, IDD 3x differential 14.2 mA typ, ISD 8 nA typ, read by specs stage 2026-11-08]"
+  },
+  {
+   "ref": "D1",
+   "name": "Amber status LED + 330 ohm (D-024)",
+   "rail": "VBAT",
+   "rail_v": 3.0,
+   "currents_ma": {
+    "*": 0.0,
+    "button_led": 3.5
+   },
+   "peak_ma": 3.5,
+   "peak_modes": [
+    "button_led"
+   ],
+   "evidence": "[estimate: (3.0 V - 1.85 V Vf at 3.5 mA) / 330 ohm; Vf about 1.75 V at 1 mA per F-207]"
+  },
+  {
+   "ref": "LEAK",
+   "name": "Board leakage: MLCC insulation (78 uF on VBAT after D-022), ESD diode, FET, flux residue",
+   "rail": "VBAT",
+   "rail_v": 3.0,
+   "currents_ma": {
+    "*": 0.0004
+   },
+   "evidence": "[estimate: X5R insulation spec >= 500 MOhm*uF gives <= 0.47 uA worst case for 78 uF at 3 V, typical 10-100x lower; ESD diode and flux about 0.1 uA; 0.3 uA planned]"
+  }
+ ],
+ "scenario_factors": {
+  "optimistic": 0.8,
+  "baseline": 1.0,
+  "pessimistic": 2.0
+ },
+ "comparables": [
+  {
+   "name": "Apple AirTag (CR2032, 'more than a year')",
+   "capacity_mah": 225,
+   "runtime_h": 8760,
+   "usable_fraction": 0.9,
+   "evidence": "[verified: apple.com/airtag 'works for more than a year on a standard battery', 2026-11-08; capacity = typical CR2032 rating]"
+  },
+  {
+   "name": "Chipolo ONE (CR2032, 'up to 2 years')",
+   "capacity_mah": 225,
+   "runtime_h": 17520,
+   "usable_fraction": 0.9,
+   "evidence": "[verified: chipolo.net/en/products/chipolo-one 'Up to 2 years, replaceable battery - CR 2032', 2026-11-08]"
+  },
+  {
+   "name": "Chipolo CR2032 variant in the maker's comparison table ('~ 1 year')",
+   "capacity_mah": 225,
+   "runtime_h": 8760,
+   "usable_fraction": 0.9,
+   "evidence": "[verified: chipolo.net comparison table 'Replaceable (CR2032) ... ~ 1 year', 2026-11-08]"
+  }
+ ],
+ "measured_avg_ma": null,
+ "limits": [
+  {
+   "name": "REQ-005 limit, cell current (<= 20 mA)",
+   "max_ma": 20,
+   "evidence": "[assumption: hw/requirements.md REQ-005 limit]"
+  },
+  {
+   "name": "CR2032 pulse capability used for planning (30 mA peaks cost about 9 % capacity vs 15 mA)",
+   "max_ma": 30,
+   "evidence": "[verified: TI SWRA349 §3 and conclusion, 2010]"
+  }
+ ]
+}

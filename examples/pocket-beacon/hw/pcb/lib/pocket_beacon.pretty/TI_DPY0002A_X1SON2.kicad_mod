@@ -1,0 +1,72 @@
+(footprint "TI_DPY0002A_X1SON2"
+	(version 20250114)
+	(generator "hdt_pcb")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -1.1 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 0.4 0.4)
+				(thickness 0.06)
+			)
+		)
+	)
+	(property "Value" "TI_DPY0002A_X1SON2"
+		(at 0 1.1 0)
+		(layer "F.Fab")
+		(hide yes)
+		(effects
+			(font
+				(size 0.4 0.4)
+				(thickness 0.06)
+			)
+		)
+	)
+	(descr "TI DPY0002A X1SON-2 1.0 x 0.6 mm: land pattern from the TPD1E10B06 datasheet 'EXAMPLE BOARD LAYOUT' (2 pads 0.3 x 0.5 mm, 0.7 mm pitch)")
+	(attr smd)
+	(pad "1" smd roundrect
+		(at -0.35 0)
+		(size 0.3 0.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+	)
+	(pad "2" smd roundrect
+		(at 0.35 0)
+		(size 0.3 0.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+	)
+	(fp_rect
+		(start -0.55 -0.35)
+		(end 0.55 0.35)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_rect
+		(start -0.75 -0.5)
+		(end 0.75 0.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(model "${KIPRJMOD}/../lib/3d/TI_DPY0002A_X1SON2.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(embedded_fonts no)
+)

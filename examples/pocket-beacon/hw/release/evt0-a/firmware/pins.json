@@ -1,0 +1,130 @@
+{
+ "mcu_ref": "U1",
+ "pins": [
+  {
+   "pin": "1",
+   "function": "ANT_1",
+   "net": "RF_P"
+  },
+  {
+   "pin": "2",
+   "function": "VDDR_2",
+   "net": "VDDR"
+  },
+  {
+   "pin": "3",
+   "function": "DIO8_3",
+   "net": "PZ_EN1"
+  },
+  {
+   "pin": "4",
+   "function": "DIO11_4",
+   "net": "PZ_EN2"
+  },
+  {
+   "pin": "5",
+   "function": "DIO12_5",
+   "net": "unconnected-(U1-DIO12-Pad5)"
+  },
+  {
+   "pin": "6",
+   "function": "DIO13_6",
+   "net": "UART_TX"
+  },
+  {
+   "pin": "7",
+   "function": "DIO16_SWDIO_7",
+   "net": "SWDIO"
+  },
+  {
+   "pin": "8",
+   "function": "DIO17_SWDCK_8",
+   "net": "SWDCK"
+  },
+  {
+   "pin": "9",
+   "function": "DIO20_A11_9",
+   "net": "PZ_DIN"
+  },
+  {
+   "pin": "10",
+   "function": "DIO21_A10_10",
+   "net": "BTN"
+  },
+  {
+   "pin": "11",
+   "function": "VDDS_11",
+   "net": "VBAT"
+  },
+  {
+   "pin": "12",
+   "function": "DIO24_A7_12",
+   "net": "LED"
+  },
+  {
+   "pin": "13",
+   "function": "RSTN_13",
+   "net": "nRESET"
+  },
+  {
+   "pin": "14",
+   "function": "DIO3_X32P_14",
+   "net": "X32P"
+  },
+  {
+   "pin": "15",
+   "function": "DIO4_X32N_15",
+   "net": "X32N"
+  },
+  {
+   "pin": "16",
+   "function": "VDDD_16",
+   "net": "VDDD"
+  },
+  {
+   "pin": "17",
+   "function": "DCDC_17",
+   "net": "DCDC"
+  },
+  {
+   "pin": "18",
+   "function": "VDDS_18",
+   "net": "VBAT"
+  },
+  {
+   "pin": "19",
+   "function": "DIO6_A1_19",
+   "net": "SPARE2"
+  },
+  {
+   "pin": "20",
+   "function": "VDDR_20",
+   "net": "VDDR"
+  },
+  {
+   "pin": "21",
+   "function": "X48P_21",
+   "net": "X48P"
+  },
+  {
+   "pin": "22",
+   "function": "X48N_22",
+   "net": "X48N"
+  },
+  {
+   "pin": "23",
+   "function": "GND_23",
+   "net": "GND"
+  },
+  {
+   "pin": "24",
+   "function": "VDDS_24",
+   "net": "VBAT"
+  },
+  {
+   "pin": "25",
+   "function": "EP_25",
+   "net": "GND"
+  }
+ ]
+}

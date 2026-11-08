@@ -1,0 +1,26 @@
+{
+  "project": "",
+  "depth": "full",
+  "created": "",
+  "stages": {
+    "toolchain": "todo",
+    "discovery": "todo",
+    "specs": "todo",
+    "research": "todo",
+    "power": "todo",
+    "paper_review": "todo",
+    "enclosure": "todo",
+    "pcb": "todo",
+    "validation": "todo",
+    "renders": "todo",
+    "drawing": "todo",
+    "cost": "todo",
+    "compliance": "todo",
+    "roadmap": "todo",
+    "final_review": "todo",
+    "presentation": "todo"
+  },
+  "gates": [],
+  "open_questions": [],
+  "golden": {"assembly": null, "validated": null, "report": null}
+}

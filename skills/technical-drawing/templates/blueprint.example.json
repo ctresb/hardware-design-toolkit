@@ -1,0 +1,37 @@
+{
+  "_comment": "Example for the fictional sensor puck built by scripts/make_test_scene.py. Rules are checked in order; the first match wins. A match rule may use names (base name, before '.001'), prefixes, collections, ancestors (base names of parents) or all:true.",
+  "frame_object": "Device",
+  "root": "Device",
+  "skip_prefixes": ["Solder", "Battery label", "Marking", "Light", "cut"],
+  "explode_axis": "z",
+  "groups": [
+    {"name": "contact", "offset_mm": -24.0, "match": {"prefixes": ["Contact"]}},
+    {"name": "lid", "offset_mm": -14.0, "match": {"prefixes": ["Lid", "Magnet"]}},
+    {"name": "battery", "offset_mm": -4.0, "match": {"prefixes": ["Battery"]}},
+    {"name": "board", "offset_mm": 6.0, "fine": true, "match": {"collections": ["Main board"]}},
+    {"name": "shell", "offset_mm": 18.0, "match": {"prefixes": ["Shell", "Window"]}}
+  ],
+  "items": [
+    {"id": 1, "name": "Top cover", "spec": "PC, optical grade, injection molded, SPI A2 outside / SPI B1 inside", "qty": "1", "match": {"prefixes": ["Shell"]}},
+    {"id": 2, "name": "Light window", "spec": "PMMA, clear, ultrasonic welded", "qty": "1", "match": {"prefixes": ["Window"]}},
+    {"id": 3, "name": "Board-to-board connector", "spec": "0.4 mm pitch, 10 pos, mated height 0.8 mm", "qty": "1", "fine": false, "match": {"ancestors": ["J1"]}},
+    {"id": 4, "name": "Main board (PCBA)", "spec": "FR4 4 layers, 0.8 mm, ENIG, black mask", "qty": "1", "match": {"collections": ["Main board"]}},
+    {"id": 5, "name": "Battery", "spec": "LiPo pouch 3.7 V, 300 mAh, PCM and 50 mm leads", "qty": "1", "match": {"prefixes": ["Battery"]}},
+    {"id": 6, "name": "Bottom lid", "spec": "Same resin as the cover; laser marking; adhesive bonded", "qty": "1", "match": {"prefixes": ["Lid"]}},
+    {"id": 7, "name": "Magnet", "spec": "NdFeB N52, nickel plated", "qty": "2", "match": {"prefixes": ["Magnet"]}},
+    {"id": 8, "name": "Charge contact", "spec": "Insert-molded 316L stainless, hard gold flash", "qty": "1", "match": {"prefixes": ["Contact"]}}
+  ],
+  "view": {"azimuth_deg": 35, "elevation_deg": 24},
+  "sheet": "A3",
+  "themes": ["blueprint", "print"],
+  "decimal": ".",
+  "title": {
+    "product": "Sensor Puck · Rev A",
+    "subtitle": "Exploded isometric view · assembly for quotation",
+    "revision": "EVT-0 · A",
+    "date": "auto",
+    "units": "mm",
+    "sheet": "1/1"
+  },
+  "footer": "Hidden lines removed. Electronic parts shown as manufacturer 3D envelopes. Reference dimensions in mm; general tolerances ISO 2768-f unless stated."
+}

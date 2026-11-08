@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "pocket_beacon")(type "KiCad")(uri "${KIPRJMOD}/../lib/pocket_beacon.pretty")(options "")(descr "project"))
+)

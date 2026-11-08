@@ -1,0 +1,75 @@
+{
+ "frame_object": "Assembly",
+ "root": "Assembly",
+ "skip_prefixes": [
+  "Solder",
+  "Marking",
+  "Label",
+  "Light",
+  "Fiber"
+ ],
+ "explode_axis": "z",
+ "view": {
+  "azimuth_deg": 35,
+  "elevation_deg": 22
+ },
+ "sheet": "A3",
+ "standard_scale": true,
+ "themes": [
+  "blueprint",
+  "print"
+ ],
+ "decimal": ".",
+ "projection": "third",
+ "hidden_lines": false,
+ "title": {
+  "product": "Pocket Beacon · EVT-0 · A",
+  "subtitle": "Exploded isometric view · assembly for quotation",
+  "revision": "EVT-0 · A",
+  "date": "auto",
+  "units": "mm",
+  "sheet": "1/1",
+  "overall_size": "32 × 32 × 10 mm"
+ },
+ "footer": "Hidden lines removed. Electronic parts shown as manufacturer 3D envelopes. Reference dimensions in mm; general tolerances ISO 2768-f unless stated.",
+ "crease_deg": 60.0,
+ "groups": [
+  {
+   "name": "shell",
+   "offset_mm": 0.0,
+   "match": {
+    "names": [
+     "shell"
+    ]
+   }
+  },
+  {
+   "name": "button",
+   "offset_mm": 0.0,
+   "match": {
+    "names": [
+     "button"
+    ]
+   }
+  },
+  {
+   "name": "plate",
+   "offset_mm": 0.0,
+   "match": {
+    "names": [
+     "plate"
+    ]
+   }
+  },
+  {
+   "name": "door",
+   "offset_mm": 0.0,
+   "match": {
+    "names": [
+     "door"
+    ]
+   }
+  }
+ ],
+ "items": []
+}

@@ -1,0 +1,22 @@
+{
+ "needed": true,
+ "mode": "fab",
+ "board": [
+  28.4,
+  28.4
+ ],
+ "array": [
+  3,
+  3
+ ],
+ "spacing": 2.0,
+ "rails": 5.0,
+ "rail_sides": "all",
+ "panel": [
+  99.2,
+  99.2
+ ],
+ "meets_min": true,
+ "tabs": "mousebites",
+ "fiducials": "rails"
+}

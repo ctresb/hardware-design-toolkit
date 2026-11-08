@@ -1,0 +1,157 @@
+{
+ "name": "example-tag-door",
+ "units": "mm",
+ "comment": "Fictional 40 x 30 x 12 mm tag with an adhesive-sealed lid and a round coin-cell door in it: 2 captive screws through ears into lid bosses, flat gasket, coin slot. Tool-secured door (coin-cell child safety). Set lid.door.retention to 'twist' for a bayonet door (undercuts).",
+ "outline": {
+  "type": "rounded_rect",
+  "width": 40.0,
+  "depth": 30.0,
+  "corner_radius": 6.0
+ },
+ "height": 12.0,
+ "wall": 1.2,
+ "top_fillet": 2.0,
+ "bottom_fillet": 0.6,
+ "draft_deg": 1.0,
+ "lid": {
+  "joint": "adhesive_lip",
+  "thickness": 2.4,
+  "lip_height": 1.0,
+  "lip_width": 1.0,
+  "clearance": 0.1,
+  "adhesive_thickness": 0.1,
+  "door": {
+   "center": [
+    0,
+    0
+   ],
+   "radius": 8.0,
+   "flange": 1.2,
+   "flange_t": 0.8,
+   "retention": "screws",
+   "screws": {
+    "count": 2,
+    "angles_deg": [
+     0,
+     180
+    ],
+    "boss_h": 3.0
+   },
+   "coin_slot": [
+    6,
+    0.8,
+    0.4
+   ]
+  }
+ },
+ "features": [
+  {
+   "type": "window",
+   "at": [
+    0.0,
+    6.0
+   ],
+   "shape": "circle",
+   "diameter": 3.0,
+   "thickness": 0.45,
+   "comment": "LED shines through a thin window; keep the rest of the wall uniform"
+  },
+  {
+   "type": "sound_port",
+   "at": [
+    -8.0,
+    -6.0
+   ],
+   "diameter": 0.8,
+   "seat_diameter": 3.0,
+   "seat_depth": 0.15,
+   "comment": "acoustic membrane bonded in the seat from inside"
+  },
+  {
+   "type": "lanyard",
+   "path": [
+    [
+     21.0,
+     8.0,
+     9.4
+    ],
+    [
+     14.0,
+     8.0,
+     9.4
+    ],
+    [
+     14.0,
+     16.0,
+     9.4
+    ]
+   ],
+   "diameter": 1.0,
+   "boss_diameter": 2.8,
+   "comment": "L-shaped cord tunnel: two straight holes, each exiting perpendicular to a flat side; two side actions"
+  },
+  {
+   "type": "boss",
+   "part": "body",
+   "at": [
+    12.0,
+    -8.0
+   ],
+   "od": 2.6,
+   "hole": 1.2,
+   "height": 2.0,
+   "hole_depth": 1.6
+  },
+  {
+   "type": "rib",
+   "part": "body",
+   "from": [
+    -16.0,
+    0.0
+   ],
+   "to": [
+    -6.0,
+    0.0
+   ],
+   "thickness": 0.6,
+   "height": 1.5
+  }
+ ],
+ "keepouts": [
+  {
+   "name": "PCB",
+   "center": [
+    0,
+    0,
+    6.0
+   ],
+   "size": [
+    30,
+    20,
+    0.8
+   ],
+   "corner_radius": 3.0
+  },
+  {
+   "name": "Components",
+   "center": [
+    0,
+    0,
+    7.1000000000000005
+   ],
+   "size": [
+    26,
+    16,
+    1.2
+   ]
+  }
+ ],
+ "dfm": {
+  "min_wall": 0.8,
+  "max_wall": 3.0,
+  "min_draft_deg": 0.5,
+  "min_window": 0.3,
+  "keepout_clearance": 0.2,
+  "min_rib": 0.5
+ }
+}

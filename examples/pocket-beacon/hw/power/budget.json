@@ -1,0 +1,128 @@
+{
+ "inputs": "power/budget.input.json",
+ "rails": {
+  "VBAT": {
+   "min": 2.0,
+   "max": 3.3,
+   "max_ma": 15
+  }
+ },
+ "rail_worst_load_ma": {
+  "VBAT": 22.800399999999996
+ },
+ "battery": {
+  "nominal_v": 3.0,
+  "usable_fraction": 0.85,
+  "eol_fraction": 0.97,
+  "rated_mah": 225
+ },
+ "target_runtime_h": 8760,
+ "per_mode_ma": {
+  "connected_idle": 0.0029480000000000005,
+  "adv_slow": 0.009167999999999999,
+  "adv_fast": 0.515408,
+  "app_active": 0.16740800000000003,
+  "ring": 15.0504,
+  "button_led": 6.100408
+ },
+ "peak_ma": {
+  "connected_idle": 5.100408,
+  "adv_slow": 5.100408,
+  "adv_fast": 5.100408,
+  "app_active": 5.100408,
+  "ring": 15.0504,
+  "button_led": 8.600408
+ },
+ "scenarios": [
+  {
+   "scenario": "optimistic",
+   "avg_ma": 0.006,
+   "runtime_new_h": 32889.4,
+   "runtime_eol_h": 31902.7,
+   "rated_mah_needed": 61.8,
+   "max_avg_ma_new": 0.022,
+   "max_avg_ma_eol": 0.021
+  },
+  {
+   "scenario": "baseline",
+   "avg_ma": 0.007,
+   "runtime_new_h": 26311.5,
+   "runtime_eol_h": 25522.1,
+   "rated_mah_needed": 77.2,
+   "max_avg_ma_new": 0.022,
+   "max_avg_ma_eol": 0.021
+  },
+  {
+   "scenario": "pessimistic",
+   "avg_ma": 0.015,
+   "runtime_new_h": 13155.7,
+   "runtime_eol_h": 12761.1,
+   "rated_mah_needed": 154.5,
+   "max_avg_ma_new": 0.022,
+   "max_avg_ma_eol": 0.021
+  },
+  {
+   "scenario": "empirical",
+   "avg_ma": 0.019,
+   "runtime_new_h": 9892.2,
+   "runtime_eol_h": 9595.5,
+   "rated_mah_needed": 205.4,
+   "max_avg_ma_new": 0.022,
+   "max_avg_ma_eol": 0.021
+  }
+ ],
+ "contributors_ma": {
+  "U1": 0.0061994999280000004,
+  "U2": 0.0006569396343999999,
+  "D1": 1.225e-05,
+  "LEAK": 0.0004,
+  "rail VBAT": 0.0
+ },
+ "comparables": [
+  {
+   "name": "Apple AirTag (CR2032, 'more than a year')",
+   "capacity_mah": 225,
+   "runtime_h": 8760,
+   "usable_fraction": 0.9,
+   "evidence": "[verified: apple.com/airtag 'works for more than a year on a standard battery', 2026-11-08; capacity = typical CR2032 rating]",
+   "avg_ma": 0.023
+  },
+  {
+   "name": "Chipolo ONE (CR2032, 'up to 2 years')",
+   "capacity_mah": 225,
+   "runtime_h": 17520,
+   "usable_fraction": 0.9,
+   "evidence": "[verified: chipolo.net/en/products/chipolo-one 'Up to 2 years, replaceable battery - CR 2032', 2026-11-08]",
+   "avg_ma": 0.012
+  },
+  {
+   "name": "Chipolo CR2032 variant in the maker's comparison table ('~ 1 year')",
+   "capacity_mah": 225,
+   "runtime_h": 8760,
+   "usable_fraction": 0.9,
+   "evidence": "[verified: chipolo.net comparison table 'Replaceable (CR2032) ... ~ 1 year', 2026-11-08]",
+   "avg_ma": 0.023
+  }
+ ],
+ "limits": [
+  {
+   "name": "REQ-005 limit, cell current (<= 20 mA)",
+   "max_ma": 20.0,
+   "worst_peak_ma": 15.1,
+   "ok": true,
+   "evidence": "[assumption: hw/requirements.md REQ-005 limit]"
+  },
+  {
+   "name": "CR2032 pulse capability used for planning (30 mA peaks cost about 9 % capacity vs 15 mA)",
+   "max_ma": 30.0,
+   "worst_peak_ma": 15.1,
+   "ok": true,
+   "evidence": "[verified: TI SWRA349 \u00a73 and conclusion, 2010]"
+  }
+ ],
+ "warnings": [
+  "rail VBAT: worst-case load 23 mA exceeds its max_ma 15",
+  "comparable products average 0.02 mA, 2.7x the bottom-up baseline: plan the cell on the pessimistic/empirical case until measured",
+  "no measured_avg_ma yet: measure on a dev kit before ordering a custom cell or a mold"
+ ]
+}

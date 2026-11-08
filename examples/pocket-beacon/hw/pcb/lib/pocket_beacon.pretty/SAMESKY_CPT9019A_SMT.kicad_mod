@@ -1,0 +1,70 @@
+(footprint "SAMESKY_CPT9019A_SMT"
+	(version 20250114)
+	(generator "hdt_pcb")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -5.75 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 0.4 0.4)
+				(thickness 0.06)
+			)
+		)
+	)
+	(property "Value" "SAMESKY_CPT9019A_SMT"
+		(at 0 5.75 0)
+		(layer "F.Fab")
+		(hide yes)
+		(effects
+			(font
+				(size 0.4 0.4)
+				(thickness 0.06)
+			)
+		)
+	)
+	(descr "Same Sky CPT-9019A-SMT-TR piezo, 9 x 9 mm: 'Recommended PCB Layout' (datasheet 02/19/2026 p.2: pads 1.3 x 3.4 mm, 7.4 mm gap, 10.0 mm span), pads aligned with the terminals of the top/bottom views. Sound port (Ø0.65) at (-3.0, -3.0) in this footprint frame: check against the vendor footprint download before release")
+	(attr smd)
+	(pad "1" smd rect
+		(at 0 -4.35)
+		(size 3.4 1.3)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+	)
+	(pad "2" smd rect
+		(at 0 4.35)
+		(size 3.4 1.3)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+	)
+	(fp_rect
+		(start -4.75 -4.75)
+		(end 4.75 4.75)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_rect
+		(start -4.9 -5.15)
+		(end 4.9 5.15)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(model "${KIPRJMOD}/../lib/3d/SAMESKY_CPT9019A_SMT.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(embedded_fonts no)
+)

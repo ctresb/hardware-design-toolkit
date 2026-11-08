@@ -1,0 +1,191 @@
+{
+ "round": 1,
+ "max_rounds": 3,
+ "overall": "NOT READY",
+ "next": "resolve the blockers listed below",
+ "areas": [
+  {
+   "area": "parts",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 0,
+   "info": 0
+  },
+  {
+   "area": "electrical",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 0,
+   "info": 0
+  },
+  {
+   "area": "power",
+   "status": "GO",
+   "critical": 0,
+   "major": 1,
+   "minor": 0,
+   "info": 0
+  },
+  {
+   "area": "pcb",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 1,
+   "info": 0
+  },
+  {
+   "area": "mechanical",
+   "status": "BLOCKED",
+   "critical": 0,
+   "major": 1,
+   "minor": 0,
+   "info": 0
+  },
+  {
+   "area": "compliance",
+   "status": "BLOCKED",
+   "critical": 0,
+   "major": 1,
+   "minor": 0,
+   "info": 0
+  },
+  {
+   "area": "cost",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 1,
+   "info": 0
+  },
+  {
+   "area": "schedule",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 0,
+   "info": 0
+  },
+  {
+   "area": "claims",
+   "status": "GO",
+   "critical": 0,
+   "major": 0,
+   "minor": 0,
+   "info": 0
+  }
+ ],
+ "blockers": [
+  {
+   "id": "F-003",
+   "area": "mechanical",
+   "type": "measurement",
+   "title": "IP67 with a twist lid needs a compressed O-ring and a vented sound port",
+   "action": "Use a 1.0 mm O-ring at 20\u201325 % compression and an acoustic membrane on the sound port; test IPX7 on SLA parts",
+   "owner": "enclosure-engineer"
+  },
+  {
+   "id": "F-004",
+   "area": "compliance",
+   "type": "external",
+   "title": "Coin-cell product must meet button-battery child-safety rules in the US",
+   "action": "Lid needs a tool or two independent motions; warning label on the product and the box",
+   "owner": "compliance-planner"
+  },
+  {
+   "id": null,
+   "area": null,
+   "type": "external",
+   "title": "Boards routed (no unrouted nets)",
+   "action": "Complete the build-package item: Boards routed (no unrouted nets)",
+   "owner": "hardware-engineer"
+  },
+  {
+   "id": null,
+   "area": null,
+   "type": "external",
+   "title": "DRC and ERC with 0 violations, schematic parity",
+   "action": "Complete the build-package item: DRC and ERC with 0 violations, schematic parity",
+   "owner": "hardware-engineer"
+  },
+  {
+   "id": null,
+   "area": null,
+   "type": "external",
+   "title": "Fab files: Gerbers, drill, pick-and-place, assembly drawing",
+   "action": "Complete the build-package item: Fab files: Gerbers, drill, pick-and-place, assembly drawing",
+   "owner": "hardware-engineer"
+  },
+  {
+   "id": null,
+   "area": null,
+   "type": "external",
+   "title": "Enclosure STEP, ready for a print, machining or molding quote",
+   "action": "Complete the build-package item: Enclosure STEP, ready for a print, machining or molding quote",
+   "owner": "hardware-engineer"
+  },
+  {
+   "id": null,
+   "area": null,
+   "type": "external",
+   "title": "Assembly validator: 0 interpenetrations; tolerance study done",
+   "action": "Complete the build-package item: Assembly validator: 0 interpenetrations; tolerance study done",
+   "owner": "hardware-engineer"
+  }
+ ],
+ "fixes": {},
+ "minor_open": [
+  "F-005",
+  "F-006"
+ ],
+ "waiting_on_prototype": [
+  "F-002"
+ ],
+ "missing_build_package": [
+  "routed_board",
+  "drc_erc_zero",
+  "fab_files",
+  "enclosure_step",
+  "assembly_validated"
+ ],
+ "missing_production": [
+  "measurements_done",
+  "quotes_received",
+  "certifications_planned"
+ ],
+ "build_package": {
+  "routed_board": false,
+  "drc_erc_zero": false,
+  "fab_files": false,
+  "bom_in_stock": true,
+  "enclosure_step": false,
+  "assembly_validated": false,
+  "test_plan": true
+ },
+ "production": {
+  "measurements_done": false,
+  "quotes_received": false,
+  "certifications_planned": false
+ },
+ "prototype_checks": [
+  {
+   "id": "V-001",
+   "what": "Average current while advertising",
+   "method": "10 min, release firmware, 3.0 V supply",
+   "instrument": "power profiler, >= 100 kHz sampling",
+   "pass_criteria": "<= 15 \u00b5A average"
+  },
+  {
+   "id": "V-002",
+   "what": "Ring loudness",
+   "method": "free field, 25 cm, device hanging",
+   "instrument": "class 2 sound level meter",
+   "pass_criteria": ">= 60 phon peak"
+  }
+ ],
+ "maturity": "concept",
+ "project": "Fixture Tag (fictional example)",
+ "date": "2026-11-08"
+}

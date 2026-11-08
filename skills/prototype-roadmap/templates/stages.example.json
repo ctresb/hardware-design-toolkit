@@ -1,0 +1,173 @@
+{
+ "project": "Example BLE fitness band (fictional)",
+ "start": "2027-01-04",
+ "stages": [
+  {
+   "id": "S0",
+   "name": "Dev-kit bench",
+   "weeks": [
+    4,
+    8
+   ],
+   "gate": "average current measured with a power profiler meets the budget with 2x margin; memory size and battery capacity chosen from the measurement"
+  },
+  {
+   "id": "S1",
+   "name": "Works-like / looks-like",
+   "weeks": [
+    3,
+    6
+   ],
+   "depends_on": [
+    "S0"
+   ],
+   "lag_weeks": -2,
+   "gate": "printed enclosure with catalogue cell fits the stack-up; users wear it for a week"
+  },
+  {
+   "id": "E0",
+   "name": "EVT-0 layout, fab, bring-up",
+   "weeks": [
+    6,
+    10
+   ],
+   "depends_on": [
+    "S0"
+   ],
+   "gate": "all rails up, radio links, sensors read, current within 20% of bench"
+  },
+  {
+   "id": "E1",
+   "name": "EVT-1 board revision",
+   "weeks": [
+    5,
+    8
+   ],
+   "depends_on": [
+    "E0"
+   ],
+   "gate": "antenna tuned in the real enclosure on a body; IPX7 pre-test passed"
+  },
+  {
+   "id": "C0",
+   "name": "Custom cell RFQ and samples",
+   "weeks": [
+    8,
+    14
+   ],
+   "depends_on": [
+    "S0"
+   ],
+   "gate": "cell samples meet rated minimum capacity, swelling allowance and thickness tolerance"
+  },
+  {
+   "id": "T1",
+   "name": "Tooling T1 + iterations",
+   "weeks": [
+    6,
+    12
+   ],
+   "depends_on": [
+    "E1"
+   ],
+   "gate": "T1 parts within drawing tolerances; cosmetic spec agreed"
+  },
+  {
+   "id": "D0",
+   "name": "DVT build (50-100 units)",
+   "weeks": [
+    6,
+    10
+   ],
+   "depends_on": [
+    "T1",
+    "C0"
+   ],
+   "gate": "drop, ESD, IP, thermal and life tests passed; pre-scan passed"
+  },
+  {
+   "id": "U0",
+   "name": "UN 38.3 of production cell",
+   "weeks": [
+    4,
+    8
+   ],
+   "depends_on": [
+    "C0"
+   ],
+   "gate": "UN 38.3 report and test summary issued"
+  },
+  {
+   "id": "R0",
+   "name": "Radio and safety certification",
+   "weeks": [
+    4,
+    10
+   ],
+   "depends_on": [
+    "D0",
+    "U0"
+   ],
+   "gate": "certificates for every launch market; Bluetooth SIG listing"
+  },
+  {
+   "id": "P0",
+   "name": "PVT line validation",
+   "weeks": [
+    4,
+    8
+   ],
+   "depends_on": [
+    "D0"
+   ],
+   "gate": "fixtures validated; first-pass yield >= 95%"
+  },
+  {
+   "id": "M0",
+   "name": "Mass production, first lot",
+   "weeks": [
+    4,
+    8
+   ],
+   "depends_on": [
+    "P0",
+    "R0"
+   ],
+   "gate": "first lot shipped"
+  }
+ ],
+ "milestones": [
+  {
+   "name": "Engineering freeze",
+   "after": "E1"
+  },
+  {
+   "name": "First legal sale",
+   "after": "R0"
+  }
+ ],
+ "long_lead": [
+  {
+   "item": "Spring contacts (24 wk factory lead)",
+   "lead_weeks": 24,
+   "needed_by": "D0"
+  },
+  {
+   "item": "LED driver IC (26 wk factory lead)",
+   "lead_weeks": 26,
+   "needed_by": "D0",
+   "qty_needed": 130,
+   "stock": {
+    "on_hand": 8241,
+    "source": "DigiKey",
+    "date": "2026-11-08",
+    "_doc": "distributor stock today; in stock >= qty_needed makes a passed order date a buy-now item, not a late one"
+   }
+  },
+  {
+   "item": "MCU/SoC for EVT (16 wk)",
+   "lead_weeks": 16,
+   "needed_by": "E0"
+  }
+ ]
+}

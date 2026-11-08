@@ -1,0 +1,216 @@
+{
+ "spec": "examples/pocket-beacon/hw/pcb/board.json",
+ "kicad": "10.0.8",
+ "boards": {
+  "main": {
+   "schematic": {
+    "parts": 47,
+    "labels": 128,
+    "no_connects": 3,
+    "pwr_flags": [
+     "GND",
+     "VBAT",
+     "VDDR"
+    ]
+   },
+   "erc": {
+    "errors": 0,
+    "warnings": 0,
+    "by_type": {}
+   },
+   "placement": {
+    "fixed_collisions": {},
+    "moved": {
+     "C17": {
+      "x": -12.974,
+      "y": -5.269,
+      "rot": 90,
+      "distance": 0.5
+     },
+     "C13": {
+      "x": -3.6,
+      "y": 2.7,
+      "rot": 0.0,
+      "distance": 0.8
+     },
+     "C14": {
+      "x": -7.7,
+      "y": 1.9,
+      "rot": 90.0,
+      "distance": 0.1
+     },
+     "L1": {
+      "x": -9.162,
+      "y": -0.552,
+      "rot": 0.0,
+      "distance": 0.35
+     },
+     "C4": {
+      "x": -9.889,
+      "y": 1.326,
+      "rot": 0.0,
+      "distance": 0.7
+     },
+     "C22": {
+      "x": -7.427,
+      "y": -7.054,
+      "rot": 0.0,
+      "distance": 0.2
+     },
+     "C23": {
+      "x": -11.623,
+      "y": -1.496,
+      "rot": 90.0,
+      "distance": 2.4
+     },
+     "C19": {
+      "x": -6.25,
+      "y": -0.9,
+      "rot": 0.0,
+      "distance": 0.65
+     },
+     "C5": {
+      "x": -9.327,
+      "y": 2.787,
+      "rot": 0,
+      "distance": 2.4
+     },
+     "C21": {
+      "x": -3.425,
+      "y": -2.996,
+      "rot": 90,
+      "distance": 0.2
+     },
+     "C1": {
+      "x": -1.95,
+      "y": -4.6,
+      "rot": 90,
+      "distance": 0.25
+     },
+     "C2": {
+      "x": -2.25,
+      "y": -7.087,
+      "rot": 180,
+      "distance": 0.1
+     },
+     "C15": {
+      "x": 0.25,
+      "y": -6.0,
+      "rot": 90,
+      "distance": 0.45
+     },
+     "C3": {
+      "x": 0.55,
+      "y": -3.0,
+      "rot": 0,
+      "distance": 1.55
+     },
+     "R3": {
+      "x": -4.475,
+      "y": 3.884,
+      "rot": 0.0,
+      "distance": 0.5
+     },
+     "C11": {
+      "x": -9.575,
+      "y": -7.769,
+      "rot": 0,
+      "distance": 1.1
+     },
+     "L2": {
+      "x": -7.925,
+      "y": -8.686,
+      "rot": 90,
+      "distance": 1.1
+     },
+     "C12": {
+      "x": -9.622,
+      "y": -8.937,
+      "rot": 0.0,
+      "distance": 0.9
+     },
+     "R2": {
+      "x": -6.7,
+      "y": -9.3,
+      "rot": 90,
+      "distance": 1.05
+     },
+     "C18": {
+      "x": -5.5,
+      "y": -9.8,
+      "rot": 90.0,
+      "distance": 0.9
+     },
+     "C8": {
+      "x": 5.89,
+      "y": 0.226,
+      "rot": 0,
+      "distance": 0.25
+     },
+     "C9": {
+      "x": 3.882,
+      "y": 2.118,
+      "rot": 90,
+      "distance": 0.45
+     },
+     "C10": {
+      "x": 7.738,
+      "y": 4.818,
+      "rot": 0,
+      "distance": 0.2
+     },
+     "R1": {
+      "x": 2.45,
+      "y": 2.987,
+      "rot": 90.0,
+      "distance": 0.1
+     }
+    },
+    "failed": [],
+    "keepout_hits": {},
+    "board": "main",
+    "outline_bbox": [
+     -14.2,
+     -14.2,
+     14.2,
+     14.2
+    ]
+   },
+   "drc": {
+    "violations": 3,
+    "errors": 2,
+    "by_type": {
+     "starved_thermal": 2,
+     "isolated_copper": 1
+    },
+    "unconnected": 64,
+    "parity": 0
+   },
+   "3d": {
+    "glb": "examples/pocket-beacon/hw/pcb/export/main.glb"
+   },
+   "fab": {
+    "gerbers": "examples/pocket-beacon/hw/pcb/fab/main/main_gerbers.zip",
+    "bom": "examples/pocket-beacon/hw/pcb/fab/main/main_bom.csv",
+    "cpl": "examples/pocket-beacon/hw/pcb/fab/main/main_cpl.csv",
+    "layers": 11,
+    "stackup": "examples/pocket-beacon/hw/pcb/fab/main/stackup.md",
+    "order": "examples/pocket-beacon/hw/pcb/fab/main/order.md",
+    "panel": "fab"
+   }
+  }
+ },
+ "library": {
+  "symbols": 17,
+  "footprints": 18,
+  "errors": [],
+  "warnings": []
+ },
+ "pads": {
+  "path": "examples/pocket-beacon/hw/pcb/export/pads.json",
+  "footprints": 47,
+  "pads": 126
+ },
+ "result": "DRC errors on main",
+ "seconds": 17.0
+}

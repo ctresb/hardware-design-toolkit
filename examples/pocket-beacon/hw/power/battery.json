@@ -1,0 +1,21 @@
+{
+  "type": "catalog primary coin cell",
+  "designation": "IEC CR2032 (Li-MnO2)",
+  "shape": "round",
+  "diameter_mm": {"max": 20.0, "min": 19.7},
+  "height_mm": {"max": 3.2, "min": 2.9},
+  "nominal_v": 3.0,
+  "rated_mah": 225,
+  "planned_mah": 191,
+  "usable_fraction": 0.85,
+  "self_discharge_pct_per_year": 1,
+  "operating_temp_c": [-20, 60],
+  "holder": {"mpn": "BAT-HLD-001-TR", "manufacturer": "TE Connectivity", "outline_mm": [23.0, 21.0, 4.3], "evidence": "[assumption: drawing not read, Q-PB-01]"},
+  "brands_checked": [
+    {"brand": "Panasonic CR2032", "rated_mah": 225, "evidence": "[verified: DigiKey listing, 2026-11-08]"},
+    {"brand": "Energizer CR2032", "typical_mah": 254, "rating": "15 kOhm to 2.0 V at 21 C", "self_discharge": "~1 %/year", "operating_temp_c": [-30, 60], "evidence": "[verified: Energizer datasheet UltimateCR2032EU0920]"}
+  ],
+  "custom_cell": false,
+  "battery_fit_py": "not used: a catalog coin cell fixes the shape",
+  "evidence": "[verified: Energizer CR2032 datasheets 2032GL0626 and UltimateCR2032EU0920 (dimensions, capacity, self-discharge); TI SWRA349 (usable fraction under pulse load)]"
+}

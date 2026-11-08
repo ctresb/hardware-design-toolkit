@@ -1,0 +1,1514 @@
+{
+ "project": "Pocket Beacon (fictional toolkit PoC): BLE item finder, CR2032",
+ "currency": "USD",
+ "date": "2026-11-08",
+ "tiers": [
+  {
+   "target": null,
+   "target_verdict": null,
+   "units": 1,
+   "categories": {
+    "electronics (BOM)": [
+     22.8867,
+     22.8867
+    ],
+    "PCBA (variable)": [
+     3.4816,
+     3.4816
+    ],
+    "bare boards": [
+     8.0,
+     25.0
+    ],
+    "enclosure": [
+     30.0,
+     140.0
+    ],
+    "mechanical": [
+     5.2,
+     21.0
+    ],
+    "packaging": [
+     2.0,
+     6.0
+    ],
+    "yield loss": [
+     3.7668,
+     38.5356
+    ]
+   },
+   "batch_fees": [
+    {
+     "name": "PCBA setup, stencil, loading, fixtures, handling",
+     "value": [
+      138.67,
+      138.67
+     ],
+     "evidence": "verified",
+     "detail": [
+      {
+       "board": "main board, 4-layer 0.6 mm, 28.4 mm, two-sided (3034TR holder on the back), 38 placed parts",
+       "boards": 1,
+       "batch_fee": 138.67,
+       "variable_per_board": 3.4816,
+       "fixtures": 2.0,
+       "per_joint": 0.0016,
+       "xray_each": 1.64
+      }
+     ]
+    },
+    {
+     "name": "Bare PCB prototype lot (5-10 panels)",
+     "value": [
+      30.0,
+      90.0
+     ],
+     "evidence": "estimate"
+    }
+   ],
+   "batch_per_unit": [
+    168.67,
+    228.67
+   ],
+   "recurring": [
+    244.0051,
+    485.5739
+   ],
+   "nre_items": [
+    {
+     "name": "Test and programming fixture (DIY pogo nest + Tag-Connect)",
+     "value": [
+      80.0,
+      300.0
+     ],
+     "evidence": "estimate",
+     "group": "fixtures"
+    }
+   ],
+   "nre": [
+    80.0,
+    300.0
+   ],
+   "nre_per_unit": [
+    80.0,
+    300.0
+   ],
+   "total": [
+    324.0051,
+    785.5739
+   ],
+   "landed": [
+    {
+     "name": "US (formal entry, company import)",
+     "multiplier": [
+      1.0,
+      1.45
+     ],
+     "freight_per_unit": [
+      20.0,
+      40.0
+     ],
+     "per_unit": [
+      344.0051,
+      1062.0821
+     ],
+     "recurring_per_unit": [
+      264.0051,
+      762.0821
+     ],
+     "evidence": "assumption",
+     "note": "Products with a lithium-metal cell installed ship as UN3091, IATA PI 970 Section II; the cell vendor's UN 38.3 test summary travels with the shipment"
+    },
+    {
+     "name": "EU (formal import)",
+     "multiplier": [
+      1.17,
+      1.32
+     ],
+     "freight_per_unit": [
+      20.0,
+      40.0
+     ],
+     "per_unit": [
+      388.8859,
+      993.7575
+     ],
+     "recurring_per_unit": [
+      308.8859,
+      693.7575
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "UK (formal import)",
+     "multiplier": [
+      1.2,
+      1.25
+     ],
+     "freight_per_unit": [
+      20.0,
+      40.0
+     ],
+     "per_unit": [
+      396.8061,
+      956.9674
+     ],
+     "recurring_per_unit": [
+      316.8061,
+      656.9674
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "Brazil (company import, regime comum, after Anatel homologation)",
+     "multiplier": [
+      1.6,
+      2.0
+     ],
+     "freight_per_unit": [
+      20.0,
+      40.0
+     ],
+     "per_unit": [
+      502.4081,
+      1351.1478
+     ],
+     "recurring_per_unit": [
+      422.4081,
+      1051.1478
+     ],
+     "evidence": "estimate",
+     "note": "",
+     "local": {
+      "currency": "BRL",
+      "per_unit": [
+       2763.2445,
+       7431.3127
+      ],
+      "recurring_per_unit": [
+       2323.2445,
+       5781.3127
+      ]
+     }
+    }
+   ],
+   "top_drivers": [
+    {
+     "name": "PCBA setup, stencil, loading, fixtures, handling (per order)",
+     "per_unit": [
+      138.67,
+      138.67
+     ],
+     "share": 0.38,
+     "evidence": "verified"
+    },
+    {
+     "name": "Enclosure set: shell, back plate, cell door, button cap (4 printed parts), service-bureau SLA/MJF",
+     "per_unit": [
+      30.0,
+      140.0
+     ],
+     "share": 0.233,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Bare PCB prototype lot (5-10 panels) (per order)",
+     "per_unit": [
+      30.0,
+      90.0
+     ],
+     "share": 0.164,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Bare PCB, 4-layer 0.6 mm FR4, ENIG, black mask, 28.4 mm, panelized",
+     "per_unit": [
+      8.0,
+      25.0
+     ],
+     "share": 0.045,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Button and light membrane (translucent TPU or LSR, one part)",
+     "per_unit": [
+      3.0,
+      10.0
+     ],
+     "share": 0.018,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Retail packaging with coin-cell warnings and instructions (16 CFR 1263 / UL 4200A, EN IEC 62368-1)",
+     "per_unit": [
+      2.0,
+      6.0
+     ],
+     "share": 0.011,
+     "evidence": "estimate"
+    }
+   ],
+   "evidence_split": {
+    "verified": [
+     163.405,
+     163.405
+    ],
+    "estimate": [
+     76.8333,
+     283.6333
+    ],
+    "assumption": [
+     0.0,
+     0.0
+    ]
+   },
+   "verified_share": 0.448
+  },
+  {
+   "target": null,
+   "target_verdict": null,
+   "units": 10,
+   "categories": {
+    "electronics (BOM)": [
+     7.7237,
+     7.7237
+    ],
+    "PCBA (variable)": [
+     1.8416,
+     1.8416
+    ],
+    "bare boards": [
+     3.0,
+     10.0
+    ],
+    "enclosure": [
+     14.0,
+     70.0
+    ],
+    "mechanical": [
+     4.2,
+     19.0
+    ],
+    "packaging": [
+     2.0,
+     6.0
+    ],
+    "yield loss": [
+     1.7245,
+     15.6225
+    ]
+   },
+   "batch_fees": [
+    {
+     "name": "PCBA setup, stencil, loading, fixtures, handling",
+     "value": [
+      138.67,
+      138.67
+     ],
+     "evidence": "verified",
+     "detail": [
+      {
+       "board": "main board, 4-layer 0.6 mm, 28.4 mm, two-sided (3034TR holder on the back), 38 placed parts",
+       "boards": 10,
+       "batch_fee": 138.67,
+       "variable_per_board": 1.8416,
+       "fixtures": 2.0,
+       "per_joint": 0.0016,
+       "xray_each": 0.82
+      }
+     ]
+    },
+    {
+     "name": "Bare PCB prototype lot (5-10 panels)",
+     "value": [
+      30.0,
+      90.0
+     ],
+     "evidence": "estimate"
+    }
+   ],
+   "batch_per_unit": [
+    16.867,
+    22.867
+   ],
+   "recurring": [
+    51.3567,
+    153.0548
+   ],
+   "nre_items": [
+    {
+     "name": "Test and programming fixture (DIY pogo nest + Tag-Connect)",
+     "value": [
+      80.0,
+      300.0
+     ],
+     "evidence": "estimate",
+     "group": "fixtures"
+    }
+   ],
+   "nre": [
+    80.0,
+    300.0
+   ],
+   "nre_per_unit": [
+    8.0,
+    30.0
+   ],
+   "total": [
+    59.3567,
+    183.0548
+   ],
+   "landed": [
+    {
+     "name": "US (formal entry, company import)",
+     "multiplier": [
+      1.0,
+      1.45
+     ],
+     "freight_per_unit": [
+      4.0,
+      10.0
+     ],
+     "per_unit": [
+      63.3567,
+      266.4295
+     ],
+     "recurring_per_unit": [
+      55.3567,
+      236.4295
+     ],
+     "evidence": "assumption",
+     "note": "Products with a lithium-metal cell installed ship as UN3091, IATA PI 970 Section II; the cell vendor's UN 38.3 test summary travels with the shipment"
+    },
+    {
+     "name": "EU (formal import)",
+     "multiplier": [
+      1.17,
+      1.32
+     ],
+     "freight_per_unit": [
+      4.0,
+      10.0
+     ],
+     "per_unit": [
+      72.7674,
+      245.2323
+     ],
+     "recurring_per_unit": [
+      64.7674,
+      215.2323
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "UK (formal import)",
+     "multiplier": [
+      1.2,
+      1.25
+     ],
+     "freight_per_unit": [
+      4.0,
+      10.0
+     ],
+     "per_unit": [
+      74.4281,
+      233.8185
+     ],
+     "recurring_per_unit": [
+      66.4281,
+      203.8185
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "Brazil (company import, regime comum, after Anatel homologation)",
+     "multiplier": [
+      1.6,
+      2.0
+     ],
+     "freight_per_unit": [
+      4.0,
+      10.0
+     ],
+     "per_unit": [
+      96.5708,
+      356.1096
+     ],
+     "recurring_per_unit": [
+      88.5708,
+      326.1096
+     ],
+     "evidence": "estimate",
+     "note": "",
+     "local": {
+      "currency": "BRL",
+      "per_unit": [
+       531.1394,
+       1958.6028
+      ],
+      "recurring_per_unit": [
+       487.1394,
+       1793.6028
+      ]
+     }
+    }
+   ],
+   "top_drivers": [
+    {
+     "name": "Enclosure set: shell, back plate, cell door, button cap (4 printed parts), service-bureau SLA/MJF",
+     "per_unit": [
+      14.0,
+      70.0
+     ],
+     "share": 0.411,
+     "evidence": "estimate"
+    },
+    {
+     "name": "PCBA setup, stencil, loading, fixtures, handling (per order)",
+     "per_unit": [
+      13.867,
+      13.867
+     ],
+     "share": 0.136,
+     "evidence": "verified"
+    },
+    {
+     "name": "Bare PCB, 4-layer 0.6 mm FR4, ENIG, black mask, 28.4 mm, panelized",
+     "per_unit": [
+      3.0,
+      10.0
+     ],
+     "share": 0.064,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Bare PCB prototype lot (5-10 panels) (per order)",
+     "per_unit": [
+      3.0,
+      9.0
+     ],
+     "share": 0.059,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Button and light membrane (translucent TPU or LSR, one part)",
+     "per_unit": [
+      2.0,
+      8.0
+     ],
+     "share": 0.049,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Retail packaging with coin-cell warnings and instructions (16 CFR 1263 / UL 4200A, EN IEC 62368-1)",
+     "per_unit": [
+      2.0,
+      6.0
+     ],
+     "share": 0.039,
+     "evidence": "estimate"
+    }
+   ],
+   "evidence_split": {
+    "verified": [
+     23.1382,
+     23.1382
+    ],
+    "estimate": [
+     26.4941,
+     114.2941
+    ],
+    "assumption": [
+     0.0,
+     0.0
+    ]
+   },
+   "verified_share": 0.226
+  },
+  {
+   "target": null,
+   "target_verdict": null,
+   "units": 100,
+   "categories": {
+    "electronics (BOM)": [
+     5.1844,
+     5.1844
+    ],
+    "PCBA (variable)": [
+     1.1816,
+     1.1816
+    ],
+    "bare boards": [
+     0.6,
+     2.0
+    ],
+    "enclosure": [
+     2.3,
+     7.5
+    ],
+    "mechanical": [
+     1.16,
+     5.4
+    ],
+    "packaging": [
+     0.8,
+     2.5
+    ],
+    "assembly & test": [
+     3.0,
+     8.0
+    ],
+    "yield loss": [
+     0.44,
+     2.7623
+    ]
+   },
+   "batch_fees": [
+    {
+     "name": "PCBA setup, stencil, loading, fixtures, handling",
+     "value": [
+      163.3,
+      163.3
+     ],
+     "evidence": "verified",
+     "detail": [
+      {
+       "board": "main board, 4-layer 0.6 mm, 28.4 mm, two-sided (3034TR holder on the back), 38 placed parts",
+       "boards": 100,
+       "batch_fee": 163.3,
+       "variable_per_board": 1.1816,
+       "fixtures": 5.0,
+       "per_joint": 0.0016,
+       "xray_each": 0.49
+      }
+     ]
+    },
+    {
+     "name": "Molding run setup and color changes (graphite, chalk, smoke)",
+     "value": [
+      450.0,
+      1500.0
+     ],
+     "evidence": "estimate"
+    },
+    {
+     "name": "Box-build lot setup",
+     "value": [
+      200.0,
+      800.0
+     ],
+     "evidence": "estimate"
+    }
+   ],
+   "batch_per_unit": [
+    8.133,
+    24.633
+   ],
+   "recurring": [
+    22.7989,
+    59.1612
+   ],
+   "nre_items": [
+    {
+     "name": "Test and programming fixture (DIY pogo nest + Tag-Connect)",
+     "value": [
+      80.0,
+      300.0
+     ],
+     "evidence": "estimate",
+     "group": "fixtures"
+    },
+    {
+     "name": "Rapid aluminum T1 tools, shell + lid, textured",
+     "value": [
+      5000.0,
+      12000.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "Side action for the keyring slot (only if the CAD keeps an undercut)",
+     "value": [
+      0.0,
+      3000.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "Cast-silicone membrane mold",
+     "value": [
+      300.0,
+      1500.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "Packaging artwork (digital print)",
+     "value": [
+      100.0,
+      400.0
+     ],
+     "evidence": "estimate",
+     "group": "packaging"
+    },
+    {
+     "name": "Certification for the launch batch, sold in the US only: FCC 15C + 15B, Bluetooth SIG, UL 4200A report, IP67 test, pre-scan, UN 38.3 summary, DULT firmware, RoHS/Prop 65 declarations",
+     "value": [
+      20300.0,
+      46500.0
+     ],
+     "evidence": "estimate",
+     "group": "certification"
+    }
+   ],
+   "nre": [
+    25780.0,
+    63700.0
+   ],
+   "nre_per_unit": [
+    257.8,
+    637.0
+   ],
+   "total": [
+    280.5989,
+    696.1612
+   ],
+   "landed": [
+    {
+     "name": "US (formal entry, company import)",
+     "multiplier": [
+      1.0,
+      1.45
+     ],
+     "freight_per_unit": [
+      0.6,
+      2.0
+     ],
+     "per_unit": [
+      281.1989,
+      725.6838
+     ],
+     "recurring_per_unit": [
+      23.3989,
+      88.6838
+     ],
+     "evidence": "assumption",
+     "note": "Products with a lithium-metal cell installed ship as UN3091, IATA PI 970 Section II; the cell vendor's UN 38.3 test summary travels with the shipment"
+    },
+    {
+     "name": "EU (formal import)",
+     "multiplier": [
+      1.17,
+      1.32
+     ],
+     "freight_per_unit": [
+      0.6,
+      2.0
+     ],
+     "per_unit": [
+      285.1768,
+      717.7328
+     ],
+     "recurring_per_unit": [
+      27.3768,
+      80.7328
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "UK (formal import)",
+     "multiplier": [
+      1.2,
+      1.25
+     ],
+     "freight_per_unit": [
+      0.6,
+      2.0
+     ],
+     "per_unit": [
+      285.8787,
+      713.4515
+     ],
+     "recurring_per_unit": [
+      28.0787,
+      76.4515
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "Brazil (company import, regime comum, after Anatel homologation)",
+     "multiplier": [
+      1.6,
+      2.0
+     ],
+     "freight_per_unit": [
+      0.6,
+      2.0
+     ],
+     "per_unit": [
+      295.2383,
+      759.3224
+     ],
+     "recurring_per_unit": [
+      37.4383,
+      122.3224
+     ],
+     "evidence": "estimate",
+     "note": "",
+     "local": {
+      "currency": "BRL",
+      "per_unit": [
+       1623.8107,
+       4176.2735
+      ],
+      "recurring_per_unit": [
+       205.9107,
+       672.7735
+      ]
+     }
+    }
+   ],
+   "top_drivers": [
+    {
+     "name": "Molding run setup and color changes (graphite, chalk, smoke) (per order)",
+     "per_unit": [
+      4.5,
+      15.0
+     ],
+     "share": 0.238,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Final assembly (board into shell, gaskets, cell, 2 door screws), flashing, functional + RF + seal test, pack",
+     "per_unit": [
+      3.0,
+      8.0
+     ],
+     "share": 0.134,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Box-build lot setup (per order)",
+     "per_unit": [
+      2.0,
+      8.0
+     ],
+     "share": 0.122,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Enclosure set molded in rapid aluminum T1 tools (PC/ABS shell, plate, door; TPU button), 3 colors",
+     "per_unit": [
+      2.0,
+      6.5
+     ],
+     "share": 0.104,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Retail packaging with coin-cell warnings and instructions (16 CFR 1263 / UL 4200A, EN IEC 62368-1)",
+     "per_unit": [
+      0.8,
+      2.5
+     ],
+     "share": 0.04,
+     "evidence": "estimate"
+    },
+    {
+     "name": "PCBA setup, stencil, loading, fixtures, handling (per order)",
+     "per_unit": [
+      1.633,
+      1.633
+     ],
+     "share": 0.04,
+     "evidence": "verified"
+    }
+   ],
+   "evidence_split": {
+    "verified": [
+     7.8625,
+     7.8625
+    ],
+    "estimate": [
+     14.4964,
+     48.5364
+    ],
+    "assumption": [
+     0.0,
+     0.0
+    ]
+   },
+   "verified_share": 0.192
+  },
+  {
+   "target": 12.0,
+   "target_verdict": "not proven",
+   "units": 1000,
+   "categories": {
+    "electronics (BOM)": [
+     4.3918,
+     4.3918
+    ],
+    "PCBA (variable)": [
+     0.4712,
+     0.4712
+    ],
+    "bare boards": [
+     0.2,
+     0.6
+    ],
+    "enclosure": [
+     1.05,
+     3.5
+    ],
+    "mechanical": [
+     0.33,
+     1.28
+    ],
+    "packaging": [
+     0.35,
+     1.0
+    ],
+    "assembly & test": [
+     1.2,
+     3.5
+    ],
+    "yield loss": [
+     0.1631,
+     0.6143
+    ]
+   },
+   "batch_fees": [
+    {
+     "name": "PCBA setup, stencil, loading, fixtures, handling",
+     "value": [
+      286.45,
+      286.45
+     ],
+     "evidence": "verified",
+     "detail": [
+      {
+       "board": "main board, 4-layer 0.6 mm, 28.4 mm, two-sided (3034TR holder on the back), 38 placed parts",
+       "boards": 1000,
+       "batch_fee": 286.45,
+       "variable_per_board": 0.4712,
+       "fixtures": 20.0,
+       "per_joint": 0.0012,
+       "xray_each": 0.16
+      }
+     ]
+    },
+    {
+     "name": "Molding run setup and color changes (graphite, chalk, smoke)",
+     "value": [
+      450.0,
+      1500.0
+     ],
+     "evidence": "estimate"
+    }
+   ],
+   "batch_per_unit": [
+    0.7365,
+    1.7865
+   ],
+   "recurring": [
+    8.8926,
+    17.1438
+   ],
+   "nre_items": [
+    {
+     "name": "Test and programming fixture (EMS-built, RF + current + ring)",
+     "value": [
+      1500.0,
+      6000.0
+     ],
+     "evidence": "estimate",
+     "group": "fixtures"
+    },
+    {
+     "name": "Rapid aluminum T1 tools, shell + lid, textured",
+     "value": [
+      5000.0,
+      12000.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "Side action for the keyring slot (only if the CAD keeps an undercut)",
+     "value": [
+      0.0,
+      3000.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "TPU/LSR membrane tool",
+     "value": [
+      2000.0,
+      6000.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "Acoustic vent die-cut tool",
+     "value": [
+      100.0,
+      500.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "Packaging artwork and cutting die",
+     "value": [
+      200.0,
+      800.0
+     ],
+     "evidence": "estimate",
+     "group": "packaging"
+    },
+    {
+     "name": "Certification for the launch batch, sold in the US only: FCC 15C + 15B, Bluetooth SIG, UL 4200A report, IP67 test, pre-scan, UN 38.3 summary, DULT firmware, RoHS/Prop 65 declarations",
+     "value": [
+      20300.0,
+      46500.0
+     ],
+     "evidence": "estimate",
+     "group": "certification"
+    },
+    {
+     "name": "Certification added for the 1k run: EU (RED radio + EN 18031 + RF exposure + CRA + GPSR + WEEE + batteries + packaging), UK (UKCA, PSTI, WEEE/batteries), Brazil (Anatel + take-back)",
+     "value": [
+      12750.0,
+      82000.0
+     ],
+     "evidence": "estimate",
+     "group": "certification"
+    }
+   ],
+   "nre": [
+    41850.0,
+    156800.0
+   ],
+   "nre_per_unit": [
+    41.85,
+    156.8
+   ],
+   "total": [
+    50.7426,
+    173.9438
+   ],
+   "landed": [
+    {
+     "name": "US (formal entry, company import)",
+     "multiplier": [
+      1.0,
+      1.45
+     ],
+     "freight_per_unit": [
+      0.15,
+      0.5
+     ],
+     "per_unit": [
+      50.8926,
+      182.3835
+     ],
+     "recurring_per_unit": [
+      9.0426,
+      25.5835
+     ],
+     "evidence": "assumption",
+     "note": "Products with a lithium-metal cell installed ship as UN3091, IATA PI 970 Section II; the cell vendor's UN 38.3 test summary travels with the shipment"
+    },
+    {
+     "name": "EU (formal import)",
+     "multiplier": [
+      1.17,
+      1.32
+     ],
+     "freight_per_unit": [
+      0.15,
+      0.5
+     ],
+     "per_unit": [
+      52.4299,
+      180.0898
+     ],
+     "recurring_per_unit": [
+      10.5799,
+      23.2898
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "UK (formal import)",
+     "multiplier": [
+      1.2,
+      1.25
+     ],
+     "freight_per_unit": [
+      0.15,
+      0.5
+     ],
+     "per_unit": [
+      52.7011,
+      178.8547
+     ],
+     "recurring_per_unit": [
+      10.8511,
+      22.0547
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "Brazil (company import, regime comum, after Anatel homologation)",
+     "multiplier": [
+      1.6,
+      2.0
+     ],
+     "freight_per_unit": [
+      0.15,
+      0.5
+     ],
+     "per_unit": [
+      56.3182,
+      192.0876
+     ],
+     "recurring_per_unit": [
+      14.4682,
+      35.2876
+     ],
+     "evidence": "estimate",
+     "note": "",
+     "local": {
+      "currency": "BRL",
+      "per_unit": [
+       309.7501,
+       1056.4817
+      ],
+      "recurring_per_unit": [
+       79.5751,
+       194.0817
+      ]
+     }
+    }
+   ],
+   "top_drivers": [
+    {
+     "name": "Final assembly (board into shell, gaskets, cell, 2 door screws), flashing, functional + RF + seal test, pack",
+     "per_unit": [
+      1.2,
+      3.5
+     ],
+     "share": 0.181,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Enclosure set molded in rapid aluminum T1 tools (PC/ABS shell, plate, door; TPU button), 3 colors",
+     "per_unit": [
+      1.0,
+      3.2
+     ],
+     "share": 0.161,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Molding run setup and color changes (graphite, chalk, smoke) (per order)",
+     "per_unit": [
+      0.45,
+      1.5
+     ],
+     "share": 0.075,
+     "evidence": "estimate"
+    },
+    {
+     "name": "U1 CC2340R52E0RGER",
+     "per_unit": [
+      0.8475,
+      0.8475
+     ],
+     "share": 0.065,
+     "evidence": "verified"
+    },
+    {
+     "name": "Retail packaging with coin-cell warnings and instructions (16 CFR 1263 / UL 4200A, EN IEC 62368-1)",
+     "per_unit": [
+      0.35,
+      1.0
+     ],
+     "share": 0.052,
+     "evidence": "estimate"
+    },
+    {
+     "name": "LS1 CPT-9019A-SMT-TR",
+     "per_unit": [
+      0.6528,
+      0.6528
+     ],
+     "share": 0.05,
+     "evidence": "verified"
+    }
+   ],
+   "evidence_split": {
+    "verified": [
+     5.0439,
+     5.0439
+    ],
+    "estimate": [
+     3.6856,
+     11.4856
+    ],
+    "assumption": [
+     0.0,
+     0.0
+    ]
+   },
+   "verified_share": 0.387
+  },
+  {
+   "target": 8.0,
+   "target_verdict": "not proven",
+   "units": 10000,
+   "categories": {
+    "electronics (BOM)": [
+     3.7604,
+     3.7604
+    ],
+    "PCBA (variable)": [
+     0.3152,
+     0.3152
+    ],
+    "bare boards": [
+     0.1,
+     0.35
+    ],
+    "enclosure": [
+     0.43,
+     1.35
+    ],
+    "mechanical": [
+     0.175,
+     0.73
+    ],
+    "packaging": [
+     0.2,
+     0.6
+    ],
+    "assembly & test": [
+     0.5,
+     1.5
+    ],
+    "yield loss": [
+     0.0554,
+     0.1756
+    ]
+   },
+   "batch_fees": [
+    {
+     "name": "PCBA setup, stencil, loading, fixtures, handling",
+     "value": [
+      286.45,
+      286.45
+     ],
+     "evidence": "verified",
+     "detail": [
+      {
+       "board": "main board, 4-layer 0.6 mm, 28.4 mm, two-sided (3034TR holder on the back), 38 placed parts",
+       "boards": 10000,
+       "batch_fee": 286.45,
+       "variable_per_board": 0.3152,
+       "fixtures": 20.0,
+       "per_joint": 0.0012,
+       "xray_each": 0.082
+      }
+     ]
+    },
+    {
+     "name": "Molding run setup and color changes (graphite, chalk, smoke)",
+     "value": [
+      600.0,
+      2000.0
+     ],
+     "evidence": "estimate"
+    }
+   ],
+   "batch_per_unit": [
+    0.0886,
+    0.2286
+   ],
+   "recurring": [
+    5.6246,
+    9.0099
+   ],
+   "nre_items": [
+    {
+     "name": "Test and programming fixture (EMS-built, RF + current + ring)",
+     "value": [
+      1500.0,
+      6000.0
+     ],
+     "evidence": "estimate",
+     "group": "fixtures"
+    },
+    {
+     "name": "Side action for the keyring slot (only if the CAD keeps an undercut)",
+     "value": [
+      0.0,
+      3000.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "Hardened steel tools, shell + lid (China, 1-2 cavities)",
+     "value": [
+      24000.0,
+      50000.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "TPU/LSR membrane tool",
+     "value": [
+      2000.0,
+      6000.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "Acoustic vent die-cut tool",
+     "value": [
+      100.0,
+      500.0
+     ],
+     "evidence": "estimate",
+     "group": "tooling"
+    },
+    {
+     "name": "Packaging artwork and cutting die",
+     "value": [
+      200.0,
+      800.0
+     ],
+     "evidence": "estimate",
+     "group": "packaging"
+    },
+    {
+     "name": "Certification for the launch batch, sold in the US only: FCC 15C + 15B, Bluetooth SIG, UL 4200A report, IP67 test, pre-scan, UN 38.3 summary, DULT firmware, RoHS/Prop 65 declarations",
+     "value": [
+      20300.0,
+      46500.0
+     ],
+     "evidence": "estimate",
+     "group": "certification"
+    },
+    {
+     "name": "Certification added for the 1k run: EU (RED radio + EN 18031 + RF exposure + CRA + GPSR + WEEE + batteries + packaging), UK (UKCA, PSTI, WEEE/batteries), Brazil (Anatel + take-back)",
+     "value": [
+      12750.0,
+      82000.0
+     ],
+     "evidence": "estimate",
+     "group": "certification"
+    }
+   ],
+   "nre": [
+    60850.0,
+    194800.0
+   ],
+   "nre_per_unit": [
+    6.085,
+    19.48
+   ],
+   "total": [
+    11.7096,
+    28.4899
+   ],
+   "landed": [
+    {
+     "name": "US (formal entry, company import)",
+     "multiplier": [
+      1.0,
+      1.45
+     ],
+     "freight_per_unit": [
+      0.05,
+      0.2
+     ],
+     "per_unit": [
+      11.7596,
+      32.8343
+     ],
+     "recurring_per_unit": [
+      5.6746,
+      13.3543
+     ],
+     "evidence": "assumption",
+     "note": "Products with a lithium-metal cell installed ship as UN3091, IATA PI 970 Section II; the cell vendor's UN 38.3 test summary travels with the shipment"
+    },
+    {
+     "name": "EU (formal import)",
+     "multiplier": [
+      1.17,
+      1.32
+     ],
+     "freight_per_unit": [
+      0.05,
+      0.2
+     ],
+     "per_unit": [
+      12.7243,
+      31.637
+     ],
+     "recurring_per_unit": [
+      6.6393,
+      12.157
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "UK (formal import)",
+     "multiplier": [
+      1.2,
+      1.25
+     ],
+     "freight_per_unit": [
+      0.05,
+      0.2
+     ],
+     "per_unit": [
+      12.8945,
+      30.9923
+     ],
+     "recurring_per_unit": [
+      6.8095,
+      11.5123
+     ],
+     "evidence": "estimate",
+     "note": ""
+    },
+    {
+     "name": "Brazil (company import, regime comum, after Anatel homologation)",
+     "multiplier": [
+      1.6,
+      2.0
+     ],
+     "freight_per_unit": [
+      0.05,
+      0.2
+     ],
+     "per_unit": [
+      15.1644,
+      37.8998
+     ],
+     "recurring_per_unit": [
+      9.0794,
+      18.4198
+     ],
+     "evidence": "estimate",
+     "note": "",
+     "local": {
+      "currency": "BRL",
+      "per_unit": [
+       83.4041,
+       208.4486
+      ],
+      "recurring_per_unit": [
+       49.9366,
+       101.3086
+      ]
+     }
+    }
+   ],
+   "top_drivers": [
+    {
+     "name": "Final assembly (board into shell, gaskets, cell, 2 door screws), flashing, functional + RF + seal test, pack",
+     "per_unit": [
+      0.5,
+      1.5
+     ],
+     "share": 0.137,
+     "evidence": "estimate"
+    },
+    {
+     "name": "Enclosure set molded in hardened steel tools (4 parts), 3 colors",
+     "per_unit": [
+      0.4,
+      1.2
+     ],
+     "share": 0.109,
+     "evidence": "estimate"
+    },
+    {
+     "name": "U1 CC2340R52E0RGER",
+     "per_unit": [
+      0.7583,
+      0.7583
+     ],
+     "share": 0.104,
+     "evidence": "verified"
+    },
+    {
+     "name": "LS1 CPT-9019A-SMT-TR",
+     "per_unit": [
+      0.4998,
+      0.4998
+     ],
+     "share": 0.068,
+     "evidence": "verified"
+    },
+    {
+     "name": "Y2 ABS06-32.768KHZ-9-T",
+     "per_unit": [
+      0.4692,
+      0.4692
+     ],
+     "share": 0.064,
+     "evidence": "verified"
+    },
+    {
+     "name": "Retail packaging with coin-cell warnings and instructions (16 CFR 1263 / UL 4200A, EN IEC 62368-1)",
+     "per_unit": [
+      0.2,
+      0.6
+     ],
+     "share": 0.055,
+     "evidence": "estimate"
+    }
+   ],
+   "evidence_split": {
+    "verified": [
+     4.0119,
+     4.0119
+    ],
+    "estimate": [
+     1.5573,
+     4.8223
+    ],
+    "assumption": [
+     0.0,
+     0.0
+    ]
+   },
+   "verified_share": 0.548
+  }
+ ],
+ "warnings": []
+}

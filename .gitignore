@@ -1,0 +1,28 @@
+# OS / editors
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Blender / KiCad backups and caches
+*.blend1
+*.blend2
+*-backups/
+fp-info-cache
+*.kicad_prl
+_autosave-*
+*.lck
+
+# Local outputs
+/out/
+/tmp/
+
+# Toolkit debug artifacts (regenerated on demand)
+assembly_failed.blend
+layout-check/
+.venv-cad/

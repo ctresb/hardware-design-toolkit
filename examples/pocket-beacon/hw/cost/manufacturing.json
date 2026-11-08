@@ -1,0 +1,748 @@
+{
+  "project": "Pocket Beacon (fictional toolkit PoC): BLE item finder, CR2032",
+  "currency": "USD",
+  "date": "2026-11-08",
+  "tiers": [
+    1,
+    10,
+    100,
+    1000,
+    10000
+  ],
+  "bom": {
+    "path": "../bom.csv",
+    "attrition": {
+      "default_pct": 2,
+      "by_ref_prefix": {
+        "C": {
+          "pct": 5,
+          "min_extra": 20
+        },
+        "R": {
+          "pct": 5,
+          "min_extra": 20
+        },
+        "L": {
+          "pct": 3,
+          "min_extra": 10
+        },
+        "U": {
+          "pct": 1,
+          "min_extra": 1
+        },
+        "Y": {
+          "pct": 2,
+          "min_extra": 2
+        },
+        "D": {
+          "pct": 3,
+          "min_extra": 5
+        },
+        "BAT": {
+          "pct": 1,
+          "min_extra": 1
+        }
+      }
+    },
+    "moq_overrides": {}
+  },
+  "pcba": {
+    "evidence": "verified: JLCPCB Standard PCBA price page, 'Last updated on Oct 22, 2026', read 2026-11-08 (https://jlcpcb.com/help/article/pcb-assembly-price): setup, stencil, $1.53 loading for basic and extended parts alike, joint and X-ray tiers, handling >= $14.93",
+    "tariff": {
+      "setup": {
+        "1": 25.56,
+        "2": 51.12
+      },
+      "stencil": {
+        "1": 8.21,
+        "2": 16.42
+      },
+      "loading_per_part_type": 1.53,
+      "handling_per_order": 14.93,
+      "single_board_surcharge": 0.48,
+      "fixture_rigid": 8.21,
+      "fixture_flex": 24.63,
+      "fixtures_count": [
+        [
+          29,
+          2
+        ],
+        [
+          99,
+          3
+        ],
+        [
+          199,
+          5
+        ],
+        [
+          349,
+          10
+        ],
+        [
+          499,
+          15
+        ],
+        [
+          100000,
+          20
+        ]
+      ],
+      "per_joint": [
+        [
+          50000,
+          0.0016
+        ],
+        [
+          100000,
+          0.0013
+        ],
+        [
+          1000000,
+          0.0012
+        ]
+      ],
+      "xray_per_component": [
+        [
+          10,
+          1.64
+        ],
+        [
+          50,
+          0.82
+        ],
+        [
+          200,
+          0.49
+        ],
+        [
+          500,
+          0.33
+        ],
+        [
+          1000,
+          0.25
+        ],
+        [
+          3000,
+          0.16
+        ],
+        [
+          99999,
+          0.082
+        ]
+      ]
+    },
+    "boards": [
+      {
+        "name": "main board, 4-layer 0.6 mm, 28.4 mm, two-sided (3034TR holder on the back), 38 placed parts",
+        "per_device": 1,
+        "sides": 2,
+        "flex": false,
+        "joints": 126,
+        "unique_parts": 26,
+        "xray_parts": 2,
+        "panelized": true,
+        "evidence": "verified: counts from hw/pcb/export/pads.json (126 pads) and hw/pcb/fab/main/main_cpl.csv (38 placements), 2026-11-08"
+      }
+    ]
+  },
+  "recurring": [
+    {
+      "name": "Bare PCB, 4-layer 0.6 mm FR4, ENIG, black mask, 28.4 mm, panelized",
+      "category": "bare boards",
+      "value": {
+        "1": [
+          8,
+          25
+        ],
+        "10": [
+          3,
+          10
+        ],
+        "100": [
+          0.6,
+          2.0
+        ],
+        "1000": [
+          0.2,
+          0.6
+        ],
+        "10000": [
+          0.1,
+          0.35
+        ]
+      },
+      "evidence": "estimate: no calculator quote (JLCPCB calculator needs JavaScript); size and stack-up from hw/pcb/fab/main/stackup.md (D-510); black mask and ENIG carry surcharges (cost-reference §2)"
+    },
+    {
+      "name": "Enclosure set: shell, back plate, cell door, button cap (4 printed parts), service-bureau SLA/MJF",
+      "category": "enclosure",
+      "to_tier": 10,
+      "value": {
+        "1": [
+          30,
+          140
+        ],
+        "10": [
+          14,
+          70
+        ]
+      },
+      "evidence": "estimate: 4 small parts ≤ 32 × 32 mm, 4.3 g total (hw/mech/dfm.md); Hubs service-bureau print range $20-100 per part [verified 2026-11-08] scaled for very small parts"
+    },
+    {
+      "name": "Enclosure set molded in rapid aluminum T1 tools (PC/ABS shell, plate, door; TPU button), 3 colors",
+      "category": "enclosure",
+      "from_tier": 100,
+      "to_tier": 1000,
+      "value": {
+        "100": [
+          2.0,
+          6.5
+        ],
+        "1000": [
+          1.0,
+          3.2
+        ]
+      },
+      "evidence": "estimate: aluminum pilot molds $1-5 per part in pilot runs (Hubs, Formlabs) [verified ranges 2026-11-08]; 4 small straight-pull parts, no side actions (hw/mech/dfm.md)"
+    },
+    {
+      "name": "Enclosure set molded in hardened steel tools (4 parts), 3 colors",
+      "category": "enclosure",
+      "from_tier": 10000,
+      "value": [
+        0.4,
+        1.2
+      ],
+      "evidence": "estimate: China steel production $0.10-0.30 per small part (cost-reference §5); 4 parts"
+    },
+    {
+      "name": "Lid marking (regulatory marks, cell polarity) by laser or pad print; safety icons molded in",
+      "category": "enclosure",
+      "from_tier": 100,
+      "value": {
+        "100": [
+          0.3,
+          1.0
+        ],
+        "1000": [
+          0.05,
+          0.3
+        ],
+        "10000": [
+          0.03,
+          0.15
+        ]
+      },
+      "evidence": "estimate: laser marking $0.05-0.30 per part + setup at a molder (cost-reference §6)"
+    },
+    {
+      "name": "Button and light membrane (translucent TPU or LSR, one part)",
+      "category": "mechanical",
+      "value": {
+        "1": [
+          3,
+          10
+        ],
+        "10": [
+          2,
+          8
+        ],
+        "100": [
+          0.5,
+          2.0
+        ],
+        "1000": [
+          0.08,
+          0.3
+        ],
+        "10000": [
+          0.04,
+          0.15
+        ]
+      },
+      "evidence": "estimate: cast silicone up to 100 units, molded TPU/LSR from 1k; the LED shines through this part (D-005), so there is no separate light window"
+    },
+    {
+      "name": "Acoustic membrane vent, die-cut with adhesive (ePTFE or PFAS-free)",
+      "category": "mechanical",
+      "value": {
+        "1": [
+          1,
+          5
+        ],
+        "100": [
+          0.3,
+          1.5
+        ],
+        "1000": [
+          0.15,
+          0.6
+        ],
+        "10000": [
+          0.08,
+          0.35
+        ]
+      },
+      "evidence": "estimate: sold direct by membrane makers (no public price, cost-reference §1); RFQ in rfq.md"
+    },
+    {
+      "name": "Door gasket, die-cut silicone 40A, 0.35 mm free (D-530)",
+      "category": "mechanical",
+      "value": {
+        "1": [
+          0.3,
+          1.5
+        ],
+        "100": [
+          0.05,
+          0.3
+        ],
+        "1000": [
+          0.02,
+          0.08
+        ],
+        "10000": [
+          0.01,
+          0.05
+        ]
+      },
+      "evidence": "estimate: die-cut silicone sheet parts; thickness from mech/tolerances.md T-4 and D-530"
+    },
+    {
+      "name": "Membrane adhesive ring (die-cut PSA)",
+      "category": "mechanical",
+      "value": {
+        "1": [
+          0.2,
+          1.0
+        ],
+        "1000": [
+          0.03,
+          0.12
+        ],
+        "10000": [
+          0.02,
+          0.08
+        ]
+      },
+      "evidence": "estimate: die-cut adhesive $0.03-0.15 at 1k-10k (cost-reference §6)"
+    },
+    {
+      "name": "Retail packaging with coin-cell warnings and instructions (16 CFR 1263 / UL 4200A, EN IEC 62368-1)",
+      "category": "packaging",
+      "value": {
+        "1": [
+          2,
+          6
+        ],
+        "100": [
+          0.8,
+          2.5
+        ],
+        "1000": [
+          0.35,
+          1.0
+        ],
+        "10000": [
+          0.2,
+          0.6
+        ]
+      },
+      "evidence": "estimate: small paperboard box + leaflet; the CR2032 ships installed in ship mode, so no separate child-resistant cell pack is needed (compliance.md)"
+    },
+    {
+      "name": "Final assembly (board into shell, gaskets, cell, 2 door screws), flashing, functional + RF + seal test, pack",
+      "category": "assembly & test",
+      "from_tier": 100,
+      "value": {
+        "100": [
+          3,
+          8
+        ],
+        "1000": [
+          1.2,
+          3.5
+        ],
+        "10000": [
+          0.5,
+          1.5
+        ]
+      },
+      "evidence": "estimate: China box-build $3-8 at 1k and $1-3 at 10k for a LiPo device (cost-reference §8), lower here: no charging, 5 parts, snap of a bayonet lid; at 1-10 units this is your own labor and is not costed"
+    },
+    {
+      "name": "Sounder port gasket, die-cut soft PU foam 0.8 mm with PSA (D-531)",
+      "category": "mechanical",
+      "value": {
+        "1": [
+          0.3,
+          1.5
+        ],
+        "100": [
+          0.05,
+          0.3
+        ],
+        "1000": [
+          0.02,
+          0.08
+        ],
+        "10000": [
+          0.01,
+          0.05
+        ]
+      },
+      "evidence": "estimate: die-cut foam parts; thickness from mech/tolerances.md T-5, grade per D-531 (verify with converter)"
+    },
+    {
+      "name": "Door screws, 2 × thread-forming 1.4 × 3 mm, stainless, captive (D-511)",
+      "category": "mechanical",
+      "value": {
+        "1": [
+          0.4,
+          2.0
+        ],
+        "100": [
+          0.06,
+          0.3
+        ],
+        "1000": [
+          0.03,
+          0.1
+        ],
+        "10000": [
+          0.015,
+          0.05
+        ]
+      },
+      "evidence": "estimate: catalog micro screws for plastics, price per pair"
+    }
+  ],
+  "per_order": [
+    {
+      "name": "Bare PCB prototype lot (5-10 panels)",
+      "to_tier": 10,
+      "value": [
+        30,
+        90
+      ],
+      "evidence": "estimate: quick-turn 4-layer lot with ENIG and black mask"
+    },
+    {
+      "name": "Molding run setup and color changes (graphite, chalk, smoke)",
+      "from_tier": 100,
+      "value": {
+        "100": [
+          450,
+          1500
+        ],
+        "1000": [
+          450,
+          1500
+        ],
+        "10000": [
+          600,
+          2000
+        ]
+      },
+      "evidence": "estimate: $150-500 per color-change run (cost-reference §5), three colors"
+    },
+    {
+      "name": "Box-build lot setup",
+      "from_tier": 100,
+      "to_tier": 100,
+      "value": [
+        200,
+        800
+      ],
+      "evidence": "estimate: lots of about 100 carry a setup or MOQ charge (cost-reference §8)"
+    }
+  ],
+  "yield_loss_pct": {
+    "1": [
+      5,
+      15
+    ],
+    "10": [
+      5,
+      12
+    ],
+    "100": [
+      3,
+      8
+    ],
+    "1000": [
+      2,
+      4
+    ],
+    "10000": [
+      1,
+      2
+    ]
+  },
+  "nre": [
+    {
+      "name": "Test and programming fixture (DIY pogo nest + Tag-Connect)",
+      "group": "fixtures",
+      "to_tier": 100,
+      "value": [
+        80,
+        300
+      ],
+      "evidence": "estimate: cost-reference §4"
+    },
+    {
+      "name": "Test and programming fixture (EMS-built, RF + current + ring)",
+      "group": "fixtures",
+      "from_tier": 1000,
+      "value": [
+        1500,
+        6000
+      ],
+      "evidence": "estimate: cost-reference §4, simpler than a charging device"
+    },
+    {
+      "name": "Rapid aluminum T1 tools, shell + lid, textured",
+      "group": "tooling",
+      "from_tier": 100,
+      "to_tier": 1000,
+      "value": [
+        5000,
+        12000
+      ],
+      "evidence": "estimate: bounded by Protolabs 'from $1,495' and the $6-15k typical small-part range [verified ranges, 2026-11-08]; refresh with the co-design DFM report"
+    },
+    {
+      "name": "Side action for the keyring slot (only if the CAD keeps an undercut)",
+      "group": "tooling",
+      "from_tier": 100,
+      "value": [
+        0,
+        3000
+      ],
+      "evidence": "estimate: side actions add 15-30% with a $1,000-1,500 minimum (Hubs) [verified 2026-11-08]; zero if the slot sits at the parting line"
+    },
+    {
+      "name": "Hardened steel tools, shell + lid (China, 1-2 cavities)",
+      "group": "tooling",
+      "from_tier": 10000,
+      "value": [
+        24000,
+        50000
+      ],
+      "evidence": "estimate: $12-25k per part (cost-reference §5)"
+    },
+    {
+      "name": "Cast-silicone membrane mold",
+      "group": "tooling",
+      "from_tier": 100,
+      "to_tier": 100,
+      "value": [
+        300,
+        1500
+      ],
+      "evidence": "estimate: urethane/silicone casting molds $400-900 (cost-reference §5)"
+    },
+    {
+      "name": "TPU/LSR membrane tool",
+      "group": "tooling",
+      "from_tier": 1000,
+      "value": [
+        2000,
+        6000
+      ],
+      "evidence": "estimate: small single-cavity elastomer tool"
+    },
+    {
+      "name": "Acoustic vent die-cut tool",
+      "group": "tooling",
+      "from_tier": 1000,
+      "value": [
+        100,
+        500
+      ],
+      "evidence": "estimate: die $100-500 (cost-reference §6)"
+    },
+    {
+      "name": "Packaging artwork (digital print)",
+      "group": "packaging",
+      "from_tier": 100,
+      "to_tier": 100,
+      "value": [
+        100,
+        400
+      ],
+      "evidence": "estimate"
+    },
+    {
+      "name": "Packaging artwork and cutting die",
+      "group": "packaging",
+      "from_tier": 1000,
+      "value": [
+        200,
+        800
+      ],
+      "evidence": "estimate: cost-reference §8"
+    },
+    {
+      "name": "Certification for the launch batch, sold in the US only: FCC 15C + 15B, Bluetooth SIG, UL 4200A report, IP67 test, pre-scan, UN 38.3 summary, DULT firmware, RoHS/Prop 65 declarations",
+      "group": "certification",
+      "from_tier": 100,
+      "value": [
+        20300,
+        46500
+      ],
+      "evidence": "estimate: sum of the US and global rows in compliance/matrix.md (bt-sig verified 2026-11-08; the rest estimates); D-601"
+    },
+    {
+      "name": "Certification added for the 1k run: EU (RED radio + EN 18031 + RF exposure + CRA + GPSR + WEEE + batteries + packaging), UK (UKCA, PSTI, WEEE/batteries), Brazil (Anatel + take-back)",
+      "group": "certification",
+      "from_tier": 1000,
+      "value": [
+        12750,
+        82000
+      ],
+      "evidence": "estimate: sum of the EU, UK and BR rows in compliance/matrix.md that the US set does not already cover; CRA documentation (0-20k) and RF exposure (0-9k, a report at 0 dBm) set the wide high end; D-601"
+    }
+  ],
+  "landed": {
+    "fx": {
+      "BRL": {
+        "rate": 5.5,
+        "evidence": "assumption: planning rate 2026-11-08; replace with the day's rate"
+      }
+    },
+    "destinations": [
+      {
+        "name": "US (formal entry, company import)",
+        "multiplier": [
+          1.0,
+          1.45
+        ],
+        "freight_per_unit": {
+          "1": [
+            20,
+            40
+          ],
+          "10": [
+            4,
+            10
+          ],
+          "100": [
+            0.6,
+            2.0
+          ],
+          "1000": [
+            0.15,
+            0.5
+          ],
+          "10000": [
+            0.05,
+            0.2
+          ]
+        },
+        "evidence": "assumption: 0% general duty if classified under an ITA heading (e.g. HTS 8517.62); Chinese-origin surcharges (Section 301 and 2025 country tariffs) can add 25-45% or more and change often; a broker confirms the HTS code; verify on the USITC HTS and CBP",
+        "note": "Products with a lithium-metal cell installed ship as UN3091, IATA PI 970 Section II; the cell vendor's UN 38.3 test summary travels with the shipment"
+      },
+      {
+        "name": "EU (formal import)",
+        "multiplier": [
+          1.17,
+          1.32
+        ],
+        "freight_per_unit": {
+          "1": [
+            20,
+            40
+          ],
+          "10": [
+            4,
+            10
+          ],
+          "100": [
+            0.6,
+            2.0
+          ],
+          "1000": [
+            0.15,
+            0.5
+          ],
+          "10000": [
+            0.05,
+            0.2
+          ]
+        },
+        "evidence": "estimate: VAT 17-27% on CIF + duty; duty 0% under an ITA heading; VAT is recoverable for a VAT-registered importer (landed-cost.md)"
+      },
+      {
+        "name": "UK (formal import)",
+        "multiplier": [
+          1.2,
+          1.25
+        ],
+        "freight_per_unit": {
+          "1": [
+            20,
+            40
+          ],
+          "10": [
+            4,
+            10
+          ],
+          "100": [
+            0.6,
+            2.0
+          ],
+          "1000": [
+            0.15,
+            0.5
+          ],
+          "10000": [
+            0.05,
+            0.2
+          ]
+        },
+        "evidence": "estimate: VAT 20% + duty by commodity code, 0% expected under an ITA heading; verify on gov.uk"
+      },
+      {
+        "name": "Brazil (company import, regime comum, after Anatel homologation)",
+        "multiplier": [
+          1.6,
+          2.0
+        ],
+        "fx": "BRL",
+        "freight_per_unit": {
+          "1": [
+            20,
+            40
+          ],
+          "10": [
+            4,
+            10
+          ],
+          "100": [
+            0.6,
+            2.0
+          ],
+          "1000": [
+            0.15,
+            0.5
+          ],
+          "10000": [
+            0.05,
+            0.2
+          ]
+        },
+        "evidence": "estimate: II + IPI + PIS/COFINS + ICMS inside the base (landed-cost.md); a customs broker confirms the NCM; CBS/IBS reform from 2027"
+      }
+    ]
+  },
+  "targets": {
+    "unit_cost": {
+      "1000": 12,
+      "10000": 8
+    }
+  }
+}

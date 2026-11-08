@@ -1,0 +1,12 @@
+{
+  "name": "hardware-design-toolkit",
+  "description": "Hardware Design Toolkit: design electronic devices that can really be built.",
+  "owner": { "name": "Hardware Design Toolkit contributors" },
+  "plugins": [
+    {
+      "name": "hardware-design",
+      "source": "./",
+      "description": "Idea to doable hardware: specs, parts, battery, PCB, enclosure, renders, blueprint, costs, certification, roadmap and presentation."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+(kicad_pcb (version 20240108) (generator "test-fixture")
+  (net 0 "")
+  (net 1 "VBAT")
+  (segment (start 100 100) (end 101 100) (width 0.2) (layer "F.Cu") (net 1))
+)

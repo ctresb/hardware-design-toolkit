@@ -1,0 +1,151 @@
+{
+  "project": "puck-sensor",
+  "library": "puck",
+  "company": "Example (fictional product)",
+  "footprint_silk": "fab",
+  "fab": {"name": "jlcpcb", "assembly": "standard", "min_assembly": [70, 70], "quantity": 10},
+  "symbols": {
+    "LIS2DH12": {
+      "ref": "U",
+      "description": "3-axis accelerometer with tap detection, LGA-12 2x2 mm (pinout: ST LIS2DH12 datasheet, pin description table)",
+      "datasheet": "https://www.st.com/resource/en/datasheet/lis2dh12.pdf",
+      "pins": [
+        ["1", "SCL/SPC", "input", "L"], ["4", "SDA/SDI/SDO", "bidirectional", "L"],
+        ["3", "SDO/SA0", "bidirectional", "L"], ["2", "CS", "input", "L"],
+        ["12", "INT1", "output", "R"], ["11", "INT2", "output", "R"],
+        ["9", "VDD", "power_in", "T"], ["10", "VDD_IO", "power_in", "T"],
+        ["5", "RES", "passive", "B"], ["6", "GND", "power_in", "B"],
+        ["7", "GND", "passive", "B"], ["8", "GND", "passive", "B"]
+      ]
+    }
+  },
+  "footprints": {
+    "BAT_TABS_2": {
+      "description": "Solder tabs for a pouch cell with protection PCM: + and -, 1.6 mm pitch (land pattern: cell vendor tab drawing; example values)",
+      "pads": [
+        {"n": "1", "x": -0.8, "y": 0, "w": 1.1, "h": 1.0, "shape": "rect"},
+        {"n": "2", "x": 0.8, "y": 0, "w": 1.1, "h": 1.0, "shape": "rect"}
+      ]
+    },
+    "CONTACT_PAD_D2.0": {
+      "description": "Gold pad for a spring or pogo contact from the dock, 2.0 mm (land pattern: spring datasheet contact area; example values)",
+      "pads": [{"n": "1", "x": 0, "y": 0, "w": 2.0, "h": 2.0, "shape": "circle", "paste": false}]
+    }
+  },
+  "boards": {
+    "main": {
+      "title": "Puck sensor main board",
+      "rev": "EVT-0 A",
+      "outline": {"type": "circle", "r": 10.0},
+      "stackup": "4L-0.8",
+      "finish": "ENIG",
+      "mask_color": "Black",
+      "edge_margin": 0.25,
+      "rules": {"min_clearance": 0.1, "min_track_width": 0.1},
+      "netclasses": {
+        "Power": {"track_width": 0.25, "clearance": 0.12, "nets": ["VBUS", "VBAT", "VDD", "DCC"]},
+        "RF": {"track_width": 0.3, "clearance": 0.15, "nets": ["RF_ANT", "RF1", "ANT_FEED"],
+               "impedance": {"ohms": 50, "type": "microstrip", "layer": "F.Cu", "ref": "In1.Cu"}}
+      },
+      "planes": [
+        {"net": "GND", "layer": "In1.Cu"},
+        {"net": "VDD", "layer": "In2.Cu"},
+        {"net": "GND", "layer": "F.Cu"},
+        {"net": "GND", "layer": "B.Cu"}
+      ],
+      "keepouts": [
+        {"name": "magnet E (enclosure, under B side)", "side": "B", "circle": [6.6, -1.0, 1.75]},
+        {"name": "magnet W (enclosure, under B side)", "side": "B", "circle": [-6.6, -1.0, 1.75]},
+        {"name": "antenna clearance (no copper, all layers)", "parts": false, "copper": true,
+         "rect": [-2.6, 6.9, 2.6, 10.2]}
+      ],
+      "exclusive": [
+        {"name": "RF corner", "rect": [-2.8, 6.6, 2.8, 10.0], "only": ["ANT1", "R5", "C14", "C15"]}
+      ],
+      "panel": {"mode": "fab", "array": [3, 3], "spacing": 2.0, "rails": 5.0, "tabs": "mousebites", "fiducials": "rails"},
+      "texts": [{"text": "PUCK EVT-0 A", "x": 0, "y": -8.4, "layer": "B.Fab", "size": 0.6}],
+      "groups": [
+        {"title": "SoC nRF52832 + RF", "refs": ["U1", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "L1", "L2",
+                                               "Y1", "C8", "C9", "L3", "C10", "R5", "C14", "C15", "ANT1"]},
+        {"title": "Power: charger, LDO, battery, dock contacts", "refs": ["U2", "U3", "R1", "R2", "C11", "C12", "C13",
+                                                                          "J1", "P1", "P2", "D1"]},
+        {"title": "Sensor, LED, test points", "refs": ["U4", "C16", "LED1", "R6", "R3", "R4", "TP1", "TP2", "TP3", "TP4", "TP5", "TP6"]}
+      ],
+      "parts": [
+        {"ref": "U1", "symbol": "MCU_Nordic:nRF52832-QFxx", "value": "nRF52832-QFAA",
+         "manufacturer": "Nordic Semiconductor", "mpn": "NRF52832-QFAA-R7",
+         "description": "BLE 5 SoC, Cortex-M4F, QFN48 6x6",
+         "pins": {"DEC1": "DEC1", "DEC2": null, "DEC3": "DEC3", "DEC4": "DEC4", "DCC": "DCC",
+                  "VDD": "VDD", "VSS": "GND", "XC1": "XC1", "XC2": "XC2", "ANT": "RF_ANT",
+                  "SWDCLK": "SWDCLK", "SWDIO": "SWDIO", "P0.21/~{RESET}": "nRESET",
+                  "P0.17": "LED_GPIO", "P0.04/AIN2": "CHG_STAT", "P0.25": "ACC_INT",
+                  "P0.26": "I2C_SDA", "P0.27": "I2C_SCL", "NC": null},
+         "nc_rest": true, "x": 0.0, "y": 1.2, "rot": 0, "side": "F", "fixed": true},
+        {"ref": "C1", "kind": "C", "value": "100nF", "size": "0201", "nets": ["DEC1", "GND"], "x": -3.6, "y": 3.6},
+        {"ref": "C2", "kind": "C", "value": "100pF", "size": "0201", "nets": ["DEC3", "GND"], "x": 3.6, "y": 3.6},
+        {"ref": "C3", "kind": "C", "value": "1uF", "size": "0402", "nets": ["DEC4", "GND"], "x": 3.6, "y": -2.6},
+        {"ref": "C4", "kind": "C", "value": "4.7uF", "size": "0402", "nets": ["VDD", "GND"], "x": -3.8, "y": -2.4},
+        {"ref": "C5", "kind": "C", "value": "100nF", "size": "0201", "nets": ["VDD", "GND"], "x": -3.6, "y": 1.2},
+        {"ref": "C6", "kind": "C", "value": "100nF", "size": "0201", "nets": ["VDD", "GND"], "x": 3.6, "y": 1.2},
+        {"ref": "C7", "kind": "C", "value": "100nF", "size": "0201", "nets": ["VDD", "GND"], "x": 0.0, "y": -2.4},
+        {"ref": "L1", "kind": "L", "value": "10uH", "size": "0603", "nets": ["DCC", "DCC_L"], "x": 2.6, "y": -3.6,
+         "mpn": "low-DCR 10 uH, check Nordic reference design"},
+        {"ref": "L2", "kind": "L", "value": "15nH", "size": "0402", "nets": ["DCC_L", "DEC4"], "x": 4.4, "y": -1.0},
+        {"ref": "Y1", "symbol": "Device:Crystal_GND24_Small", "footprint": "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm",
+         "value": "32MHz 8pF 10ppm", "pins": {"1": "XC1", "3": "XC2", "G": "GND"}, "x": -3.8, "y": 5.4},
+        {"ref": "C8", "kind": "C", "value": "12pF", "size": "0201", "nets": ["XC1", "GND"], "x": -5.4, "y": 4.6},
+        {"ref": "C9", "kind": "C", "value": "12pF", "size": "0201", "nets": ["XC2", "GND"], "x": -5.4, "y": 6.0},
+        {"ref": "L3", "kind": "L", "value": "3.9nH", "size": "0201", "nets": ["RF_ANT", "RF1"], "x": 3.4, "y": 5.0,
+         "description": "matching network values: start from the SoC reference design, tune on the real enclosure"},
+        {"ref": "C10", "kind": "C", "value": "1.0pF", "size": "0201", "nets": ["RF1", "GND"], "x": 3.4, "y": 6.0},
+        {"ref": "R5", "kind": "R", "value": "0R", "size": "0201", "nets": ["RF1", "ANT_FEED"], "x": 2.2, "y": 7.0},
+        {"ref": "C14", "kind": "C", "value": "DNP", "size": "0201", "nets": ["RF1", "GND"], "x": 2.4, "y": 6.8, "dnp": true},
+        {"ref": "C15", "kind": "C", "value": "DNP", "size": "0201", "nets": ["ANT_FEED", "GND"], "x": 1.6, "y": 7.2, "dnp": true},
+        {"ref": "ANT1", "symbol": "Device:Antenna_Chip", "footprint": "RF_Antenna:Johanson_2450AT18x100",
+         "value": "2450AT18A100", "manufacturer": "Johanson Technology", "mpn": "2450AT18A0100001E",
+         "pins": {"FEED": "ANT_FEED", "PCB_Trace": null}, "x": 0.0, "y": 7.7, "rot": 0, "fixed": true},
+
+        {"ref": "U2", "symbol": "Battery_Management:MCP73831-2-OT", "value": "MCP73831-2-OT",
+         "manufacturer": "Microchip", "mpn": "MCP73831T-2ACI/OT", "description": "Li-Po charger 4.2 V, PROG sets current",
+         "pins": {"1": "CHG_STAT", "2": "GND", "3": "VBAT", "4": "VBUS", "5": "PROG"}, "x": -5.2, "y": -3.0, "rot": 90},
+        {"ref": "R1", "kind": "R", "value": "20k", "size": "0201", "nets": ["PROG", "GND"], "x": -6.6, "y": -4.8,
+         "description": "50 mA charge: keep charge current <= 1C of the cell"},
+        {"ref": "R2", "kind": "R", "value": "100k", "size": "0201", "nets": ["CHG_STAT", "VDD"], "x": -3.4, "y": -4.8},
+        {"ref": "C11", "kind": "C", "value": "4.7uF", "size": "0402", "nets": ["VBUS", "GND"], "x": -7.6, "y": -2.6},
+        {"ref": "C12", "kind": "C", "value": "4.7uF", "size": "0402", "nets": ["VBAT", "GND"], "x": -4.0, "y": -6.2},
+        {"ref": "U3", "symbol": "Regulator_Linear:TLV70030_SOT23-5", "value": "TLV70030",
+         "manufacturer": "Texas Instruments", "mpn": "TLV70030DDCR", "description": "LDO 3.0 V 200 mA, 31 uA Iq",
+         "pins": {"IN": "VBAT", "GND": "GND", "EN": "VBAT", "NC": null, "OUT": "VDD"}, "x": 5.2, "y": -3.2, "rot": 90},
+        {"ref": "C13", "kind": "C", "value": "1uF", "size": "0402", "nets": ["VDD", "GND"], "x": 7.4, "y": -2.6},
+        {"ref": "J1", "symbol": "Connector_Generic:Conn_01x02", "footprint": "BAT_TABS_2", "value": "LiPo 3.7 V",
+         "description": "pouch cell tabs: 1 = +, 2 = -", "pins": {"1": "VBAT", "2": "GND"}, "x": 0.0, "y": -6.8, "fixed": true},
+
+        {"ref": "P1", "symbol": "Connector_Generic:Conn_01x01", "footprint": "CONTACT_PAD_D2.0", "value": "dock +",
+         "pins": {"1": "VBUS"}, "x": -3.2, "y": -1.5, "side": "B", "fixed": true},
+        {"ref": "P2", "symbol": "Connector_Generic:Conn_01x01", "footprint": "CONTACT_PAD_D2.0", "value": "dock -",
+         "pins": {"1": "GND"}, "x": 3.2, "y": -1.5, "side": "B", "fixed": true},
+        {"ref": "D1", "symbol": "Device:D_TVS_Small", "footprint": "Diode_SMD:D_SOD-882", "value": "ESD 5V",
+         "mpn": "PESD5V0S1UL", "manufacturer": "Nexperia", "description": "ESD on the exposed dock contact",
+         "pins": {"1": "VBUS", "2": "GND"}, "x": -3.2, "y": 0.8, "side": "B"},
+
+        {"ref": "U4", "symbol": "LIS2DH12", "footprint": "Package_LGA:LGA-12_2x2mm_P0.5mm", "value": "LIS2DH12",
+         "manufacturer": "STMicroelectronics", "mpn": "LIS2DH12TR",
+         "pins": {"1": "I2C_SCL", "4": "I2C_SDA", "3": "GND", "2": "VDD", "12": "ACC_INT", "11": null,
+                  "9": "VDD", "10": "VDD", "5": "GND", "GND": "GND"}, "x": 0.0, "y": 3.2, "side": "B"},
+        {"ref": "C16", "kind": "C", "value": "100nF", "size": "0201", "nets": ["VDD", "GND"], "x": 1.8, "y": 3.2, "side": "B"},
+        {"ref": "R3", "kind": "R", "value": "4.7k", "size": "0201", "nets": ["I2C_SDA", "VDD"], "x": -1.8, "y": 4.4, "side": "B"},
+        {"ref": "R4", "kind": "R", "value": "4.7k", "size": "0201", "nets": ["I2C_SCL", "VDD"], "x": -1.8, "y": 2.2, "side": "B"},
+        {"ref": "LED1", "kind": "LED", "value": "red", "size": "0603", "nets": ["LED_K", "VDD"], "x": 0.0, "y": -4.4,
+         "description": "status LED under a light pipe"},
+        {"ref": "R6", "kind": "R", "value": "1k", "size": "0201", "nets": ["LED_GPIO", "LED_K"], "x": 1.6, "y": -4.4},
+
+        {"ref": "TP1", "kind": "TP", "nets": ["SWDIO"], "x": -4.6, "y": -5.6, "side": "B"},
+        {"ref": "TP2", "kind": "TP", "nets": ["SWDCLK"], "x": -2.4, "y": -6.6, "side": "B"},
+        {"ref": "TP3", "kind": "TP", "nets": ["nRESET"], "x": 0.0, "y": -7.0, "side": "B"},
+        {"ref": "TP4", "kind": "TP", "nets": ["VDD"], "x": 2.4, "y": -6.6, "side": "B"},
+        {"ref": "TP5", "kind": "TP", "nets": ["GND"], "x": 4.6, "y": -5.6, "side": "B"},
+        {"ref": "TP6", "kind": "TP", "nets": ["VBAT"], "x": 0.0, "y": -4.6, "side": "B"}
+      ]
+    }
+  }
+}

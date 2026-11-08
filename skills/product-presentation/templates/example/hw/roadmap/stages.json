@@ -1,0 +1,118 @@
+{
+ "project": "Fixture Tag (fictional example)",
+ "start": "2026-12-07",
+ "stages": [
+  {
+   "id": "S0",
+   "name": "Dev-kit bench",
+   "weeks": [
+    3,
+    6
+   ],
+   "gate": "idle current measured ≤ 18 µA; ring burst holds VBAT ≥ 2.2 V with the reservoir capacitor"
+  },
+  {
+   "id": "E0",
+   "name": "EVT-0 layout, fab, bring-up",
+   "weeks": [
+    5,
+    8
+   ],
+   "depends_on": [
+    "S0"
+   ],
+   "gate": "all functions work on the bench; antenna matched in a printed enclosure"
+  },
+  {
+   "id": "S1",
+   "name": "Works-like / looks-like",
+   "weeks": [
+    3,
+    5
+   ],
+   "depends_on": [
+    "S0"
+   ],
+   "gate": "printed enclosure seals IPX7 for 30 min; lid passes child-resistance check"
+  },
+  {
+   "id": "T1",
+   "name": "Tooling T1 + iterations",
+   "weeks": [
+    6,
+    10
+   ],
+   "depends_on": [
+    "E0",
+    "S1"
+   ],
+   "gate": "T1 parts within tolerance; O-ring compression 20–25 %"
+  },
+  {
+   "id": "D0",
+   "name": "DVT build (100 units)",
+   "weeks": [
+    5,
+    8
+   ],
+   "depends_on": [
+    "T1"
+   ],
+   "gate": "drop, IP67, ESD and battery-life tests passed; pre-scan passed"
+  },
+  {
+   "id": "R0",
+   "name": "Radio certification and SIG listing",
+   "weeks": [
+    4,
+    9
+   ],
+   "depends_on": [
+    "D0"
+   ],
+   "gate": "FCC, CE/RED and UKCA paperwork complete; Bluetooth SIG listing"
+  },
+  {
+   "id": "P0",
+   "name": "PVT line validation",
+   "weeks": [
+    3,
+    6
+   ],
+   "depends_on": [
+    "D0"
+   ],
+   "gate": "first-pass yield ≥ 97 %"
+  },
+  {
+   "id": "M0",
+   "name": "Mass production, first lot",
+   "weeks": [
+    3,
+    6
+   ],
+   "depends_on": [
+    "P0",
+    "R0"
+   ],
+   "gate": "1,000 units shipped"
+  }
+ ],
+ "milestones": [
+  {
+   "name": "Engineering freeze",
+   "after": "E0"
+  },
+  {
+   "name": "First legal sale",
+   "after": "R0"
+  }
+ ],
+ "long_lead": [
+  {
+   "item": "BLE SoC reel for DVT (14 wk factory lead)",
+   "lead_weeks": 14,
+   "needed_by": "D0"
+  }
+ ]
+}

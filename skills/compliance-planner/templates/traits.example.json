@@ -1,0 +1,30 @@
+{
+  "product": "Example BLE fitness band (fictional)",
+  "markets": ["US", "CA", "EU", "UK", "BR"],
+  "product_category": "wearable",
+  "radios": ["ble"],
+  "radio_module_precertified": false,
+  "tx_power_dbm": 4,
+  "connected": true,
+  "body_worn": true,
+  "skin_contact": true,
+  "battery": {
+    "chemistry": "li-polymer",
+    "wh": 0.3,
+    "user_removable": false,
+    "custom_cell": true,
+    "sold_separately": false
+  },
+  "wired_charging": false,
+  "ships_mains_adapter": false,
+  "ip_rating_claim": "IP67",
+  "audio_recording": false,
+  "camera": false,
+  "location_tracking": false,
+  "for_children": false,
+  "finder_network": false,
+  "apple_mfi_features": false,
+  "wireless_charging_claims_qi": false,
+  "uses_ptfe_membranes": true,
+  "uses_fluoropolymers": false
+}

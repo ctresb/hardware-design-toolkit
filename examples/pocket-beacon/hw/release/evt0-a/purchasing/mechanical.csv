@@ -1,0 +1,7 @@
+Item,Vendor,MPN,Quantity,Unit,URL
+"Thread-forming screw for plastics 1.4 × 3 mm, pan head, PH000, stainless, with retaining washer",catalog micro-screw supplier (RFQ),spec per D-511,21,pcs,
+"Door gasket, silicone 40A, 0.35 mm, Ø21.9/Ø23.7 mm die-cut",die-cut converter (RFQ),spec per D-701,10.5,pcs,
+"Sounder port gasket, extra-soft PU foam 0.8 mm + PSA, Ø3.0/Ø1.6 mm",die-cut converter (RFQ),e.g. Rogers PORON 4701-30 0.031 in (D-702),10.5,pcs,https://rogerscorp.com/elastomeric-material-solutions/poron-industrial-polyurethanes
+"Acoustic vent Ø2.6 mm with PSA, IP67 class",membrane maker (RFQ),spec per hw/cost/rfq.md,10.5,pcs,
+"Double-sided tape ring 0.10 mm, die-cut to the plate lip",die-cut converter (RFQ),e.g. tesa 4982 class PET tape,10.5,pcs,
+"Micro screwdriver PH000 (in the launch-batch box, D-703)",tool supplier,-,10.5,pcs,
