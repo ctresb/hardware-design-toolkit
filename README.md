@@ -47,7 +47,7 @@ designed. Each skill checks for those mistakes with a script, not with good inte
 In Claude Code:
 
 ```text
-/plugin marketplace add supersoniclabsai/hardware-design-toolkit
+/plugin marketplace add ctresb/hardware-design-toolkit
 /plugin install hardware-design@hardware-design-toolkit
 ```
 
@@ -64,7 +64,7 @@ installed without your consent.
 <summary>Manual install (copy the skills)</summary>
 
 ```sh
-git clone https://github.com/supersoniclabsai/hardware-design-toolkit
+git clone https://github.com/ctresb/hardware-design-toolkit
 cp -R hardware-design-toolkit/skills/* ~/.claude/skills/
 ```
 
