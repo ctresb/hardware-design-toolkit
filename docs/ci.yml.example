@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }} Verification Suite
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run toolkit self-tests and unit tests
+        run: |
+          python3 skills/build-package/scripts/selftest.py
+          python3 skills/compliance-planner/scripts/test_compliance_matrix.py
+          python3 skills/cost-and-sourcing/scripts/test_cost_model.py
+          python3 skills/doability-review/scripts/test_doability_score.py
+          python3 skills/electronics-researcher/scripts/test_bom_merge.py
+          python3 skills/pcb-engineer/scripts/test_tools.py
+          python3 skills/product-render/scripts/test_solder_geom.py
+          python3 skills/prototype-roadmap/scripts/test_roadmap.py
+          python3 skills/technical-drawing/scripts/test_line_clean.py
+      - name: Run example workspace verification gates
+        run: |
+          python3 skills/battery-and-power/scripts/check_rails.py examples/pocket-beacon/hw/bom.csv examples/pocket-beacon/hw/power/rails.json
+          python3 skills/specs-engineer/scripts/bom_check.py examples/pocket-beacon/hw/bom.csv --rails examples/pocket-beacon/hw/power/rails.json
+          python3 skills/doability-review/scripts/doability_score.py examples/pocket-beacon/hw

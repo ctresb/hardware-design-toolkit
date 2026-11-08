@@ -42,6 +42,24 @@ problems look like this:
 Every rule in this toolkit comes from a mistake like these, made and corrected while a real wearable was
 designed. Each skill checks for those mistakes with a script, not with good intentions.
 
+## Quick Start
+
+1. Install the plugin in Claude Code (or clone the repository for any agent runtime):
+   ```text
+   /plugin marketplace add ctresb/hardware-design-toolkit
+   /plugin install hardware-design@hardware-design-toolkit
+   ```
+2. Launch a hardware project in an empty folder:
+   ```text
+   /hardware-design:hardware-engineer I want to build a small Bluetooth tag that beeps when I lose my keys
+   ```
+3. Verify the reference example (`examples/pocket-beacon`) from the terminal:
+   ```sh
+   python3 skills/doability-review/scripts/doability_score.py --hw examples/pocket-beacon/hw
+   python3 skills/build-package/scripts/selftest.py
+   ```
+   See [docs/hardening-and-dfm-gates.md](docs/hardening-and-dfm-gates.md) for the physics, electrical, RF, and CAD verification gates.
+
 ## Install
 
 In Claude Code:
@@ -89,6 +107,8 @@ Copy every skill folder. The skills call each other's scripts through relative p
 It then writes the resolved paths to `toolchain.json` for the other skills.
 
 ## How it works
+
+### Architecture
 
 ```mermaid
 flowchart LR

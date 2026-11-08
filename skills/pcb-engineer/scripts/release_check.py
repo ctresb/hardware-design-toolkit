@@ -158,6 +158,49 @@ def check_board(spec, out, bname):
     return fails, notes
 
 
+def _ellipk_agm(k: float) -> float:
+    """Complete elliptic integral of the first kind K(k) via arithmetic-geometric mean."""
+    import math
+    k = max(0.0, min(1.0 - 1e-12, float(k)))
+    a, g = 1.0, math.sqrt(max(1e-15, 1.0 - k * k))
+    for _ in range(25):
+        a, g = 0.5 * (a + g), math.sqrt(a * g)
+        if abs(a - g) < 1e-15:
+            break
+    return math.pi / (2.0 * a)
+
+
+def cpwg_impedance_ohm(w_mm: float, s_mm: float, h_mm: float, er: float = 4.4) -> float:
+    """Closed-form grounded coplanar waveguide (CPWG) characteristic impedance Z0 in ohms."""
+    import math
+    a = float(w_mm) / 2.0
+    b = a + float(s_mm)
+    h = float(h_mm)
+    k = a / b
+    kp = math.sqrt(max(1e-12, 1.0 - k * k))
+    k1 = math.tanh(math.pi * a / (2.0 * h)) / math.tanh(math.pi * b / (2.0 * h))
+    k1p = math.sqrt(max(1e-12, 1.0 - k1 * k1))
+    ratio_k = _ellipk_agm(k) / _ellipk_agm(kp)
+    ratio_k1 = _ellipk_agm(k1) / _ellipk_agm(k1p)
+    q_tilde = ratio_k1 / ratio_k
+    er_eff = (1.0 + float(er) * q_tilde) / (1.0 + q_tilde)
+    z0 = (60.0 * math.pi / math.sqrt(er_eff)) / (ratio_k + ratio_k1)
+    return round(z0, 2)
+
+
+def check_thermal_rise(t_amb_c: float, p_diss_w: float, r_theta_ja_c_per_w: float, t_j_max_c: float = 125.0) -> dict:
+    """Compute junction temperature Tj = Tamb + P_diss * R_theta_JA and verify margin."""
+    delta_t = float(p_diss_w) * float(r_theta_ja_c_per_w)
+    t_j = float(t_amb_c) + delta_t
+    margin = float(t_j_max_c) - t_j
+    return {
+        "delta_t_c": round(delta_t, 2),
+        "t_j_c": round(t_j, 2),
+        "margin_c": round(margin, 2),
+        "ok": t_j <= float(t_j_max_c),
+    }
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("spec")

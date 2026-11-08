@@ -57,14 +57,15 @@ def layer_id(board, name):
 
 # ---------------------------------------------------------------- geometry of keepouts (device frame)
 
-def shape_polygon(s, n=48):
-    if "circle" in s:
-        cx, cy, r = s["circle"]
-        return outl.circle(r, cx, cy, n)
-    if "rect" in s:
-        x0, y0, x1, y1 = s["rect"]
-        return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
-    return [tuple(p) for p in s["polygon"]]
+shape_polygon = outl.shape_polygon
+_bbox_polys = outl.bbox_polys
+_move = outl.move_polys
+_seg_dist = outl.seg_dist
+poly_gap = outl.poly_gap
+polys_overlap = outl.polys_overlap
+shape_hits_polys = outl.shape_hits_polys
+shape_hits_rect = outl.shape_hits_rect
+inside_outline = outl.inside_outline
 
 
 def courtyard(fp):
@@ -91,79 +92,6 @@ def courtyard_polys(fp):
         y1, y0 = OY - pcbnew.ToMM(bb.GetY()), OY - pcbnew.ToMM(bb.GetBottom())
         out = [[(x0, y0), (x1, y0), (x1, y1), (x0, y1)]]
     return out
-
-
-def _bbox_polys(polys):
-    xs = [x for p in polys for x, _ in p]
-    ys = [y for p in polys for _, y in p]
-    return min(xs), min(ys), max(xs), max(ys)
-
-
-def _move(polys, dx, dy):
-    return [[(x + dx, y + dy) for x, y in p] for p in polys]
-
-
-def _seg_dist(a, b, c, d):
-    """Distance between segments ab and cd (0 if they cross)."""
-    def cross(o, p, q):
-        return (p[0] - o[0]) * (q[1] - o[1]) - (p[1] - o[1]) * (q[0] - o[0])
-
-    d1, d2, d3, d4 = cross(c, d, a), cross(c, d, b), cross(a, b, c), cross(a, b, d)
-    if ((d1 > 0) != (d2 > 0)) and ((d3 > 0) != (d4 > 0)):
-        return 0.0
-
-    def pd(p, q, r):
-        dx, dy = r[0] - q[0], r[1] - q[1]
-        t = max(0.0, min(1.0, ((p[0] - q[0]) * dx + (p[1] - q[1]) * dy) / (dx * dx + dy * dy or 1e-12)))
-        return math.hypot(p[0] - q[0] - t * dx, p[1] - q[1] - t * dy)
-
-    return min(pd(a, c, d), pd(b, c, d), pd(c, a, b), pd(d, a, b))
-
-
-def poly_gap(A, B):
-    """0 if polygons A and B overlap (or touch), else the distance between them."""
-    if outl.inside(B, *A[0]) or outl.inside(A, *B[0]):
-        return 0.0
-    best = 1e9
-    for a, b in zip(A, A[1:] + A[:1]):
-        for c, d in zip(B, B[1:] + B[:1]):
-            best = min(best, _seg_dist(a, b, c, d))
-            if best == 0.0:
-                return 0.0
-    return best
-
-
-def polys_overlap(PA, PB, gap=0.0):
-    ax0, ay0, ax1, ay1 = _bbox_polys(PA)
-    bx0, by0, bx1, by1 = _bbox_polys(PB)
-    if not (ax0 < bx1 + gap and bx0 < ax1 + gap and ay0 < by1 + gap and by0 < ay1 + gap):
-        return False
-    return any(poly_gap(a, b) < max(gap, 1e-9) for a in PA for b in PB)
-
-
-def shape_hits_polys(s, polys):
-    """Does a keepout shape (circle, rect or polygon) touch any of the polygons?"""
-    if "circle" in s:
-        cx, cy, r = s["circle"]
-        return any(outl.inside(p, cx, cy) or outl.edge_dist(p, cx, cy) < r for p in polys)
-    return polys_overlap([shape_polygon(s)], polys)
-
-
-def shape_hits_rect(s, rect):
-    x0, y0, x1, y1 = rect
-    return shape_hits_polys(s, [[(x0, y0), (x1, y0), (x1, y1), (x0, y1)]])
-
-
-def inside_outline(polys, poly, margin):
-    """Every courtyard vertex inside the outline at >= margin from the edge, and no outline vertex inside a
-    courtyard (catches outline chamfers and notches that cut into a part)."""
-    for p in polys:
-        for x, y in p:
-            if not outl.inside(poly, x, y) or outl.edge_dist(poly, x, y) < margin:
-                return False
-        if any(outl.inside(p, x, y) for x, y in poly):
-            return False
-    return True
 
 
 def overlap(a, b, m=0.0):
@@ -206,7 +134,7 @@ def legalize(board, parts, poly, b):
         side = p["side"]
         my_nets = nets_of(fp)
         allow = set(p.get("allow_overlap", []))
-        rots = [p["rot"]] if (p["fixed"] or npads(p) > 2 or p.get("lock_rotation")) else [p["rot"], (p["rot"] + 90) % 360]
+        rots = [p["rot"]] if (p["fixed"] or p.get("lock_rotation")) else [p["rot"], (p["rot"] + 90) % 360]
         base = {}
         for r in rots:
             set_pose(fp, 0, 0, r, side)
@@ -216,12 +144,18 @@ def legalize(board, parts, poly, b):
             out = []
             if not inside_outline(polys, poly, margin):
                 out.append("outside outline / edge margin")
+            part_h = p.get("height_mm")
+            ceil_h = b.get("max_z_mm")
+            if part_h is not None and ceil_h is not None and float(part_h) > float(ceil_h):
+                out.append(f"height {part_h} mm exceeds max_z_mm {ceil_h} mm")
             for k in b["keepouts"]:
                 if k.get("parts", True) is False or p["ref"] in k.get("allow", []):
                     continue
                 if k.get("side", "both") not in ("both", side):
                     continue
                 if shape_hits_polys(k, polys):
+                    if part_h is not None and k.get("max_height_mm") is not None and float(part_h) <= float(k["max_height_mm"]):
+                        continue
                     out.append("keepout " + k.get("name", "?"))
             for e in b["exclusive"]:
                 if p["ref"] not in e["only"] and shape_hits_polys(e, polys):

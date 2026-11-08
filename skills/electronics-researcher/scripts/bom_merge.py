@@ -179,6 +179,9 @@ def check_dossier(name, d, rep, today, max_age):
     sr = d.get("supply_range_v", "-")
     if not unknown(sr) and parse_range(sr) is None:
         rep.err(name, f"supply_range_v `{sr}` must be `min-max` in volts")
+    ior = d.get("io_range_v", "-")
+    if not unknown(ior) and parse_range(ior) is None:
+        rep.err(name, f"io_range_v `{ior}` must be `min-max` in volts")
 
 
 def merge_notes(cur, new):
@@ -315,22 +318,41 @@ def main(argv=None):
                 else:
                     rep.err(where, f"conflict in `{c}`: BOM has `{cur}`, dossier has `{v}` "
                                    "(fix one, or rerun with --overwrite)")
+        io_rng = d.get("io_range_v", "-")
+        if not unknown(io_rng) and "vio=" not in (r.get("key_specs") or "").lower():
+            ks = (r.get("key_specs") or "").strip().rstrip(";")
+            r["key_specs"] = f"{ks}; vio={io_rng}" if ks else f"vio={io_rng}"
         rail = r.get("supply_rail_v", "")
         sr = d.get("supply_range_v", "-")
         if not unknown(rail) and not unknown(sr):
             names = rail_names(rail)
-            span = rail_span(names[0], rails) if names else None
-            if span is None:
+            rng = parse_range(sr)
+            if names:
+                for idx, rname in enumerate(names):
+                    span = rail_span(rname, rails)
+                    sub_rng = rng
+                    if idx > 0:
+                        ks_parts = {k.strip().lower(): val.strip() for tok in (r.get("key_specs") or "").split(";") if "=" in tok for k, val in [tok.split("=", 1)]}
+                        sub_sr = ks_parts.get(f"vdd{idx + 1}") or (ks_parts.get("vio") if idx == 1 else None)
+                        if sub_sr:
+                            sub_rng = parse_range(sub_sr) or rng
+                    if span is None:
+                        rep.warn(where, f"supply_rail_v `{rname}` is not in rails.json and has no voltage to check")
+                    elif sub_rng and (span[0] < sub_rng[0] - 1e-9 or span[1] > sub_rng[1] + 1e-9):
+                        rep.err(where, f"rail {rname} spans {span[0]:.2f}-{span[1]:.2f} V, "
+                                       f"outside the supply range {sr} V")
+                    elif not span[3] and rails:
+                        rep.warn(where, f"supply_rail_v `{rname}` is a voltage, not a rail name from rails.json")
+            else:
                 rr = parse_range(rail)                  # legacy text such as "VSYS 3.0-3.6"
                 span = (rr[0], rr[1], None, False) if rr else None
-            rng = parse_range(sr)
-            if span is None:
-                rep.warn(where, f"supply_rail_v `{rail}` is not in rails.json and has no voltage to check")
-            elif rng and (span[0] < rng[0] - 1e-9 or span[1] > rng[1] + 1e-9):
-                rep.err(where, f"rail {names[0] if names else rail} spans {span[0]:.2f}-{span[1]:.2f} V, "
-                               f"outside the supply range {sr} V")
-            elif not span[3] and rails:
-                rep.warn(where, f"supply_rail_v `{rail}` is a voltage, not a rail name from rails.json")
+                if span is None:
+                    rep.warn(where, f"supply_rail_v `{rail}` is not in rails.json and has no voltage to check")
+                elif rng and (span[0] < rng[0] - 1e-9 or span[1] > rng[1] + 1e-9):
+                    rep.err(where, f"rail {rail} spans {span[0]:.2f}-{span[1]:.2f} V, "
+                                   f"outside the supply range {sr} V")
+                elif not span[3] and rails:
+                    rep.warn(where, f"supply_rail_v `{rail}` is a voltage, not a rail name from rails.json")
         elif unknown(rail):
             rep.warn(where, "supply_rail_v empty: rail not checked against the supply range")
 

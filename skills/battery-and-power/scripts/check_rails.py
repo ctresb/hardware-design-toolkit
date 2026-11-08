@@ -96,7 +96,85 @@ def check_row(row, rails):
             out.append(("error", f"cannot parse {key} '{specs[key]}'"))
         elif lo < pr[0] - 1e-9 or hi > pr[1] + 1e-9:
             out.append(("error", f"rail {name} spans {lo:.2f}–{hi:.2f} V but {key} accepts {pr[0]:.2f}–{pr[1]:.2f} V"))
+    if "vio" in specs and "vio_rail" in specs:
+        vspan = rail_span(specs["vio_rail"], rails)
+        vr = parse_range(specs["vio"])
+        if vspan and vr and (vspan[0] < vr[0] - 1e-9 or vspan[1] > vr[1] + 1e-9):
+            out.append(("error", f"vio_rail {specs['vio_rail']} spans {vspan[0]:.2f}–{vspan[1]:.2f} V "
+                                 f"but vio accepts {vr[0]:.2f}–{vr[1]:.2f} V"))
     return out
+
+
+def resolve_part_vio(row, rails):
+    """Return (lo, hi) effective I/O logic level for a BOM row, or None if unknown."""
+    specs = parse_specs(row.get("key_specs"))
+    if "vio_rail" in specs:
+        sp = rail_span(specs["vio_rail"], rails)
+        if sp:
+            return sp[0], sp[1]
+    if "vio" in specs:
+        pr = parse_range(specs["vio"])
+        if pr:
+            return pr
+    names = rail_names(row.get("supply_rail_v", ""))
+    for nm in reversed(names):   # dual-rail parts (VSYS|1V8) typically run digital I/O on the secondary logic rail
+        sp = rail_span(nm, rails)
+        if sp:
+            return sp[0], sp[1]
+    return None
+
+
+def check_bus_vio_compatibility(rows, rails, tol_v=0.15):
+    """Flag buses (bus=I2C0, SPI0, UART0...) where connected devices have incompatible I/O logic voltages."""
+    buses = {}
+    shifters = set()
+    for r in rows:
+        ref = r.get("ref", "?")
+        specs = parse_specs(r.get("key_specs"))
+        func = (r.get("function") or "").lower()
+        if "level" in func and ("shift" in func or "translat" in func):
+            for b in re.split(r"[,/ ]+", specs.get("bus", "")):
+                if b:
+                    shifters.add(b.strip())
+            continue
+        bus_tok = specs.get("bus") or (r.get("interface") or "").strip() or ("I2C" if "i2c" in specs else "")
+        if not bus_tok or bus_tok in ("-", "none"):
+            continue
+        vio = resolve_part_vio(r, rails)
+        if not vio:
+            continue
+        for b in re.split(r"[,/ ]+", bus_tok):
+            b = b.strip()
+            if b:
+                buses.setdefault(b, []).append((ref, (vio[0] + vio[1]) / 2.0, vio))
+    errs = []
+    for bus, members in sorted(buses.items()):
+        if bus in shifters or len(members) < 2:
+            continue
+        noms = [m[1] for m in members]
+        if max(noms) - min(noms) > tol_v:
+            desc = ", ".join(f"{ref} ({v:.2f}V)" for ref, v, _ in members)
+            errs.append((",".join(m[0] for m in members),
+                         f"cross-domain I/O voltage mismatch on {bus}: {desc} (add a level shifter or align vio)"))
+    return errs
+
+
+def check_ldo_dropout(rails):
+    """Verify upstream_min >= downstream_max + dropout_v for rails that declare 'parent'/'upstream'/'source' and 'dropout_v'."""
+    errs = []
+    for name, r in rails.items():
+        if not isinstance(r, dict):
+            continue
+        parent = r.get("upstream") or r.get("parent") or r.get("source")
+        if not parent or parent not in rails:
+            continue
+        do_v = float(r.get("dropout_v", 0.0))
+        sp_out = rail_span(name, rails)
+        sp_in = rail_span(parent, rails)
+        if sp_out and sp_in and sp_in[0] < sp_out[1] + do_v - 1e-9:
+            errs.append((name, f"upstream rail {parent} min ({sp_in[0]:.2f} V) < {name} max ({sp_out[1]:.2f} V) "
+                               f"+ dropout ({do_v:.2f} V)"))
+    return errs
 
 
 def load_rails(path):

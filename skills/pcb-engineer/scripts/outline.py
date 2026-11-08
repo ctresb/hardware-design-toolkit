@@ -336,6 +336,86 @@ def build(spec, base_dir="."):
     return ccw(poly)
 
 
+def shape_polygon(s, n=48):
+    if "circle" in s:
+        cx, cy, r = s["circle"]
+        return circle(r, cx, cy, n)
+    if "rect" in s:
+        x0, y0, x1, y1 = s["rect"]
+        return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+    return [tuple(p) for p in s["polygon"]]
+
+
+def bbox_polys(polys):
+    xs = [x for p in polys for x, _ in p]
+    ys = [y for p in polys for _, y in p]
+    return min(xs), min(ys), max(xs), max(ys)
+
+
+def move_polys(polys, dx, dy):
+    return [[(x + dx, y + dy) for x, y in p] for p in polys]
+
+
+def seg_dist(a, b, c, d):
+    """Distance between segments ab and cd (0 if they cross)."""
+    def cross(o, p, q):
+        return (p[0] - o[0]) * (q[1] - o[1]) - (p[1] - o[1]) * (q[0] - o[0])
+
+    d1, d2, d3, d4 = cross(c, d, a), cross(c, d, b), cross(a, b, c), cross(a, b, d)
+    if ((d1 > 0) != (d2 > 0)) and ((d3 > 0) != (d4 > 0)):
+        return 0.0
+
+    def pd(p, q, r):
+        dx, dy = r[0] - q[0], r[1] - q[1]
+        t = max(0.0, min(1.0, ((p[0] - q[0]) * dx + (p[1] - q[1]) * dy) / (dx * dx + dy * dy or 1e-12)))
+        return math.hypot(p[0] - q[0] - t * dx, p[1] - q[1] - t * dy)
+
+    return min(pd(a, c, d), pd(b, c, d), pd(c, a, b), pd(d, a, b))
+
+
+def poly_gap(A, B):
+    """0 if polygons A and B overlap (or touch), else the distance between them."""
+    if any(inside(B, *pt) for pt in A) or any(inside(A, *pt) for pt in B):
+        return 0.0
+    best = 1e9
+    for a, b in zip(A, A[1:] + A[:1]):
+        for c, d in zip(B, B[1:] + B[:1]):
+            best = min(best, seg_dist(a, b, c, d))
+            if best == 0.0:
+                return 0.0
+    return best
+
+
+def polys_overlap(PA, PB, gap=0.0):
+    ax0, ay0, ax1, ay1 = bbox_polys(PA)
+    bx0, by0, bx1, by1 = bbox_polys(PB)
+    if not (ax0 < bx1 + gap and bx0 < ax1 + gap and ay0 < by1 + gap and by0 < ay1 + gap):
+        return False
+    return any(poly_gap(a, b) < max(gap, 1e-9) for a in PA for b in PB)
+
+
+def shape_hits_polys(s, polys):
+    if "circle" in s:
+        cx, cy, r = s["circle"]
+        return any(inside(p, cx, cy) or edge_dist(p, cx, cy) < r for p in polys)
+    return polys_overlap([shape_polygon(s)], polys)
+
+
+def shape_hits_rect(s, rect):
+    x0, y0, x1, y1 = rect
+    return shape_hits_polys(s, [[(x0, y0), (x1, y0), (x1, y1), (x0, y1)]])
+
+
+def inside_outline(polys, poly, margin):
+    for p in polys:
+        for x, y in p:
+            if not inside(poly, x, y) or edge_dist(poly, x, y) < margin:
+                return False
+        if any(inside(p, x, y) for x, y in poly):
+            return False
+    return True
+
+
 if __name__ == "__main__":
     import argparse
     import json

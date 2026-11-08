@@ -164,7 +164,7 @@ def table(rows):
 
 def markdown(traits, res, rules, show_skipped):
     L = [f"# Certification matrix — {traits.get('product', 'product')}", "",
-         f"> {rules["disclaimer"]} Rules file checked {rules['checked']}. "
+         f"> {rules['disclaimer']} Rules file checked {rules['checked']}. "
          f"{rules['fx_note']}", ""]
     if rules.get("local_rules"):
         L += [f"> Project-local rules applied ({os.path.basename(rules['local_rules']['file'])}): "
