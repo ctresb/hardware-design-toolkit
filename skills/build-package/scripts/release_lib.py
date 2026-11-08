@@ -52,12 +52,20 @@ def read_csv(path):
         return list(csv.DictReader(f))
 
 
+def _sanitize_csv_cell(val):
+    if isinstance(val, str) and val and val[0] in ("=", "+", "@", "\t", "\r"):
+        return "'" + val
+    if isinstance(val, str) and len(val) > 1 and val[0] == "-" and not re.match(r"^-[0-9.]", val):
+        return "'" + val
+    return val
+
+
 def write_csv(path, header, rows):
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(header)
-        w.writerows(rows)
+        w.writerows([[_sanitize_csv_cell(c) for c in r] for r in rows])
 
 
 def lcsc_of(row):
@@ -150,3 +158,56 @@ def verify_list_from_doability(path):
         if isinstance(v, list):
             return v
     return []
+
+
+def extract_mcu_pins(netlist_text, mcu):
+    pins = []
+    for chunk in re.split(r"\(net\s+\(code", netlist_text)[1:]:
+        m = re.search(r'\(name\s+"([^"]*)"', chunk)
+        net = m.group(1) if m else ""
+        for nm in re.finditer(r'\(node\s+\(ref\s+"?([^")\s]+)"?\)\s+\(pin\s+"?([^")\s]+)"?\)(?:\s+\(pinfunction\s+"([^"]*)"\))?', chunk):
+            if nm.group(1) == mcu:
+                pins.append({"pin": nm.group(2), "function": nm.group(3) or "", "net": net.lstrip("/")})
+    pins.sort(key=lambda d: natural(d["pin"]))
+    return pins
+
+
+def format_pins_header(mcu, pins):
+    h = [f"/* Pin map of {mcu}, generated from the schematic netlist. Do not edit; regenerate. */", "#pragma once", ""]
+    net_counts = {}
+    for d in pins:
+        if d["net"].startswith("unconnected") or not d["net"]:
+            continue
+        ident = re.sub(r"[^A-Za-z0-9]+", "_", d["net"]).strip("_").upper()
+        net_counts[ident] = net_counts.get(ident, 0) + 1
+    for d in pins:
+        if d["net"].startswith("unconnected") or not d["net"]:
+            continue
+        ident = re.sub(r"[^A-Za-z0-9]+", "_", d["net"]).strip("_").upper()
+        macro_name = f"PIN_{ident}_{d['pin'].upper()}" if net_counts[ident] > 1 else f"PIN_{ident}"
+        fun = re.sub(r"[^A-Za-z0-9_.]+", "_", d["function"])
+        h.append(f"#define {macro_name:<28} \"{fun or d['pin']}\"  /* pad {d['pin']} */")
+    return "\n".join(h) + "\n"
+
+
+def format_order_markdown(cfg):
+    steps = cfg.get("order_steps", [])
+    n = cfg.get("build_qty", 1)
+    lo = sum((s.get("cost_usd") or [0, 0])[0] for s in steps)
+    hi = sum((s.get("cost_usd") or [0, 0])[-1] for s in steps)
+    out = [f"# Order · {cfg.get('product', '')} rev {cfg.get('rev')} · build of {n}", "",
+           f"Total: USD {lo:,.0f}–{hi:,.0f} [estimate, sources per step]. Steps that do not depend on each other "
+           "can run in parallel; the lead times are per step.", "",
+           "**WARNING** Ordering spends money. Confirm the release check passed (`checks/release-check.json`) "
+           "and the stock dates are current before each step.", ""]
+    for i, s in enumerate(steps, 1):
+        c, t = s.get("cost_usd"), s.get("lead_time_days")
+        out += [f"## {i}. {s.get('title', '')}", "",
+                f"- **Where:** {s.get('where', '')}",
+                f"- **Upload:** " + (", ".join(f"`{u}`" for u in s.get("upload", [])) or "nothing"),
+                f"- **Options:** {s.get('options', '')}",
+                f"- **Cost:** " + (f"USD {c[0]:,.0f}–{c[-1]:,.0f}" if c else "MISSING"),
+                f"- **Lead time:** " + (f"{t[0]}–{t[-1]} days" if t else "MISSING"),
+                f"- **Receiver:** {s.get('receiver', '')}",
+                f"- **Source:** {s.get('source', '')}", ""]
+    return "\n".join(out)

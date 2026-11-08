@@ -28,6 +28,7 @@ def build_fixture(root):
             z.writestr(n, "test fixture, not a real Gerber\n")
     (hw / "mech/cad/shell.step").write_text("ISO-10303-21;\nHEADER;\n/* test fixture stub */\nENDSEC;\nEND-ISO-10303-21;\n")
     (hw / "mech/cad/shell.stl").write_text("solid shell\nendsolid shell\n")
+    (hw / "drawings").mkdir(parents=True, exist_ok=True)
     (hw / "drawings/blueprint.pdf").write_bytes(b"%PDF-1.4\n% test fixture stub\n")
     time.sleep(0.01)
     later = time.time() + 5

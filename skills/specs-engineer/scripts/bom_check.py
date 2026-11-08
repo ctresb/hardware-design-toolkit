@@ -52,7 +52,10 @@ SIZE = re.compile(r"^\s*(\d+(?:\.\d+)?)\s*[x×]\s*(\d+(?:\.\d+)?)\s*[x×]\s*(\d+
 _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(_HERE, "..", "..", "battery-and-power", "scripts"))
 try:
-    from check_rails import parse_range, parse_specs, rail_names, rail_span, check_row  # noqa: E402
+    from check_rails import (  # noqa: E402
+        parse_range, parse_specs, rail_names, rail_span, check_row,
+        check_bus_vio_compatibility, check_ldo_dropout,
+    )
 except ImportError:  # pragma: no cover
     sys.exit("bom_check: needs battery-and-power/scripts/check_rails.py next to this skill "
              "(install the whole Hardware Design Toolkit)")
@@ -165,12 +168,16 @@ def main():
             elif level == "skip" and IC_FUNCS.search(func):
                 W(ref, f"IC on a rail without a supply range: {msg}")
         if names and isinstance(peak, float):
-            rail = names[0]                       # peak current is drawn from the primary rail
-            span = rail_span(rail, rails)
             qn = q if isinstance(q, float) else 1
-            rail_peaks.setdefault(rail, []).append((ref, peak * qn))
-            if span and span[2] is not None and peak > float(span[2]):
-                E(ref, f"peak {peak} mA exceeds rail {rail} limit {span[2]} mA")
+            for k_idx, rname in enumerate(names):
+                pk_key = "peak_ma_vdd" if k_idx == 0 else f"peak_ma_vdd{k_idx + 1}"
+                r_peak = num(specs.get(pk_key)) if pk_key in specs else (peak if k_idx == 0 else None)
+                if not isinstance(r_peak, float):
+                    continue
+                span = rail_span(rname, rails)
+                rail_peaks.setdefault(rname, []).append((ref, r_peak * qn))
+                if span and span[2] is not None and r_peak > float(span[2]):
+                    E(ref, f"peak {r_peak} mA exceeds rail {rname} limit {span[2]} mA")
         if "i2c" in specs:
             bus = specs.get("bus", "I2C")
             for addr in re.split(r"[,/ ]+", specs["i2c"]):
@@ -185,6 +192,10 @@ def main():
     for (bus, addr), refs in sorted(i2c.items()):
         if len(refs) > 1:
             E(",".join(refs), f"I2C address 0x{addr:02X} used twice on {bus}")
+    for refs_str, msg in check_bus_vio_compatibility(rows, rails):
+        E(refs_str, msg)
+    for rname, msg in check_ldo_dropout(rails):
+        E(rname, msg)
     for rail, lst in rail_peaks.items():
         span = rail_span(rail, rails)
         if span and span[2] is not None:

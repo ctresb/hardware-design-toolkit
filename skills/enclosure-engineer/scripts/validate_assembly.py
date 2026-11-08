@@ -260,6 +260,17 @@ def _validate(root, collections, tol, closed_regex, container_re, max_report, t0
                 d = v1 - v0
                 L = d.length
                 if L < 2 * tol:
+                    if L > 1e-9 and data[t][6]:
+                        mid = (v0 + v1) * 0.5
+                        if _parity_inside(bvh, mid):
+                            loc_n, _nrm, _idx, dist_n = bvh.find_nearest(mid)
+                            if loc_n is not None and dist_n > tol:
+                                n += 1
+                                if dist_n > depth:
+                                    depth = dist_n
+                                    where = [round(c, 3) for c in mid]
+                                    detail = {"edge_of": s.name, "from": [round(c, 3) for c in v0],
+                                              "to": [round(c, 3) for c in v1], "face_normal": [0.0, 0.0, 1.0]}
                     continue
                 d /= L
                 travelled, start = 0.0, v0
@@ -278,6 +289,21 @@ def _validate(root, collections, tol, closed_regex, container_re, max_report, t0
                                       "to": [round(c, 3) for c in v1], "face_normal": [round(c, 2) for c in nrm]}
                     travelled = s_hit + 1e-6
                     start = v0 + d * travelled
+        if n == 0:
+            for s, t in ((a, b), (b, a)):
+                co_s = data[s][0]
+                if len(co_s) and data[t][6]:
+                    v_test = Vector(co_s[0])
+                    if _parity_inside(data[t][4], v_test):
+                        loc_n, nrm_n, _idx, dist_n = data[t][4].find_nearest(v_test)
+                        pen_c = float(dist_n) if dist_n is not None else tol * 2.0
+                        if pen_c > tol:
+                            n = 1
+                            depth = pen_c
+                            where = [round(c, 3) for c in v_test]
+                            detail = {"edge_of": s.name, "from": where, "to": where,
+                                      "face_normal": [round(c, 2) for c in (nrm_n or Vector((0, 0, 1)))]}
+                            break
         if n:
             hits.append({"depth": round(depth, 4), "edges": n, "a": a.name, "b": b.name,
                          "component_a": data[a][5], "component_b": data[b][5], "near": where, "detail": detail})

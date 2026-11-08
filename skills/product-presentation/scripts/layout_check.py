@@ -136,8 +136,35 @@ def toolchain_browser(start_dir):
 
 def headless(browser, args, timeout=120):
     base = ["--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-first-run", "--no-default-browser-check",
-            "--run-all-compositor-stages-before-draw", "--virtual-time-budget=4000", "--force-device-scale-factor=1"]
+            "--disable-background-networking", "--run-all-compositor-stages-before-draw",
+            "--virtual-time-budget=4000", "--force-device-scale-factor=1"]
     return subprocess.run(browser + base + args, capture_output=True, text=True, timeout=timeout)
+
+
+import contextlib
+import functools
+import http.server
+import socketserver
+import threading
+
+
+class _QuietHandler(http.server.SimpleHTTPRequestHandler):
+    def log_message(self, format, *args):
+        pass
+
+
+@contextlib.contextmanager
+def serve_directory_loopback(directory):
+    """Serve `directory` over an ephemeral 127.0.0.1 HTTP port so headless Chrome never needs --allow-file-access-from-files."""
+    handler = functools.partial(_QuietHandler, directory=directory)
+    with socketserver.TCPServer(("127.0.0.1", 0), handler) as httpd:
+        port = httpd.server_address[1]
+        thread = threading.Thread(target=httpd.serve_forever, daemon=True)
+        thread.start()
+        try:
+            yield f"http://127.0.0.1:{port}"
+        finally:
+            httpd.shutdown()
 
 
 def _host(path, src, w, h):
@@ -168,7 +195,8 @@ def lint_once(browser, html_path, width, theme, tmp):
         f.write(probe)
     _host(hp, os.path.basename(pp) + f"?theme={theme}", width, h)
     try:
-        r = headless(browser, [_window(width, h), "--allow-file-access-from-files", "--dump-dom", "file://" + hp])
+        with serve_directory_loopback(d) as base_url:
+            r = headless(browser, [_window(width, h), "--dump-dom", f"{base_url}/{os.path.basename(hp)}"])
     finally:
         for x in (pp, hp):
             if os.path.exists(x):
@@ -188,7 +216,8 @@ def shoot(browser, html_path, width, theme, idx, out_png):
     hp = os.path.join(d, f".layout-shot-{width}-{theme}-{idx}.html")
     _host(hp, os.path.basename(html_path) + f"?theme={theme}&slide={idx}", width, h)
     try:
-        headless(browser, [_window(width, h), f"--screenshot={out_png}", "file://" + hp])
+        with serve_directory_loopback(d) as base_url:
+            headless(browser, [_window(width, h), f"--screenshot={out_png}", f"{base_url}/{os.path.basename(hp)}"])
     finally:
         os.remove(hp)
     return os.path.exists(out_png)

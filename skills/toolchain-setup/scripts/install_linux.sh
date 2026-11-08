@@ -49,6 +49,18 @@ run()  {
   if [ "$DRY" -eq 0 ]; then "$@"; fi
 }
 have() { command -v "$1" >/dev/null 2>&1; }
+verify_sha256() {   # verify_sha256 <file> <expected_sha256>
+  [ -z "${2:-}" ] && return 0
+  if [ "$DRY" -eq 0 ]; then
+    local got
+    got="$(sha256sum "$1" | cut -d' ' -f1)"
+    if [ "$got" != "$2" ]; then
+      rm -f "$1"
+      echo "Checksum mismatch for $1 (expected $2, got $got)." >&2
+      exit 1
+    fi
+  fi
+}
 
 [ "$(uname -s)" = "Linux" ] || { echo "This script is for Linux." >&2; exit 2; }
 
@@ -261,6 +273,7 @@ if [ "$CLOUD" -eq 1 ]; then
     pkg unzip unzip unzip unzip
     if [ "$DRY" -eq 0 ]; then TMP="$(mktemp -d)"; else TMP="/tmp/hdt-awscli"; fi
     run curl -fL -o "$TMP/awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}.zip"
+    verify_sha256 "$TMP/awscliv2.zip" "${AWSCLI_SHA256:-}"
     run unzip -q "$TMP/awscliv2.zip" -d "$TMP"
     run "${SUDO[@]}" "$TMP/aws/install"
   fi
@@ -270,6 +283,7 @@ if [ "$CLOUD" -eq 1 ]; then
     if [ "$PM" = apt ]; then
       D="ubuntu_64bit"; [ "$ARCH" = aarch64 ] && D="ubuntu_arm64"
       run curl -fL -o /tmp/session-manager-plugin.deb "$BASE/$D/session-manager-plugin.deb"
+      verify_sha256 /tmp/session-manager-plugin.deb "${SSM_PLUGIN_SHA256:-}"
       run "${SUDO[@]}" dpkg -i /tmp/session-manager-plugin.deb
     else
       D="linux_64bit"; [ "$ARCH" = aarch64 ] && D="linux_arm64"

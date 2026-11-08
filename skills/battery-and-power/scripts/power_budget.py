@@ -22,7 +22,24 @@ usage: power_budget.py budget.json [-o hw/power/budget.json] [--rails-out hw/pow
 """
 import argparse
 import json
+import math
 import sys
+
+
+def verify_battery_pulse_droop(v_ocv_min, r_int_max_ohm, p_load_peak_w, v_uvlo_max):
+    """Non-linear constant-power battery droop & UVLO check under internal resistance R_int."""
+    if r_int_max_ohm <= 0 or p_load_peak_w <= 0:
+        margin_v = round(v_ocv_min - v_uvlo_max, 4)
+        return {"ok": margin_v >= 0.10, "i_bat_ma": 0.0, "v_term_min": round(v_ocv_min, 3), "margin_v": margin_v}
+    discriminant = (v_ocv_min ** 2) - 4.0 * r_int_max_ohm * p_load_peak_w
+    if discriminant < 0:
+        return {"ok": False, "reason": "voltage_collapse", "v_term_min": 0.0,
+                "margin_v": round(-v_uvlo_max, 4), "p_max_w": round((v_ocv_min ** 2) / (4.0 * r_int_max_ohm), 4)}
+    i_bat_a = (v_ocv_min - math.sqrt(discriminant)) / (2.0 * r_int_max_ohm)
+    v_term_min = v_ocv_min - i_bat_a * r_int_max_ohm
+    margin_v = round(v_term_min - v_uvlo_max, 4)
+    return {"ok": margin_v >= 0.10, "i_bat_ma": round(i_bat_a * 1000.0, 2),
+            "v_term_min": round(v_term_min, 3), "margin_v": margin_v}
 
 
 def battery_current(load_ma, rail_v, rail, vbat):
@@ -144,6 +161,22 @@ def main():
                            ok=worst_peak <= float(mx), evidence=L.get("evidence", "")))
         if worst_peak > float(mx):
             warnings.append(f"peak {worst_peak:.0f} mA exceeds {L['name']} ({float(mx):.0f} mA)")
+
+    # optional battery internal resistance (R_int) pulse voltage droop & UVLO check
+    r_int = bat.get("internal_resistance_ohm", bat.get("r_int_ohm"))
+    pulse_droop = None
+    if r_int is not None:
+        v_ocv_min = float(bat.get("ocv_min_v", vbat * 0.92))
+        v_uvlo = float(bat.get("cutoff_v", bat.get("uvlo_v", vbat * 0.67)))
+        p_peak_w = (worst_peak / 1000.0) * vbat
+        pulse_droop = verify_battery_pulse_droop(v_ocv_min, float(r_int), p_peak_w, v_uvlo)
+        if not pulse_droop["ok"]:
+            warnings.append(
+                f"battery R_int ({r_int} ohm) pulse droop fails UVLO ({v_uvlo:.2f} V): {pulse_droop}"
+            )
+            limits.append(dict(name="battery_pulse_uvlo", max_ma=round((v_ocv_min - v_uvlo - 0.10) / float(r_int) * 1000.0, 1),
+                               worst_peak_ma=round(pulse_droop.get("i_bat_ma", worst_peak), 1),
+                               ok=False, evidence="R_int pulse droop"))
 
     # per-rail worst-case load (sum of part peaks on the rail) vs the rail's max_ma; shared rails.json
     rail_load = {}
